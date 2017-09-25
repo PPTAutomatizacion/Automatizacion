@@ -1,0 +1,10 @@
+C:\Users\rdibarra\Documents\rafa\Desarrollo C#\PoolingServiceSln\PoolingProcessWS_CambioEstado_VRA\bin\Debug\PoolingProcessWS_CambioEstado_VRA.exe.config
+C:\Users\rdibarra\Documents\rafa\Desarrollo C#\PoolingServiceSln\PoolingProcessWS_CambioEstado_VRA\bin\Debug\PoolingProcessWS_CambioEstado_VRA.exe
+C:\Users\rdibarra\Documents\rafa\Desarrollo C#\PoolingServiceSln\PoolingProcessWS_CambioEstado_VRA\bin\Debug\PoolingProcessWS_CambioEstado_VRA.pdb
+C:\Users\rdibarra\Documents\rafa\Desarrollo C#\PoolingServiceSln\PoolingProcessWS_CambioEstado_VRA\bin\Debug\Common.dll
+C:\Users\rdibarra\Documents\rafa\Desarrollo C#\PoolingServiceSln\PoolingProcessWS_CambioEstado_VRA\bin\Debug\Common.pdb
+C:\Users\rdibarra\Documents\rafa\Desarrollo C#\PoolingServiceSln\PoolingProcessWS_CambioEstado_VRA\obj\Debug\PoolingProcessWS_CambioEstado_VRA.ProjectInstaller.resources
+C:\Users\rdibarra\Documents\rafa\Desarrollo C#\PoolingServiceSln\PoolingProcessWS_CambioEstado_VRA\obj\Debug\PoolingProcessWS_CambioEstado_VRA.csproj.GenerateResource.Cache
+C:\Users\rdibarra\Documents\rafa\Desarrollo C#\PoolingServiceSln\PoolingProcessWS_CambioEstado_VRA\obj\Debug\PoolingProcessWS_CambioEstado_VRA.exe
+C:\Users\rdibarra\Documents\rafa\Desarrollo C#\PoolingServiceSln\PoolingProcessWS_CambioEstado_VRA\obj\Debug\PoolingProcessWS_CambioEstado_VRA.pdb
+C:\Users\rdibarra\Documents\rafa\Desarrollo C#\PoolingServiceSln\PoolingProcessWS_CambioEstado_VRA\obj\Debug\PoolingProcessWS_CambioEstado_VRA.csprojResolveAssemblyReference.cache

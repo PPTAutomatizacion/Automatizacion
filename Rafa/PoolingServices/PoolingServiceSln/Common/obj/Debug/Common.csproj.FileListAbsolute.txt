@@ -1,0 +1,4 @@
+C:\Users\rdibarra\Documents\rafa\Desarrollo C#\PoolingServiceSln\Common\bin\Debug\Common.dll
+C:\Users\rdibarra\Documents\rafa\Desarrollo C#\PoolingServiceSln\Common\bin\Debug\Common.pdb
+C:\Users\rdibarra\Documents\rafa\Desarrollo C#\PoolingServiceSln\Common\obj\Debug\Common.dll
+C:\Users\rdibarra\Documents\rafa\Desarrollo C#\PoolingServiceSln\Common\obj\Debug\Common.pdb

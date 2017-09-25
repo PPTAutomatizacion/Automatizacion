@@ -1,0 +1,10 @@
+C:\Users\rdibarra\Documents\rafa\Desarrollo C#\PoolingServiceSln\PoolingProcessWS_ESET\bin\Debug\PoolingProcessWS_ESET.exe.config
+C:\Users\rdibarra\Documents\rafa\Desarrollo C#\PoolingServiceSln\PoolingProcessWS_ESET\bin\Debug\PoolingProcessWS_ESET.exe
+C:\Users\rdibarra\Documents\rafa\Desarrollo C#\PoolingServiceSln\PoolingProcessWS_ESET\bin\Debug\PoolingProcessWS_ESET.pdb
+C:\Users\rdibarra\Documents\rafa\Desarrollo C#\PoolingServiceSln\PoolingProcessWS_ESET\bin\Debug\Common.dll
+C:\Users\rdibarra\Documents\rafa\Desarrollo C#\PoolingServiceSln\PoolingProcessWS_ESET\bin\Debug\Common.pdb
+C:\Users\rdibarra\Documents\rafa\Desarrollo C#\PoolingServiceSln\PoolingProcessWS_ESET\obj\Debug\PoolingProcessWS_ESET.csprojResolveAssemblyReference.cache
+C:\Users\rdibarra\Documents\rafa\Desarrollo C#\PoolingServiceSln\PoolingProcessWS_ESET\obj\Debug\PoolingProcessWS_ESET.ProjectInstaller.resources
+C:\Users\rdibarra\Documents\rafa\Desarrollo C#\PoolingServiceSln\PoolingProcessWS_ESET\obj\Debug\PoolingProcessWS_ESET.csproj.GenerateResource.Cache
+C:\Users\rdibarra\Documents\rafa\Desarrollo C#\PoolingServiceSln\PoolingProcessWS_ESET\obj\Debug\PoolingProcessWS_ESET.exe
+C:\Users\rdibarra\Documents\rafa\Desarrollo C#\PoolingServiceSln\PoolingProcessWS_ESET\obj\Debug\PoolingProcessWS_ESET.pdb

@@ -1,0 +1,49 @@
+desde dos
+
+"C:\Windows\Microsoft.NET\Framework\v4.0.30319\InstallUtil.exe" "C:\Pooling\PoolingProcessWS.exe"
+
+"C:\Windows\Microsoft.NET\Framework\v4.0.30319\InstallUtil.exe /u" "C:\Pooling\PoolingProcessWS.exe"
+
+
+
+C:\Windows\Microsoft.NET\Framework\v4.0.30319\InstallUtil.exe /u "C:\Pooling\PoolingProcessWS.exe"
+
+
+
+"C:\Pooling2\PoolingProcessWS.exe"
+
+
+InstallUtil.exe /u "C:\Pooling\WS_ESSET\PoolingProcessWS_ESET.exe"
+
+"C:\Pooling\PoolingProcessWS.exe"
+ 
+"C:\Pooling\PoolingProcessWS_ESET\PoolingProcessWS_ESET.exe"
+
+"C:\Pooling\PoolingProcessWS_WAP\PoolingProcessWS_WAP.exe"
+
+BizagiProduccion
+
+Mati123
+
+
+
+
+"C:\Windows\Microsoft.NET\Framework\v4.0.30319\InstallUtil.exe" "C:\Pooling\PoolingProcessWS_WAP\PoolingProcessWS_WAP.exe"
+
+InstallUtil.exe" "C:\Pooling\PoolingProcessWS_SVP\PoolingProcessWS_SVP.exe"
+
+
+
+InstallUtil.exe "C:\Pooling\PoolingProcessWS_WAP\PoolingProcessWS_WAP.exe"
+
+
+InstallUtil.exe /u "C:\Pooling\PoolingProcessWS_ESET\PoolingProcessWS_ESET.exe"
+
+
+InstallUtil.exe /u "C:\Pooling\PoolingProcessWS_SAASProyecto\ServiceSAAS_Proyecto.exe"
+
+
+InstallUtil.exe "C:\Pooling\PoolingProcessWS_SAASProyecto\ServiceSAAS_Proyecto.exe"
+
+
+InstallUtil.exe "C:\Pooling\PoolingProcessWS_VVIP\PoolingProcessWS_VVIP.exe"
