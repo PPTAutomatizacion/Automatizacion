@@ -1,0 +1,153 @@
+DEBUG 2017-07-21 11:23:49,618   318ms WebApiApplication      Application_Start  - FiberCorp Offcice 365 Api Started
+DEBUG 2017-07-21 15:15:27,813 13898512ms BaseApiController      QueryCustomers     - api/v1/customers/query: {
+	"domain":"pruebaseba.onmicrosoft.com"
+}
+DEBUG 2017-07-21 15:16:47,639 13978339ms BaseApiController      QueryCustomers     - api/v1/customers/query: {
+	"domain":"pruebaseba.onmicrosoft.com"
+}
+DEBUG 2017-07-21 16:48:06,328 19457027ms BaseApiController      CreateOrder        - api/v1/order: {
+  "referenceCustomerId":"14b1c3d8-8592-4966-8677-fba900994e0b",
+  "offerId":"35a36b80-270a-44bf-9290-00545d350866",
+  "quantity": 5
+}
+DEBUG 2017-07-25 14:14:27,101   249ms WebApiApplication      Application_Start  - FiberCorp Offcice 365 Api Started
+DEBUG 2017-07-25 14:14:27,648   796ms BaseApiController      CreateOrder        - api/v1/order: {
+  "offerId": "aca0c06c-890d-4abb-83cf-bc519a2565e5",
+  "quantity": 1,
+  "referenceCustomerId": "64d61d5a-71cb-4cad-acf3-54a0a8b304ac"
+}
+DEBUG 2017-07-25 14:44:24,526 1797673ms BaseApiController      CreateCustomer     - api/v1/customer: {
+  "addressLine1": "HORNOS GRAL 790  ",
+  "city": "CAPITAL FEDERAL",
+  "companyName": "PRUEBA 11221122",
+  "domain": "y2jbz1te.onmicrosoft.com",
+  "email": "y2jbz1te.ysw@20mail.eu",
+  "firstName": "Ekjempñlo",
+  "lastName": "Ejemplo",
+  "phoneNumber": "112323",
+  "postalCode": 1272
+}
+DEBUG 2017-07-25 14:44:44,724 1817871ms BaseApiController      CreateOrder        - api/v1/order: {
+  "offerId": "aca0c06c-890d-4abb-83cf-bc519a2565e5",
+  "quantity": 1,
+  "referenceCustomerId": "baa0bb9f-1fef-42d4-98c1-0c6cbd5f3d9c"
+}
+DEBUG 2017-08-03 17:05:27,580   234ms WebApiApplication      Application_Start  - FiberCorp Offcice 365 Api Started
+DEBUG 2017-08-03 17:05:28,204   858ms BaseApiController      CreateOrder        - api/v1/order: {
+  "offerId": "5c9fd4cc-edce-44a8-8e91-07df09744609",
+  "quantity": 1,
+  "referenceCustomerId": "86e99320-8206-49c0-bc0a-261228c552fb"
+}
+DEBUG 2017-08-03 17:12:29,202 421855ms BaseApiController      CreateOrder        - api/v1/order: {
+  "offerId": "031c9e47-4802-4248-838e-778fb1d2cc05",
+  "quantity": 1,
+  "referenceCustomerId": "86e99320-8206-49c0-bc0a-261228c552fb"
+}
+DEBUG 2017-08-04 12:43:36,531   249ms WebApiApplication      Application_Start  - FiberCorp Offcice 365 Api Started
+DEBUG 2017-08-04 12:43:37,139   858ms BaseApiController      CreateOrder        - api/v1/order: {
+  "offerId": "aca0c06c-890d-4abb-83cf-bc519a2565e5",
+  "quantity": 1,
+  "referenceCustomerId": "86e99320-8206-49c0-bc0a-261228c552fb"
+}
+DEBUG 2017-08-08 13:06:50,983   358ms WebApiApplication      Application_Start  - FiberCorp Offcice 365 Api Started
+DEBUG 2017-08-08 13:06:53,245  2620ms BaseApiController      bscriptionsSuspend - api/v1/subscriptions/suspend: {
+	"customerId":"14b1c3d8-8592-4966-8677-fba900994e0b",
+	"id":"5F87861F-89AD-4EE3-B210-61CA3B45CC74"
+}
+DEBUG 2017-08-08 13:16:39,560 588936ms BaseApiController      bscriptionsSuspend - api/v1/subscriptions/suspend: {
+	"customerId":"14b1c3d8-8592-4966-8677-fba900994e0b",
+	"id":"5F87861F-89AD-4EE3-B210-61CA3B45CC74"
+}
+DEBUG 2017-08-08 13:21:28,319 877695ms BaseApiController      bscriptionsSuspend - api/v1/subscriptions/suspend: {
+	"customerId":"14b1c3d8-8592-4966-8677-fba900994e0b",
+	"id":"5F87861F-89AD-4EE3-B210-61CA3B45CC74"
+}
+DEBUG 2017-08-08 13:29:40,388 1369763ms BaseApiController      bscriptionsSuspend - api/v1/subscriptions/suspend: {
+	"customerId":"14b1c3d8-8592-4966-8677-fba900994e0b",
+	"id":"5F87861F-89AD-4EE3-B210-61CA3B45CC74"
+}
+DEBUG 2017-08-08 13:30:45,462 1434838ms BaseApiController      bscriptionsSuspend - api/v1/subscriptions/suspend: {
+	"customerId":"14b1c3d8-8592-4966-8677-fba900994e0b",
+	"id":"5F87861F-89AD-4EE3-B210-61CA3B45CC74"
+}
+DEBUG 2017-08-08 13:44:12,268 2241644ms BaseApiController      bscriptionsSuspend - api/v1/subscriptions/suspend: {
+	"customerId":"14b1c3d8-8592-4966-8677-fba900994e0b",
+	"id":"5F87861F-89AD-4EE3-B210-61CA3B45CC74"
+}
+DEBUG 2017-08-08 13:46:01,499 2350874ms BaseApiController      bscriptionsSuspend - api/v1/subscriptions/suspend: {
+	"customerId":"14b1c3d8-8592-4966-8677-fba900994e0b",
+	"id":"5F87861F-89AD-4EE3-B210-61CA3B45CC74"
+}
+DEBUG 2017-08-08 14:07:03,935 3613310ms BaseApiController      bscriptionsSuspend - api/v1/subscriptions/suspend: {
+	"customerId":"14b1c3d8-8592-4966-8677-fba900994e0b",
+	"id":"5F87861F-89AD-4EE3-B210-61CA3B45CC74"
+}
+DEBUG 2017-08-24 11:40:07,516   202ms WebApiApplication      Application_Start  - FiberCorp Offcice 365 Api Started
+DEBUG 2017-08-24 11:40:08,187   873ms BaseApiController      QueryCustomers     - api/v1/customers/query: {
+	"domain": "pruebafibercorp"
+}
+DEBUG 2017-08-25 13:04:20,078   296ms WebApiApplication      Application_Start  - FiberCorp Offcice 365 Api Started
+DEBUG 2017-08-25 13:04:25,570  5787ms BaseApiController      DomainsVerify      - api/v1/domains/verify: {
+	"domain":"12DEOCTUBREINSTITUTODEDIAGNOSTICO.onmicrosoft.com"
+}
+DEBUG 2017-08-28 15:20:50,053   140ms WebApiApplication      Application_Start  - FiberCorp Offcice 365 Api Started
+DEBUG 2017-08-28 15:20:52,112  2199ms BaseApiController      CreateOrder        - api/v1/order: {
+  "offerId": "a044b16a-1861-4308-8086-a3a3b506fac2",
+  "quantity": 2,
+  "referenceCustomerId": "3a30d747-1e00-499d-ab9b-b1a7534ff65d"
+}
+DEBUG 2017-10-04 16:39:43,300   140ms WebApiApplication      Application_Start  - FiberCorp Offcice 365 Api Started
+DEBUG 2017-10-04 16:39:44,143   982ms BaseApiController      CreateOrder        - api/v1/order: {
+  "referenceCustomerId":"aaedfec3-01fb-40a5-bb45-374490512925",
+  "offerId":"bd938f12-058f-4927-bba3-ae36b1d2501c",
+  "quantity":5
+}
+DEBUG 2017-10-18 15:43:51,114   748ms WebApiApplication      Application_Start  - FiberCorp Offcice 365 Api Started
+DEBUG 2017-10-18 15:43:51,956  1591ms BaseApiController      DomainsVerify      - api/v1/domains/verify: {
+	"domain":"PETRACCHI.onmicrosoft.com"
+}
+DEBUG 2017-10-18 15:54:12,413   140ms WebApiApplication      Application_Start  - FiberCorp Offcice 365 Api Started
+DEBUG 2017-10-18 15:54:12,866   592ms BaseApiController      DomainsVerify      - api/v1/domains/verify: {
+	"domain":"PETRACCHI.onmicrosoft.com"
+}
+DEBUG 2017-10-18 16:10:38,525    93ms WebApiApplication      Application_Start  - FiberCorp Offcice 365 Api Started
+DEBUG 2017-10-18 16:10:38,884   452ms BaseApiController      DomainsVerify      - api/v1/domains/verify: {
+	"domain":"PETRACCHI.onmicrosoft.com"
+}
+DEBUG 2017-11-06 18:17:47,746   187ms WebApiApplication      Application_Start  - FiberCorp Offcice 365 Api Started
+DEBUG 2017-11-06 18:17:50,080  2521ms BaseApiController      CreateCustomer     - api/v1/customer: {
+  "addressLine1": "Brasil ,av. 1000 ",
+  "city": "CAPITAL FEDERAL",
+  "companyName": "MONICA  BARQIN ",
+  "domain": "c5333paf.onmicrosoft.com",
+  "email": "c5333paf.5rc@20mail.eu",
+  "firstName": "Prueba",
+  "lastName": "Prueba",
+  "phoneNumber": "43432543",
+  "postalCode": 1154
+}
+DEBUG 2017-11-06 18:18:11,788 24229ms BaseApiController      CreateOrder        - api/v1/order: {
+  "offerId": "be57ff4c-100c-4f1f-b82d-f1c5ab63a665",
+  "quantity": 1,
+  "referenceCustomerId": "f72bfd14-b702-4e0a-92af-875cee85156c"
+}
+DEBUG 2017-11-14 00:33:34,965   171ms WebApiApplication      Application_Start  - FiberCorp Offcice 365 Api Started
+DEBUG 2017-11-14 00:33:36,431  1638ms BaseApiController      CreateCustomer     - api/v1/customer: {
+  "addressLine1": "Cordoba ,av. 1600 ",
+  "city": "CAPITAL FEDERAL",
+  "companyName": "CAMPOS PABLO ENCABO ",
+  "domain": "null.onmicrosoft.com",
+  "email": "fosovnikar@cablevision.com.ar",
+  "firstName": "Name",
+  "lastName": "Apellido",
+  "phoneNumber": "46541234",
+  "postalCode": 1055
+}
+DEBUG 2017-11-15 14:17:30,785   140ms WebApiApplication      Application_Start  - FiberCorp Offcice 365 Api Started
+DEBUG 2017-11-15 14:17:31,378   733ms BaseApiController      DomainsVerify      - api/v1/domains/verify: {
+	"domain":"NEWBERRYYASOCIADOSSA.onmicrosoft.com"
+}
+DEBUG 2017-11-16 23:56:54,091   234ms WebApiApplication      Application_Start  - FiberCorp Offcice 365 Api Started
+DEBUG 2017-11-16 23:56:56,228  2371ms BaseApiController      DomainsVerify      - api/v1/domains/verify: {
+	"domain":"uomfirmat.onmicrosoft.com"
+}

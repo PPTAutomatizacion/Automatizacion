@@ -1,0 +1,964 @@
+﻿@using FiberCorp.Off365.Web.Models.Home
+@model List<SubscriptionViewModel>
+<link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+
+<ul class="nav nav-tabs headerTabs gradient">
+    <li class="active gradient"><a data-toggle="tab" href="#planesContratados">Planes Contratados</a></li>
+    <li class="gradient"><a data-toggle="tab" href="#precios">Precios</a></li>
+    <li class="gradient"><a data-toggle="tab" href="#consumos">Consumos</a></li>
+</ul>
+
+<div class="tab-content tabLine" style="height:100%;">
+
+    <div id="planesContratados" class="tab-pane fade in active">
+
+        @if (ViewBag.CustomerId is string)
+        {
+        <div class="col-sm-12">
+            <h4>Seleccione el cliente</h4>
+        </div>
+        <div class="col-sm-12">
+            <div class="form-group form-inline">
+                <label>CUIC:</label>
+                <input type="text" class="form-control txt-cuic" />
+                <button type="button" class="btn btn-default btn-select-customer">Seleccionar</button>
+            </div>
+        </div>
+        }
+        else
+        {
+        <div class="col-md-12">
+            <h4>@ViewBag.CustomerData.NombreCliente</h4>
+            @if (ViewBag.IsInternalEnvironment)
+                {
+                <div class="row">
+                    <div class="col-sm-2"><strong>DOCUMENTO: </strong></div><div class="col-sm-2"><strong>NUMERO:</strong></div><div class="col-sm-2"><strong>CUIC:</strong></div><div class="col-sm-6"><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> @ViewBag.CustomerData.Telefono</div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2">@ViewBag.CustomerData.TipDocumento</div><div class="col-sm-2">@ViewBag.CustomerData.NroDocumento</div><div class="col-sm-2">@ViewBag.CustomerData.Cuic</div><div class="col-sm-6"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> @ViewBag.CustomerData.Email</div>
+                </div>
+                }
+            @if (!ViewBag.IsInternalEnvironment)
+                {
+                <div class="row">
+                    <div class="col-sm-4"><strong>Usuario:</strong> @ViewBag.MSUser</div><div class="col-sm-4"><strong>Clave Provisoria:</strong> @ViewBag.MSPwd</div><div class="col-sm-4"><strong>Acceso al Portal Office:</strong> <a href="https://portal.office.com" target="_blank">Click Aquí</a></div>
+                </div>
+                }
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                &nbsp;
+            </div>
+        </div>
+
+        <div class="col-sm-12 headerTable gradient">
+            <div class="col-sm-6 col-xs-6 headerTableText" style="padding-left:0px !important;">Plan Contratado</div>
+            <div class="col-sm-6 col-xs-6 headerTableText">Cant. de Licencias</div>
+        </div>
+
+        <div class="col-sm-12 hidden minAlert">
+            <div class="alert alert-warning">
+                <strong>Atenci&oacute;n!</strong> Se debe poner como m&iacute;nimo una licencia.
+            </div>
+        </div>
+
+        <div class="col-sm-12 hidden maxOfferAlert">
+            <div class="alert alert-warning">
+                <strong>Atenci&oacute;n!</strong> La cantidad ingresada excede el m&aacute;ximo permitido de licencias.
+            </div>
+        </div>
+
+        <div class="col-sm-12 hidden minOfferAlert">
+            <div class="alert alert-warning">
+                <strong>Atenci&oacute;n!</strong> La cantidad ingresado es menor al m&iacute;nicmo permitido de licencias.
+            </div>
+        </div>
+
+        <div class="col-sm-12 hidden errAlert">
+            <div class="alert alert-danger">
+                <strong>Atenci&oacute;n!</strong> Se ha producido un error, por favor comun&iacute;quese telef&oacute;nicamente o reintente m&aacute;s tarde.
+            </div>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="col-md-6 col-xs-6 tableSpace" style="padding-bottom: initial;">
+                <div class="col-sm-3 col-xs-3" style="padding-left: initial; padding-bottom: 10px;">
+                    <button type="button" id="btn-add-license" class="btn btn-success btn-circle btn-add-license" title="Agregar Plan">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                    </button>
+                    <span>Agregar plan</span>
+                </div>
+
+                <div class="col-sm-9 col-xs-9 tableSpace" style="padding-right: initial;padding-bottom: initial;">
+                    <div class="form-group add-license-controls" style="display:none;">
+                        <select id="cmb-price" class="form-control planContratadoColor">
+                            @foreach (PriceViewModel price in (List<PriceViewModel>)ViewBag.Prices)
+                                {
+                                <option value="@(price.OfferId)|@(price.SubscriptionId)">@price.Name</option>
+                                }
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-2 col-xs-2">
+                <div class="form-group add-license-controls" style="display:none;">
+                    <input type="number" id="txt-license-quantity" min="1" class="form-control" value="1">
+                </div>
+            </div>
+
+            <div class="col-md-3 col-xs-3 tableSpace">
+                <div class="btn-group add-license-controls" style="display:none;">
+                    <button type="button" id="btn-confirm-add-license" class="btn btn-success btn-circle btn-confirm-add-license" title="Agregar Plan">
+                        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                    </button>
+                    <button type="button" id="btn-cancel-add-license" class="btn btn-danger btn-circle btn-cancel-add-license" title="Cancelar">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+            foreach (SubscriptionViewModel subscription in Model)
+            {
+        <div class="col-sm-12">
+            <div class="col-md-6 col-xs-6 tableSpace">
+                <input type="text" class="form-control planContratadoColor" style="cursor:default;" placeholder="@subscription.Name" disabled>
+            </div>
+
+            <div class="col-md-2 col-xs-2">
+                <div class="form-group">
+                    <input type="number" min="1" class="form-control txt-license-quantity"
+                           data-subscription-id="@subscription.Id" placeholder="@subscription.Quantity"
+                           data-subscription-quantity="@subscription.Quantity" style="cursor:default;" disabled>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-xs-3 tableSpace">
+                <div class="btn-group">
+                    @if (subscription.Status == "Activo" && !ViewBag.IsInternalEnvironment)
+                            {
+                            <button type="button" class="btn btn-default btn-circle btn-modify-licenses" data-subscription-id="@subscription.Id" title="Modificar Licencia">
+                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                            </button>
+                            <button type="button" class="btn btn-success btn-circle btn-save-licenses" data-subscription-id="@subscription.Id" title="Guardar" style="display:none">
+                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                            </button>
+                                if (ViewBag.MoreThanOneSubscription)
+                                {
+                            <button type="button" class="btn btn-danger btn-circle btn-suspend-licenses" data-subscription-id="@subscription.Id" title="Suspender">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            </button>
+                                }
+                            }
+                </div>
+            </div>
+        </div>
+            }
+
+        <div class="clearfix"></div>
+
+	        <!-- MENSAJE -->
+            if (ViewBag.ShowSuspendSubscriptionByPhone && !ViewBag.IsInternalEnvironment)
+            {
+        <div class="col-md-10 ">
+            <div class="alert alert-info">
+                Tiene solo una suscripción activa, si desea suspenderla comuniquese telef&oacute;nicamente, gracias.
+            </div>
+        </div>
+            }
+	        <!-- --- -->
+        }
+    </div>
+    <div id="precios" class="tab-pane fade">
+        <!-- COMIENZA LA LISTA DE PRECIOS -->
+        <div class="col-sm-12 precios-contenido">
+
+            <table class="table">
+
+                <tr>
+                    <td class="preciosTable align-top">
+                        <!-- módulo 1 -->
+                        <div>
+                            <div class="precios-top">Office 365<br>Empresa</div>
+                            <div class="precios-texto">
+                                <div class="precios-texto-tit">$888.00 usuario / mes</div>
+                                Da lo mejor de tu trabajo con las aplicaciones de Office instaladas al completo en todos tus dispositivos, además del almacenamiento en línea y uso compartido de archivos.<br>
+                                <br>
+                                Office 365 Empresa incluye ahora las nuevas aplicaciones de Office 2016 para PC y Mac.<br>
+                                <br>
+                                <strong>Aplicaciones móviles y de escritorio de Office 2016</strong>
+                                <ul class="precios-lista">
+                                    <li><img src="~/content/images/aplicaciones_outlook.jpg" width="26" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_word.jpg" width="26" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_excel.jpg" width="26" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_powerPoint.jpg" width="26" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_notes.jpg" width="26" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_publisher.jpg" width="26" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_acces.jpg" width="26" height="24" alt="" /></li>
+                                </ul><br>
+                                <div style="clear: both;"></div>
+                                <div class="precios-collapse text-center"><a data-toggle="collapse" data-target="#modulo1" class="precios-cursor">▼▲</a></div>
+                                <div id="modulo1" class="collapse">
+                                    Disfruta de una experiencia de instalación completa de Office en equipos PC, equipos Mac, tabletas Windows, iPad® y tabletas Android™, así como en la mayoría de dispositivos móviles. Cada usuario puede instalar Office en 5 equipos PC o Mac, en 5 tabletas (Windows, iPad y Android) y en 5 teléfonos.
+                                    <br><br>
+                                    <strong>Servicios en línea</strong>
+                                    <ul class="precios-lista">
+                                        <li><img src="~/content/images/aplicaciones_cloud.jpg" width="26" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_officeOnline.jpg" width="26" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_sway.jpg" width="26" height="24" alt="" /></li>
+                                    </ul><br>
+                                    <div style="clear: both;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="preciosTable align-top">
+                        <!-- módulo 2 -->
+                        <div>
+                            <div class="precios-top">Office 365<br>Empresa Essentials</div>
+                            <div class="precios-texto">
+                                <div class="precios-texto-tit">$888.00 usuario / mes</div>
+                                Trabaja mejor desde cualquier lugar con herramientas y servicios de colaboración de Office siempre actualizados.
+                                <br><br>
+                                <strong>Servicios en línea</strong>
+                                <ul class="precios-lista">
+                                    <li><img src="~/content/images/aplicaciones_calendario.jpg" width="40" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_cloud.jpg" width="26" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_conferencias.jpg" width="26" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_skype.jpg" width="30" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_chat.jpg" width="30" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_yammer.jpg" width="30" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_grupo.jpg" width="30" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_officeOnline.jpg" width="26" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_admin.jpg" width="30" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_sway.jpg" width="26" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_busqueda.jpg" width="30" height="24" alt="" /></li>
+                                </ul><br>
+                                <div style="clear: both;"></div>
+                            </div>
+                        </div>
+                    </td>
+
+                    <td class="preciosTable align-top">
+                        <!-- módulo 3 -->
+                        <div>
+                            <div class="precios-top">Office 365<br>Empresa Premium</div>
+                            <div class="precios-texto">
+                                <div class="precios-texto-tit">$888.00 usuario / mes</div>
+                                Aumenta tu impacto y maximiza tu alcance con Office con tecnología de nube, unas herramientas imprescindibles para la empresa actual.<br><br>
+                                <strong>Conjunto de programas de Office</strong><br>
+                                Ahora incluye las nuevas aplicaciones de Office 2016 para PC y Mac.
+                                <ul class="precios-lista">
+                                    <li><img src="~/content/images/aplicaciones_outlook.jpg" width="26" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_word.jpg" width="26" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_excel.jpg" width="26" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_powerPoint.jpg" width="26" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_notes.jpg" width="26" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_publisher.jpg" width="26" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_acces.jpg" width="26" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_skype2.jpg" width="26" height="24" alt="" /></li>
+                                </ul><br>
+                                <div style="clear: both;"></div>
+                                <div class="precios-collapse text-center"><a data-toggle="collapse" data-target="#modulo3" class="precios-cursor">▼▲</a></div>
+                                <div id="modulo3" class="collapse">
+                                    <img src="~/content/images/aplicaciones_tablets.jpg" width="26" height="31" alt="" /><br>
+                                    Disfruta de una experiencia de instalación completa de Office en equipos PC, equipos Mac, tabletas Windows, iPad® y tabletas Android™, así como en la mayoría de dispositivos móviles. Cada usuario puede instalar Office en 5 equipos PC o Mac, en 5 tabletas (Windows, iPad y Android) y en 5 teléfonos.
+                                    <br><br>
+                                    <strong>Servicios en línea</strong>
+                                    <ul class="precios-lista">
+                                        <li><img src="~/content/images/aplicaciones_calendario.jpg" width="40" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_cloud.jpg" width="26" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_conferencias.jpg" width="26" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_skype.jpg" width="30" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_chat.jpg" width="30" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_yammer.jpg" width="30" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_grupo.jpg" width="30" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_officeOnline.jpg" width="26" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_admin.jpg" width="30" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_sway.jpg" width="26" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_busqueda.jpg" width="30" height="24" alt="" /></li>
+                                    </ul><br>
+                                    <div style="clear: both;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="preciosTable align-top">
+                        <!-- módulo 4 -->
+                        <div>
+                            <div class="precios-top">Office 365<br>ProPlus</div>
+                            <div class="precios-texto">
+                                <div class="precios-texto-tit">$888.00 usuario / mes</div>
+                                Tu Office, dondequiera que vayas. Obtén las últimas herramientas de productividad, colaboración, cumplimiento normativo y BI, actualizadas con regularidad.<br><br>
+                                <strong>Conjunto de programas de Office</strong><br>
+                                Ahora incluye las nuevas aplicaciones de Office 2016 para PC y Mac.
+                                <ul class="precios-lista">
+                                    <li><img src="~/content/images/aplicaciones_outlook.jpg" width="26" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_word.jpg" width="26" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_excel.jpg" width="26" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_powerPoint.jpg" width="26" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_notes.jpg" width="26" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_publisher.jpg" width="26" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_acces.jpg" width="26" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_skype2.jpg" width="26" height="24" alt="" /></li>
+                                </ul><br>
+                                <div style="clear: both;"></div>
+                                <div class="precios-collapse text-center"><a data-toggle="collapse" data-target="#modulo4" class="precios-cursor">▼▲</a></div>
+                                <div id="modulo4" class="collapse">
+                                    <img src="~/content/images/aplicaciones_tablets.jpg" width="26" height="31" alt="" /><br>
+                                    Disfruta de una experiencia de instalación completa de Office en equipos PC, equipos Mac, tabletas Windows, iPad® y tabletas Android™, así como en la mayoría de dispositivos móviles. Cada usuario puede instalar Office en 5 equipos PC o Mac, en 5 tabletas (Windows, iPad y Android) y en 5 teléfonos.
+                                    <br><br>
+                                    <strong>Servicios en línea</strong>
+                                    <ul class="precios-lista">
+                                        <li><img src="~/content/images/aplicaciones_cloud.jpg" width="26" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_officeOnline.jpg" width="26" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_sway.jpg" width="26" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_inteligencia.jpg" width="26" height="24" alt="" /></li>
+                                    </ul><br>
+                                    <div style="clear: both;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="preciosTable align-top">
+                        <!-- módulo 5 -->
+                        <div>
+                            <div class="precios-top">Office 365<br>Enterprise E1</div>
+                            <div class="precios-texto">
+                                <div class="precios-texto-tit">$888.00 usuario / mes</div>
+                                Trabaja mejor desde cualquier lugar con herramientas y servicios de colaboración de Office siempre actualizados.
+                                <br><br>
+                                <strong>Servicios en línea</strong>
+                                <ul class="precios-lista">
+                                    <li><img src="~/content/images/aplicaciones_calendario.jpg" width="40" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_cloud.jpg" width="26" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_conferencias.jpg" width="26" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_skype.jpg" width="30" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_chat.jpg" width="30" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_yammer.jpg" width="30" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_grupo.jpg" width="30" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_officeOnline.jpg" width="26" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_admin.jpg" width="30" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_sway.jpg" width="26" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_busqueda.jpg" width="30" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_video.jpg" width="26" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_sharepoint.jpg" width="31" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_empleados.jpg" width="26" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_difusion.jpg" width="34" height="24" alt="" /></li>
+                                </ul><br>
+                                <div style="clear: both;"></div>
+                            </div>
+                        </div>
+                    </td>
+                    <td class="preciosTable align-top">
+                        <!-- módulo 6 -->
+                        <div>
+                            <div class="precios-top">Office 365<br>ProPlus</div>
+                            <div class="precios-texto">
+                                <div class="precios-texto-tit">$888.00 usuario / mes</div>
+                                Tu Office, dondequiera que vayas. Obtén las últimas herramientas de productividad, colaboración, cumplimiento normativo y BI, actualizadas con regularidad.<br><br>
+                                <strong>Conjunto de programas de Office</strong><br>
+                                Ahora incluye las nuevas aplicaciones de Office 2016 para PC y Mac.
+                                <ul class="precios-lista">
+                                    <li><img src="~/content/images/aplicaciones_outlook.jpg" width="26" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_word.jpg" width="26" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_excel.jpg" width="26" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_powerPoint.jpg" width="26" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_notes.jpg" width="26" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_publisher.jpg" width="26" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_acces.jpg" width="26" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_skype2.jpg" width="26" height="24" alt="" /></li>
+                                </ul><br>
+                                <div style="clear: both;"></div>
+                                <div class="precios-collapse text-center"><a data-toggle="collapse" data-target="#modulo6" class="precios-cursor">▼▲</a></div>
+                                <div id="modulo6" class="collapse">
+                                    <img src="~/content/images/aplicaciones_tablets.jpg" width="26" height="31" alt="" /><br>
+                                    Disfruta de una experiencia de instalación completa de Office en equipos PC, equipos Mac, tabletas Windows, iPad® y tabletas Android™, así como en la mayoría de dispositivos móviles. Cada usuario puede instalar Office en 5 equipos PC o Mac, en 5 tabletas (Windows, iPad y Android) y en 5 teléfonos.
+                                    <br><br>
+                                    <strong>Servicios en línea</strong>
+                                    <ul class="precios-lista">
+                                        <li><img src="~/content/images/aplicaciones_calendario.jpg" width="40" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_cloud.jpg" width="26" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_conferencias.jpg" width="26" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_skype.jpg" width="30" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_chat.jpg" width="30" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_yammer.jpg" width="30" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_grupo.jpg" width="30" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_officeOnline.jpg" width="26" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_admin.jpg" width="30" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_sway.jpg" width="26" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_busqueda.jpg" width="30" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_mailBusqueda.jpg" width="34" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_seguridad.jpg" width="32" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_difusion.jpg" width="34" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_calendarioMail.jpg" width="32" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_sistema.jpg" width="26" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_video.jpg" width="26" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_telefono.jpg" width="26" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_herramientas.jpg" width="31" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_archivo.jpg" width="26" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_inteligencia.jpg" width="26" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_sharepoint.jpg" width="31" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_empleados.jpg" width="26" height="24" alt="" /></li>
+                                    </ul><br>
+                                    <div style="clear: both;"></div><br><br>
+                                    <strong>Servicios complementarios</strong>
+                                    <ul class="precios-lista">
+                                        <li><img src="~/content/images/aplicaciones_celular.jpg" width="26" height="34" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_nubeTelefono.jpg" width="34" height="34" alt="" /></li>
+                                    </ul><br>
+                                    <div style="clear: both;"></div><br><br>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="preciosTable align-top">
+                        <!-- módulo 7 -->
+                        <div>
+                            <div class="precios-top">Office 365<br>ProPlus</div>
+                            <div class="precios-texto">
+                                <div class="precios-texto-tit">$888.00 usuario / mes</div>
+                                Con nuevas capacidades sumadas a las recién estrenadas aplicaciones de Office 2016, este es el mejor momento para obtener la oferta más completa de Office 365.<br><br>
+                                <strong>Conjunto de programas de Office</strong><br>
+                                Ahora incluye las nuevas aplicaciones de Office 2016 para PC y Mac.
+                                <ul class="precios-lista">
+                                    <li><img src="~/content/images/aplicaciones_outlook.jpg" width="26" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_word.jpg" width="26" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_excel.jpg" width="26" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_powerPoint.jpg" width="26" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_notes.jpg" width="26" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_publisher.jpg" width="26" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_acces.jpg" width="26" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_skype2.jpg" width="26" height="24" alt="" /></li>
+                                </ul><br>
+                                <div style="clear: both;"></div>
+                                <div class="precios-collapse text-center"><a data-toggle="collapse" data-target="#modulo7" class="precios-cursor">▼▲</a></div>
+                                <div id="modulo7" class="collapse">
+                                    <img src="~/content/images/aplicaciones_tablets.jpg" width="26" height="31" alt="" /><br>
+                                    Disfruta de una experiencia de instalación completa de Office en equipos PC, equipos Mac, tabletas Windows, iPad® y tabletas Android™, así como en la mayoría de dispositivos móviles. Cada usuario puede instalar Office en 5 equipos PC o Mac, en 5 tabletas (Windows, iPad y Android) y en 5 teléfonos.
+                                    <br><br>
+                                    <strong>Servicios en línea</strong>
+                                    <ul class="precios-lista">
+                                        <li><img src="~/content/images/aplicaciones_calendario.jpg" width="40" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_cloud.jpg" width="26" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_conferencias.jpg" width="26" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_skype.jpg" width="30" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_chat.jpg" width="30" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_yammer.jpg" width="30" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_grupo.jpg" width="30" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_officeOnline.jpg" width="26" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_admin.jpg" width="30" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_sway.jpg" width="26" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_busqueda.jpg" width="30" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_mailBusqueda.jpg" width="34" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_seguridad.jpg" width="32" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_difusion.jpg" width="34" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_calendarioMail.jpg" width="32" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_sistema.jpg" width="26" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_video.jpg" width="26" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_telefono.jpg" width="26" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_herramientas.jpg" width="31" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_archivo.jpg" width="26" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_sharepoint.jpg" width="31" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_empleados.jpg" width="26" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_celu2.jpg" width="26" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_nube2.jpg" width="32" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_escudo.jpg" width="26" height="24" alt="" /></li>
+                                        <li><img src="~/content/images/aplicaciones_grafico.jpg" width="26" height="24" alt="" /></li>
+                                    </ul><br>
+                                    <div style="clear: both;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+
+                    <td class="preciosTable align-top">
+                        <!-- módulo 8 -->
+                        <div>
+                            <div class="precios-top">Office 365<br>Exchange Online (plan 1)</div>
+                            <div class="precios-texto">
+                                <div class="precios-texto-tit">$888.00 usuario / mes</div>
+                                Plan de archivado de correo electrónico, mensajería y calendarios accesibles desde Outlook en equipos PC, en la web y en dispositivos móviles.
+                                <br><br>
+                                <strong>Servicios en línea</strong>
+                                <ul class="precios-lista">
+                                    <li><img src="~/content/images/aplicaciones_exchange.jpg" width="26" height="24" alt="" /></li>
+                                </ul><br>
+                                <div style="clear: both;"></div>
+                            </div>
+                        </div>
+                    </td>
+
+                    <td class="preciosTable align-top">
+                        <!-- módulo 9 -->
+                        <div>
+                            <div class="precios-top">Office 365<br>Enterprise K1</div>
+                            <div class="precios-texto">
+                                <div class="precios-texto-tit">$888.00 usuario / mes</div>
+                                Destinado a personas de su organización que, sin contar con un PC dedicado, necesiten disponer de acceso ocasional al correo electrónico web, a sitios internos y a documentos con Office Online.
+                                <br><br>
+                                <strong>Servicios en línea</strong>
+                                <ul class="precios-lista">
+                                    <li><img src="~/content/images/aplicaciones_exchange.jpg" width="26" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_skype.jpg" width="26" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_sway.jpg" width="26" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_cloud.jpg" width="26" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_yammer.jpg" width="26" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_video2.jpg" width="26" height="24" alt="" /></li>
+                                    <li><img src="~/content/images/aplicaciones_chat.jpg" width="26" height="24" alt="" /></li>
+                                </ul><br>
+                                <div style="clear: both;"></div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="preciosTable align-top">
+                        <!-- módulo 10 -->
+                        <div>
+                            <div class="precios-top">Office 365<br>Quiosco de Exchange Online</div>
+                            <div class="precios-texto">
+                                <div class="precios-texto-tit">$888.00 usuario / mes</div>
+                                Plan básico con características de mensajería y calendarios con correo electrónico web y acceso POP.
+                                <br><br>
+                                <strong>Servicios en línea</strong>
+                                <ul class="precios-lista">
+                                    <li><img src="~/content/images/aplicaciones_exchange.jpg" width="26" height="24" alt="" /></li>
+                                </ul><br>
+                                <div style="clear: both;"></div>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+
+                    <td class="preciosTableVacio align-top">&nbsp;</td>
+                    <td class="preciosTableVacio align-top">&nbsp;</td>
+                </tr>
+            </table>
+        </div>
+        <!-- FINALIZA LA LISTA DE PRECIOS -->
+    </div>
+    <div id="consumos" class="tab-pane fade" style="height:100%;">
+        <!-- COMIENZA TAB IFRAME -->
+        <div class="row" style="height:100%;">
+            <div class="col-sm-12" style="height:100%;">
+                <iframe src="@ViewBag.ConsumosUrl" style="width:100%;height:100%;"></iframe>
+            </div>
+        </div>
+        <!-- FINALIZA TAB IFRAME -->
+    </div>
+    <div class="clearfix"></div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modalConfirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">CONFIRMAR</h4>
+            </div>
+            <div id="modal-body-text" class="modal-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="confirmOK">SÍ</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="confirmCancel">NO</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+
+        // handle select customer button clicks
+        $(function () {
+            $('.btn-select-customer').each(function () {
+                $(this).on('click', function () {
+                    onSelectCustomerClick($(this));
+                });
+            });
+        });
+        function onSelectCustomerClick($button) {
+            var $textbox = $('.txt-cuic').first();
+
+            if ($textbox) {
+                var cuic = $textbox.val();
+                var url = '@Url.Action("index","home")?id=' + cuic;
+                window.location.href = url;
+            }
+        }
+
+        // handle modify button clicks
+        $(function () { bindModifyLicensesButtons(); });
+        function bindModifyLicensesButtons() {
+            $('.btn-modify-licenses').each(function () {
+                $(this).off('click');
+                $(this).on('click', function () { onModifyLicensesButtonClick($(this)); });
+            });
+        }
+        function onModifyLicensesButtonClick($button) {
+            var subscriptionId = $button.data('subscription-id');
+            enableLicenseEdition(subscriptionId);
+            event.preventDefault();
+        }
+
+        // handle save button clicks
+        $(function () { bindSaveLicensesButtons(); });
+        function bindSaveLicensesButtons() {
+            $('.btn-save-licenses').each(function () {
+                $(this).off('click');
+                $(this).on('click', function () { onSaveLicensesButtonClick($(this)); });
+            });
+        }
+        function onSaveLicensesButtonClick($button) {
+
+            var $minAlert = $('.minAlert').first();
+            var $minOfferAlert = $('.minOfferAlert').first();
+            var $maxOfferAlert = $('.maxOfferAlert').first();
+            var $errAlert = $('.errAlert').first();
+
+            $minAlert.addClass('hidden');
+            $minOfferAlert.addClass('hidden');
+            $maxOfferAlert.addClass('hidden');
+            $errAlert.addClass('hidden');
+
+            var subscriptionId = $button.data('subscription-id');
+            var $textbox = selectBySubscriptionId('.txt-license-quantity', subscriptionId);
+            if ($textbox.val() < 1) {
+                $minAlert.removeClass('hidden');
+                return;
+            }
+
+            confirmDialog('¿Está seguro que desea guardar los cambios?'
+                            , function () {
+                                $.LoadingOverlay('show');
+
+                                var subscriptionId = $button.data('subscription-id');
+                                disableSaveButton(subscriptionId);
+                                disableLicenseQuantityTextBox(subscriptionId);
+                                saveLicenseQuantity(subscriptionId,
+                                    function () {
+                                        $.LoadingOverlay('hide');
+                                        disableLicenseEdition(subscriptionId);
+                                        enableSaveButton(subscriptionId);
+                                    },
+                                    function (xhr, status, error) {
+                                        $.LoadingOverlay('hide');
+                                        enableSaveButton(subscriptionId);
+                                        enableLicenseQuantityTextBox(subscriptionId);
+
+                                        if (error.match("^MaximunQuantity:")) {
+                                            $maxOfferAlert.removeClass('hidden');
+                                            return;
+
+                                        }
+
+                                        if (error.match("^MinimumQuantity:")) {
+                                            $minOfferAlert.removeClass('hidden');
+                                            return;
+
+                                        }
+
+                                        $errAlert.removeClass('hidden');
+                                    }
+                                );
+                                event.preventDefault();
+                            });
+        }
+
+        // handle suspend button clicks
+        $(function () { bindSuspendLicensesButtons(); });
+        function bindSuspendLicensesButtons() {
+            $('.btn-suspend-licenses').each(function () {
+                $(this).off('click');
+                $(this).on('click', function () { onSuspendLicensesButtonClick($(this)); });
+            });
+        }
+        function onSuspendLicensesButtonClick($button) {
+
+            var $errAlert = $('.errAlert').first();
+            $errAlert.addClass('hidden');
+
+            confirmDialog('¿Confirma la suspensión de la licencia?'
+                            , function () {
+                                var subscriptionId = $button.data('subscription-id');
+                                disableModifyButton(subscriptionId);
+                                disableSuspendButton(subscriptionId);
+                                disableSaveButton(subscriptionId);
+
+                                $.LoadingOverlay('show');
+                                suspendLicense(subscriptionId,
+                                    function () {
+                                        location.reload();
+                                    },
+                                    function (xhr, status, error) {
+                                        $.LoadingOverlay('hide');
+                                        enableModifyButton(subscriptionId);
+                                        enableSuspendButton(subscriptionId);
+                                        enableSaveButton(subscriptionId);
+                                        $errAlert.removeClass('hidden');
+                                    }
+                                );
+                                event.preventDefault();
+                            });
+        }
+
+        // Confirm Dialog
+        function confirmDialog(confirmText, onConfirm) {
+
+            var modal = $('#modalConfirm');
+
+            var fClose = function () {
+                modal.unbind();
+                modal.modal("hide");
+            };
+
+            var modalTextDiv = $('#modal-body-text');
+            modalTextDiv.text(confirmText);
+
+            modal.modal("show");
+
+            $("#confirmOK").off('click').one('click', onConfirm);
+            $("#confirmOK").one('click', fClose);
+            $("#confirmCancel").off('click').one('click', fClose);
+        }
+
+        // handle add license buttons click
+        $(function () {
+            $('#btn-add-license').on('click', function () {
+                onAddLicensesButtonClick();
+            });
+            $('#btn-confirm-add-license').on('click', function () {
+                onConfirmAddLicensesButtonClick();
+            });
+            $('#btn-cancel-add-license').on('click', function () {
+                onCancelAddLicensesButtonClick();
+            });
+        });
+        function onAddLicensesButtonClick() {
+            enableLicenseAddition();
+            event.preventDefault();
+        }
+        function onConfirmAddLicensesButtonClick() {
+
+            confirmDialog(
+                '¿Confirma agregar el plan seleccionado?',
+                function () {
+                    var $cmb = $('#cmb-price');
+                    var parts = $cmb.val().split('|');
+                    var $txt = $('#txt-license-quantity');
+
+                    var data = {
+                        customerId: '@ViewBag.CustomerId',
+                        offerId: parts[0],
+                        subscriptionId: parts[1],
+                        offerFriendlyName: $cmb.children('option:selected').text(),
+                        licenseQuantity: parseInt($txt.val())
+                    };
+
+                    var $errAlert = $('.errAlert').first();
+                    $errAlert.addClass('hidden');
+
+                    $.LoadingOverlay('show');
+                    $.post('@Url.Action("AddLicense", "Subscriptions")', data)
+                    .done(function () {
+                        location.reload();
+                    })
+                    .fail(function () {
+                        $.LoadingOverlay('hide');
+                        $errAlert.removeClass('hidden');
+                    });
+                }
+            );
+            event.preventDefault();
+        }
+        function onCancelAddLicensesButtonClick() {
+            disableLicenseAddition();
+        }
+
+        function saveLicenseQuantity(subscriptionId, onSuccessCallback, onErrorCallback) {
+            var $textbox = selectBySubscriptionId('.txt-license-quantity', subscriptionId);
+            if ($textbox) {
+                var data = {
+                    customerId: '@ViewBag.CustomerId',
+                    subscriptionId: subscriptionId,
+                    licenseQuantity: parseInt($textbox.val())
+                };
+                $.post('@Url.Action("SaveLicenseQuantity", "Subscriptions")', data)
+                .done(onSuccessCallback)
+                .fail(onErrorCallback);
+            }
+        }
+
+        function suspendLicense(subscriptionId, onSuccessCallback, onErrorCallback) {
+
+            var data = {
+                customerId: '@ViewBag.CustomerId',
+                subscriptionId: subscriptionId,
+            };
+
+            $.post('@Url.Action("SuspendLicense", "Subscriptions")', data)
+                .done(onSuccessCallback)
+                .fail(onErrorCallback);
+        }
+
+        function enableLicenseAddition() {
+            // show controls
+            var $controls = $('.add-license-controls');
+            if ($controls) {
+                $controls.fadeIn();
+            }
+        }
+
+        function disableLicenseAddition() {
+            // hide controls
+            var $controls = $('.add-license-controls');
+            if ($controls) {
+                $controls.fadeOut();
+            }
+        }
+
+        function enableLicenseEdition(subscriptionId) {
+
+            // enable input
+            var $textbox = selectBySubscriptionId('.txt-license-quantity', subscriptionId);
+            if ($textbox) {
+                var quantity = $textbox.data('subscription-quantity');
+                $textbox.prop('disabled', false);
+                $textbox.val(quantity);
+                $textbox.attr('placeholder', '');
+                $textbox.focus();
+            }
+
+            // hide modify button
+            var $button = selectBySubscriptionId('.btn-modify-licenses', subscriptionId);
+            if ($button) {
+                $button.hide();
+            }
+
+            // show save button
+            var $button = selectBySubscriptionId('.btn-save-licenses', subscriptionId);
+            if ($button) {
+                $button.show();
+            }
+        }
+
+        function disableLicenseEdition(subscriptionId) {
+
+            // enable input
+            var $textbox = selectBySubscriptionId('.txt-license-quantity', subscriptionId);
+            if ($textbox) {
+                var quantity = $textbox.val();
+                $textbox.prop('disabled', true);
+                $textbox.val();
+                $textbox.attr('placeholder', quantity);
+                $textbox.data('subscription-quantity', quantity);
+            }
+
+            // hide modify button
+            var $button = selectBySubscriptionId('.btn-modify-licenses', subscriptionId);
+            if ($button) {
+                $button.show();
+            }
+
+            // show save button
+            var $button = selectBySubscriptionId('.btn-save-licenses', subscriptionId);
+            if ($button) {
+                $button.hide();
+            }
+        }
+
+        function disableSaveButton(subscriptionId) {
+            var $button = selectBySubscriptionId('.btn-save-licenses', subscriptionId);
+            if ($button) {
+                $button.prop('disabled', true);
+            }
+        }
+
+        function disableModifyButton(subscriptionId) {
+            var $button = selectBySubscriptionId('.btn-modify-licenses', subscriptionId);
+            if ($button) {
+                $button.prop('disabled', true);
+            }
+        }
+
+        function disableModifyButtons() {
+            $('.btn-modify-licenses').prop('disabled', true);
+        }
+
+        function enableModifyButton(subscriptionId) {
+            var $button = selectBySubscriptionId('.btn-modify-licenses', subscriptionId);
+            if ($button) {
+                $button.prop('disabled', false);
+            }
+        }
+
+        function enableModifyButtons() {
+            $('.btn-modify-licenses').prop('disabled', false);
+        }
+
+        function disableSuspendButton(subscriptionId) {
+            var $button = selectBySubscriptionId('.btn-suspend-licenses', subscriptionId);
+            if ($button) {
+                $button.prop('disabled', true);
+            }
+        }
+
+        function disableSuspendButtons() {
+            $('.btn-suspend-licenses').prop('disabled', true);
+        }
+
+        function enableSuspendButton(subscriptionId) {
+            var $button = selectBySubscriptionId('.btn-suspend-licenses', subscriptionId);
+            if ($button) {
+                $button.prop('disabled', false);
+            }
+        }
+
+        function enableSuspendButtons() {
+            $('.btn-suspend-licenses').prop('disabled', false);
+        }
+
+        function enableSaveButton(subscriptionId) {
+            var $button = selectBySubscriptionId('.btn-save-licenses', subscriptionId);
+            if ($button) {
+                $button.prop('disabled', false);
+            }
+        }
+
+        function disableLicenseQuantityTextBox(subscriptionId) {
+            var $textbox = selectBySubscriptionId('.txt-license-quantity', subscriptionId);
+            if ($textbox) {
+                $textbox.prop('disabled', true);
+            }
+        }
+
+        function enableLicenseQuantityTextBox(subscriptionId) {
+            var $textbox = selectBySubscriptionId('.txt-license-quantity', subscriptionId);
+            if ($textbox) {
+                $textbox.prop('disabled', false);
+                $textbox.focus();
+            }
+        }
+
+        function selectBySubscriptionId(selector, subscriptionId) {
+            var $element = null;
+            $(selector).each(function () {
+                var $e = $(this);
+                if ($e.data('subscription-id') == subscriptionId) {
+                    $element = $e;
+                }
+            });
+            return $element;
+        }
+    </script>
+}
