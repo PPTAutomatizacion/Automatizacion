@@ -1,0 +1,91 @@
+-- Procedimiento Consumos.
+
+-- Ejecución - Cambiar nombre de la carpeta  C:\Pruebasssss:
+
+USE Automatizacion
+
+DECLARE	@return_value int,
+	    @Archivo varchar(255), 
+	    @Query varchar(2000)		
+EXEC	@return_value = [dbo].[EscrituraArchivo]
+		@Archivo = 'C:\Pruebasssss\Detalle.txt',
+		@Query = 'SELECT [codigo_reg_ticket],LEFT(REPLICATE('''' '''',100-len(numero_elem_medicion))+numero_elem_medicion,100),LEFT(REPLICATE('''' '''',10-len(cant_tipo_evento))+cant_tipo_evento,10),LEFT(REPLICATE('''' '''',100-len([descripcion]))+[descripcion],100),[fecha_evento],[hora_evento],[fecha_evento],[hora_evento],[tipo_evento] FROM [Automatizacion].[dbo].[Facturacion_Uso]',
+		--@Query =  'SELECT DISTINCT biz.cuic, cli.RAZONSOCIAL, biz.idProducto, pla.VRA_ID, pla.VM_Name, pla.VM_vCPU, pla.VM_OS, pla.VM_Applications, COUNT(*) Cantidad FROM Automatizacion.dbo.PLA_PlataformaVRA pla LEFT JOIN Automatizacion.dbo.BIZ_VRA_Prod biz ON pla.VRA_ID = biz.VRA_ID LEFT JOIN Automatizacion.dbo.Clientes cli ON biz.cuic = cli.CUIC WHERE 1 = 1 AND pla.VRA_ID NOT LIKE ''''%DCHornos-SVP-0%'''' AND (DATEPART(MONTH, DATE) = DATEPART(MONTH, DATEADD(MM, -1, SYSDATETIME())) AND DATEPART(YEAR, DATE) = DATEPART(YEAR, DATEADD(MM, -1, SYSDATETIME()))) AND pla.VRA_ID NOT IN (''''DCHornos-Networking-01-Edge-01'''',''''DCHornos-Networking-01-Management-01'''',''''Cloud_Mgmt,DCHornos-SVP-01'''') GROUP BY biz.cuic, cli.RAZONSOCIAL, biz.idProducto, pla.VRA_ID, pla.VM_Name, pla.VM_vCPU, pla.VM_OS, pla.VM_Applications',
+		@Separador = '-t' --'-t |'
+ 
+SELECT	'Return Value' = @return_value
+
+----------------------------------------
+
+Procedure
+
+USE [Automatizacion]
+GO
+/****** Object:  StoredProcedure [dbo].[EscrituraArchivo]    Script Date: 28/09/2017 16:50:36 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+-- Modificar las carpetas:
+
+	SET @ArchivoEnc = 'C:\Pruebasssss\Header.txt';
+	SET @ArchivoFoot = 'C:\Pruebasssss\Footer.txt';
+	
+---------------------------------------------------
+ 
+CREATE PROCEDURE [dbo].[EscrituraArchivo]  
+	@Archivo varchar(255), 
+	@Query varchar(2000),
+	@Separador varchar(8)	
+AS
+BEGIN TRY
+ 
+	declare @Sql nvarchar(2000);
+	declare @Resultado nvarchar(50);
+	declare @Encabezado nvarchar(1000);
+	declare @Fin nvarchar(1000);
+	declare @ArchivoEnc nvarchar(100);
+	declare @ArchivoFoot nvarchar(100);
+
+	SET @ArchivoEnc = 'C:\Pruebasssss\Header.txt';
+	SET @ArchivoFoot = 'C:\Pruebasssss\Footer.txt';
+
+	-- ENCABEZADO
+	
+	SET @Encabezado = 'SELECT ''''01''''+CONVERT(VARCHAR(4),YEAR(GETDATE()))+RIGHT(''''0''''+CONVERT(VARCHAR(2),MONTH(GETDATE())),2)+RIGHT(''''0''''+CONVERT(VARCHAR(2),DAY(GETDATE())),2), RIGHT(''''0''''+CONVERT(VARCHAR(2),DATEPART(HOUR,GETDATE())),2)+RIGHT(''''0''''+CONVERT(VARCHAR(2),DATEPART(MINUTE,GETDATE())),2)+RIGHT(''''0''''+CONVERT(VARCHAR(2),DATEPART(SECOND,GETDATE())),2)+RIGHT(''''0''''+CONVERT(VARCHAR(2),DATEPART(HOUR,GETDATE())),2)+RIGHT(''''0''''+CONVERT(VARCHAR(2),DATEPART(MINUTE,GETDATE())),2)+RIGHT(''''0''''+CONVERT(VARCHAR(2),DATEPART(SECOND,GETDATE())),2)';
+	
+	set @Sql = 'exec master..xp_cmdshell ' + char(39) + 'bcp "'+ @Encabezado +
+		'" queryout "' + @ArchivoEnc + '" -w "'+@Separador+'" -T -S EQUIPO013032\SQLEXPRESS' + char(39) 
+	PRINT @Sql;
+	EXECUTE sp_executesql @Sql;
+
+	-- DETALLE
+
+	set @Sql = 'exec master..xp_cmdshell ' + char(39) + 'bcp "'+ @Query +
+		'" queryout "' + @Archivo + '" -w "'+@Separador+'" -T -S EQUIPO013032\SQLEXPRESS' + char(39) 
+	PRINT @Sql;
+	EXECUTE sp_executesql @Sql;
+ 
+    -- PIE
+
+	SET @Fin = 'SELECT ''''99''''+CONVERT(VARCHAR(4),YEAR(GETDATE()))+RIGHT(''''0''''+CONVERT(VARCHAR(2),MONTH(GETDATE())),2)+RIGHT(''''0''''+CONVERT(VARCHAR(2),DAY(GETDATE())),2), RIGHT(''''0''''+CONVERT(VARCHAR(2),DATEPART(HOUR,GETDATE())),2)+RIGHT(''''0''''+CONVERT(VARCHAR(2),DATEPART(MINUTE,GETDATE())),2)+RIGHT(''''0''''+CONVERT(VARCHAR(2),DATEPART(SECOND,GETDATE())),2)+RIGHT(''''0''''+CONVERT(VARCHAR(2),DATEPART(HOUR,GETDATE())),2)+RIGHT(''''0''''+CONVERT(VARCHAR(2),DATEPART(MINUTE,GETDATE())),2)+RIGHT(''''0''''+CONVERT(VARCHAR(2),DATEPART(SECOND,GETDATE())),2)';
+	
+	set @Sql = 'exec master..xp_cmdshell ' + char(39) + 'bcp "'+ @Fin +
+		'" queryout "' + @ArchivoFoot + '" -w "'+@Separador+'" -T -S EQUIPO013032\SQLEXPRESS' + char(39) 
+	PRINT @Sql;
+	EXECUTE sp_executesql @Sql;
+
+	-- RESULTADO
+
+	SET @Resultado = 'Exito'
+	select @Resultado as Resultado;
+ 
+END TRY
+BEGIN CATCH
+ 
+	SET @Resultado = @@ERROR
+	select @Resultado as Resultado;
+ 
+END CATCH
+
