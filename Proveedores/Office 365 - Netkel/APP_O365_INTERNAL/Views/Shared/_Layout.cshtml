@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="height:100%;">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,13 +17,14 @@
     </style>
     <![endif]-->
 </head>
-<body>
-    <div class="bs-example contentWidth">
+<body style="height:100%;">
+    <div class="bs-example contentWidth" style="height:100%;">
         @RenderBody()
     </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/loadingoverlay")
     @RenderSection("scripts", required: false)
 </body>
 </html>
