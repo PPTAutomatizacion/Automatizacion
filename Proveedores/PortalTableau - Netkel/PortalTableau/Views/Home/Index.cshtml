@@ -1,0 +1,192 @@
+﻿<div data-bind="errorBox: true"></div>
+
+<div id="login-layer" class="container-fluid container-background-login " data-bind="slideVisible: mode() === 'news'">
+    <!-- saludo + slide imagen -->
+    <div id="news" class="row">
+        <!-- MD+ -->
+        <div class="hidden-xs hidden-sm col-md-6 col-lg-6 pad-top-logon">
+            <div class="titPortal">Portal de Monitoreo de Procesos</div>
+            <div class="textPortal">Monitorear nuestros procesos nos permite entender nuestra operación, mejorar la comunicación, identificar puntos de mejora y necesidades de automatización de circuitos.</div>
+            <div class="col-md-12 saludo-content">
+                <div class="col-md-9 saludo">¡Hola @Security.CurrentUser.FirstName!</div>
+                <div class="col-md-3 saludo-boton">
+                    <button type="submit" class="btnLog btn-login-registrame" data-bind="click: ()=> mode('projects')">Acceder<i class="fa fa-arrow-right login-icon-button" aria-hidden="true"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="hidden-xs hidden-sm col-md-6 col-lg-6 pad-top-logon">
+            <news-carousel params="ViewModel: News"></news-carousel>
+        </div>
+        <!-- SM -->
+        <div class="hidden-xs col-sm-offset-1 col-sm-10 hidden-md hidden-lg  text-left">
+            <div class="titPortal-sm">Portal de Monitoreo de Procesos</div>
+            <div class="textPortal-sm">Monitorear nuestros procesos nos permite entender nuestra operación, mejorar la comunicación, identificar puntos de mejora y necesidades de automatización de circuitos.</div>
+            <div class="col-sm-12 saludo-content">
+                <div class="col-sm-12 saludo-sm">¡Hola @Security.CurrentUser.FirstName!</div>
+                <div class="col-sm-12 saludo-boton-sm">
+                    <button type="submit" class="btnLog-sm btn-login-registrame" data-bind="click: ()=> mode('projects')">Acceder<i class="fa fa-arrow-right login-icon-button" aria-hidden="true"></i></button>
+                </div>
+            </div>
+        </div>
+        <!-- XS -->
+        <div class="col-xs-offset-1 col-xs-10 hidden-sm hidden-md hidden-lg text-left">
+            <div class="titPortal">Portal de Monitoreo de Procesos</div>
+            <div class="textPortal-xs">Monitorear nuestros procesos nos permite entender nuestra operación, mejorar la comunicación, identificar puntos de mejora y necesidades de automatización de circuitos.</div>
+            <div class="col-sm-12 saludo-content">
+                <div class="col-sm-12 saludo-sm">¡Hola @Security.CurrentUser.FirstName!</div>
+                <div class="col-sm-12 saludo-boton-sm">
+                    <button type="submit" class="btnLog btn-login-registrame" data-bind="click: ()=> mode('projects')">Acceder<i class="fa fa-arrow-right login-icon-button" aria-hidden="true"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div id="tableau-layer" data-bind="slideVisible: mode() === 'projects'" class="container-fluid container-background-tablero">
+    <div id="new-content-layer" class="container-fluid">
+        <!-- TOP MD+ -->
+        <div class="hidden-xs hidden-sm col-md-12 col-lg-12">
+            <div class="col-md-5 new-portal-md">Portal de Monitoreo de Procesos</div>
+            <div class="col-md-3"><tableau-search params="ViewModel: TableauSearcher"></tableau-search></div>
+            <div class="col-md-4 new-portal-user-md">
+                <div class="col-md-9 pad-top-5"><a href="@Url.Action("ChangePassword", "Account")"><span class="new-portal-user-name-md" title="Cambiar contraseña">@Security.CurrentUser.FullName</span></a></div>
+                <div class="col-md-3 pad-top-5 text-left"><a href="@Url.Action("Logout", "Home")"><span class="new-portal-user-log-out-md" title="Salir">Logout</span></a></div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <!-- TOP SM -->
+        <div id="mySidenavMD" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNavMD()">&times;</a>
+            <div style="padding-top:30px;"><a href="@Url.Action("ChangePassword", "Account")"><span class="new-portal-user-name-sm" title="Cambiar contraseña">@Security.CurrentUser.FullName</span></a></div>
+            <a href="@Url.Action("Logout", "Home")"><span class="new-portal-user-log-out-sm" title="Salir">Logout</span></a>
+        </div>
+        <div class="hidden-xs col-sm-12 hidden-md hidden-lg no-pad-left-right">
+            <div class="col-sm-6 new-portal-sm">
+                <div class="open-nav-content-sm"><span class="openNav-sm" onclick="openNavMD()">&#9776;</span></div>
+                <div class="open-nav-text-sm">Portal de Monitoreo de Procesos</div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="col-sm-6 new-portal-search-sm"><tableau-search params="ViewModel: TableauSearcher"></tableau-search></div>
+        </div>
+        <div class="clearfix"></div>
+        <!-- TOP XS -->
+        <div id="mySidenav" class="sidenav-xs">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <div style="padding-top:30px;"><a href="@Url.Action("ChangePassword", "Account")"><span class="new-portal-user-name" title="Cambiar contraseña">@Security.CurrentUser.FullName</span></a></div>
+            <a href="@Url.Action("Logout", "Home")"><span class="new-portal-user-log-out" title="Salir">Logout</span></a>
+        </div>
+        <div class="col-xs-12 hidden-sm hidden-md hidden-lg" style="padding-right:0px; padding-left:0px;">
+            <div class="col-xs-12 new-portal-xs">
+                <div class="open-nav-content-xs"><span class="openNav-xs" onclick="openNav()">&#9776;</span></div>
+                <div class="open-nav-text-xs">Portal de Monitoreo de Procesos</div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="col-xs-12"><tableau-search params="ViewModel: TableauSearcher"></tableau-search></div>
+        </div>
+        <div class="clearfix"></div>
+
+
+        <!-- tableros -->
+        <div class="row new-content-row hidden-xs" style="padding-top:4vw;">
+            <!-- todos los tableros -->
+            <div id="tablero" class="tablero">
+                <!-- tablero -->
+                <div class="grid-stack" data-bind="tilesGrid: {onTilesChanged: userTableauxChanged}, foreach: {data: UserTableaux, afterRender: afterAddTile}">
+                    <div class="grid-stack-item" data-bind="hoverVisible: {targetSelector: '[data-hover=\'' + TableauId() + '\']', effect: 'fade'}, attr: {'data-gs-id' : Id, 'data-gs-x': X, 'data-gs-y': Y, 'data-gs-width': Width, 'data-gs-height': Height, 'data-gs-auto-position': AutoPosition}">
+                        <div class="grid-stack-item-content">
+                            <div class="col-sm-12 tablero-content collapse in" data-bind="style: { backgroundImage: 'url(\'' + Tableau.ImageUrl() + '\')'}">
+                                <div class="tablero-100-fondo">
+                                    <div class="pull-right tablero-boton-close-mobile hidden-md hidden-lg"> <a href="#" data-bind="click: $parent.deleteUserTableau,"><img src="~/Content/Images/closeMobile.png" alt="" /></a></div>
+                                    <div class="pull-right tablero-boton-close hidden-xs hidden-sm"> <a href="#" data-bind="enable: Id() > 0, click: $parent.deleteUserTableau, attr: {'data-hover': TableauId() }"><img src="~/Content/Images/botonClose.png" alt="" /></a></div>
+                                    <div class="tablero-100 color-borde">
+                                        <div class="tablero-tit color-fondo">&nbsp;</div>
+                                        <div class="tablero-text-tit color-text">
+                                            <div class="tit-space" data-bind="text: Tableau.Title"></div>
+                                            <div data-bind="attr: {'data-hover': TableauId() }" class="tablero-text-bajada hidden-xs hidden-sm">
+                                                <div class="tablero-text-bajada-italic" data-bind="text: Tableau.Description"></div>
+                                                <a href="#" data-bind="click: ()=> $root.showTableau(Tableau)" class="btn btnLog btn-ver">Ver Tablero <i class="fa fa-arrow-right" aria-hidden="true" style="padding-left: 20px;"></i></a>
+                                            </div>
+                                        </div>
+
+                                        <div class="hidden-md hidden-lg tablero-boton-ver"><a href="#" data-bind="click: ()=> $root.showTableau(Tableau)"><img src="~/Content/Images/tablero-mobile.png" alt="" /></a></div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- --- -->
+
+        <!-- tableros xs -->
+        <div class="row new-content-row hidden-sm hidden-md hidden-lg" style="padding-top:3vw;">
+            <!-- ko foreach: UserTableaux -->
+            <div class="col-xs-12" style="padding-top:2vw;">
+                <div class="color-borde tablero-mobile" data-bind="style: { backgroundImage: 'url(\'' + Tableau.ImageUrl() + '\')'}">
+                    <div class="col-xs-10 color-fondo titulo-mobile"><a href="#" data-bind="click: ()=> $root.showTableau(Tableau)" class="link-tablero-mobile"><div data-bind="text: Tableau.Title"></div></a></div>
+                    <div class="col-xs-2 color-fondo titulo-close-mobile"><a href="#" data-bind="enable: Id() > 0, click: $parent.deleteUserTableau"><img src="~/Content/Images/closeMobile.png" alt="" style="max-height:30px;" /></a></div>
+                </div>
+            </div>
+            <!-- /ko -->
+            <div style="height:20px;">&nbsp;</div>
+        </div>
+        <!-- --- -->
+    </div>
+
+
+    <!-- overlay tablero  (Aca se muestra el tablero seleccionado) -->
+    <div class="overlay" data-bind="slideVisible: {visible: selectedTableau() != null, direction: 'leftRight'}">
+        <div>
+            <a href="#" class="closebtn hidden-xs hidden-sm" data-bind="click: ()=> $root.hideTableau(selectedTableau())"><img src="~/Content/Images/botonClose.png" width="17" height="17" alt="" /></a>
+        </div>
+
+
+        <div class="col-xs-12 col-sm-12 hidden-md hidden-lg hidden-md text-right">
+            <a href="#" data-bind="click: ()=> $root.hideTableau(selectedTableau())"><img src="~/Content/Images/menuBotTablero-black.png" width="40" height="40" alt="" style="text-align:right; padding-top:15px;" /></a>
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-10 col-md-offset-1 overlay-content iframe-position">
+            <!--ko with:selectedTableau-->
+            <iframe src="about:blank" data-bind="attr:{src: TableauUrl}" class="iframe-overlay"></iframe>
+            <!--/ko-->
+        </div>
+    </div>
+    <!-- -- -->
+    <!-- -- -->
+
+</div>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $('#nav-icon1,#nav-icon2,#nav-icon3,#nav-icon4').click(function () {
+                $(this).toggleClass('open');
+            });
+        });
+    </script>
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "100%";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+
+        function openNavMD() {
+            document.getElementById("mySidenavMD").style.width = "40%";
+        }
+
+        function closeNavMD() {
+            document.getElementById("mySidenavMD").style.width = "0";
+        }
+    </script>
+    <script src="~/Scripts/Views/index.js"></script>
+    @RenderPage("~/Views/Components/_NewsCarousel.cshtml")
+    @RenderPage("~/Views/Components/_TableauSearch.cshtml")
+}

@@ -1,0 +1,24 @@
+﻿<script type="text/html" id="single-file-upload">
+    <div class="row">
+        <div class="small-12 columns">
+            <div>
+                <input type="file" style="visibility:hidden; position:absolute" data-bind="validator: validate, enable: enable, attr:{ id: fileInputId }, singleFileUpload: {}" />
+                <!--ko if: Filename() !== null-->
+                <span class="subir-foto" data-bind="text: Filename"></span>
+                <!--/ko-->
+                <!--ko if: Filename() === null-->
+                <span class="subir-foto">Seleccione un archivo...</span>
+                <!--/ko-->
+                <span class="form-error" data-bind="text: validationMessage" style="margin-top:5px">
+                </span>
+            </div><br />
+
+            <div data-bind="if: uploading(), attr:{ id: progressControlId }, style: { borderBottom: uploading() ? '1px solid' : 'inherit' }">
+                <div class="bar" style="width: 0%;height: 5px;background: #2de4ea"></div>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/javascript" src="~/Scripts/fileUpload.js"></script>
+<script type="text/javascript" src="~/Scripts/Components/singlefileupload.js"></script>

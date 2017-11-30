@@ -1,0 +1,128 @@
+﻿<!-- Edit form -->
+<div class="container" data-bind="slideVisible: ['new', 'edit'].indexOf(mode()) != -1, afterIn: afterFormIn, afterOut: afterFormOut">
+    <div class="row breadcrumb-content">
+        <ul class="breadcrumbs">
+            <li><a href="~/"><i class="fa fa-home"></i> Inicio</a></li>
+            <li><a href="#" data-bind="click:cancel">Proyecto</a></li>
+            <li><span data-bind="text: mode() == 'new' ? 'Nuevo' : 'Edición'"></span></li>
+        </ul>
+    </div>
+
+    <div data-bind="errorBox:['new', 'edit'].indexOf(mode()) != -1"></div>
+
+    <!-- ko with: Project -->
+    <form data-bind="submit: $root.save" data-abide novalidate id="edit-form">
+        <div class="row">
+            <div class="col-sm-12 tit-page-edit">PROYECTO</div>
+            <div class="medium-10 columns">
+                <div class="row">
+                    <div class="medium-10 columns">
+                        <div class="row">
+                            <div class="medium-6 columns">
+                                <label>
+                                    Nombre
+                                    <input data-bind="textInput: Name, hasFocus: $root.nameFocus" type="text" maxlength="150" required />
+                                    <span class="form-error">
+                                        Debe ingresar un nombre
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="medium-5 columns">
+                                <label>
+                                    Sitio<br />
+                                    <select data-bind="options: Sites,
+                                                       optionsText: 'Name',
+                                                       optionsValue: 'Id',
+                                                       value: SiteId,
+                                                       optionsCaption: 'Seleccione...'" required></select>
+                                    <span class="form-error">
+                                        Debe seleccionar un sitio
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="medium-5 columns">
+                                <label>
+                                    <div style="padding-bottom:10px">Icono <small>(*.svg)</small></div>
+                                    <single-file-upload params="ViewModel: Icon"></single-file-upload>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="medium-2 columns">
+                                <!--ko if: SvgIconPath() !== null-->
+                                <svg version="1.1" id="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                     viewBox="0 0 60 60" style="enable-background:new 0 0 60 60;" xml:space="preserve" class="color00-fill color00-borde iconos-menu-image">
+                                    <!-- ko foreach: IconPaths -->
+                                    <path data-bind="attr:{d: $data}" d="M51.7,51.3L36.8,35.8C40.6,32,43,26.8,43,21C43,9.4,33.6,0,22,0S1,9.4,1,21s9.4,21,21,21c5.1,0,9.7-1.8,13.4-4.8l14.9,15.5
+	                                        c0.2,0.2,0.5,0.3,0.7,0.3c0.3,0,0.5-0.1,0.7-0.3C52.1,52.3,52.1,51.7,51.7,51.3z M22,40C11.5,40,3,31.5,3,21S11.5,2,22,2
+	                                        s19,8.5,19,19S32.5,40,22,40z">
+                                    </path>
+                                    <!-- /ko -->
+                                </svg>
+                                <!--/ko-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="medium-2 columns">
+                <button type="submit" class="button expanded action-button ok"><i class="fa fa-check"></i> Aceptar</button>
+                <a href="#" data-bind="click:$root.cancel" class="button expanded action-button cancel"><i class="fa fa-remove"></i> Cancelar</a>
+            </div>
+        </div>
+    </form>
+    <!--/ko-->
+</div>
+
+<!-- list -->
+<div class="container" data-bind="slideVisible: ['list'].indexOf(mode()) !== -1">
+    <div class="row breadcrumb-content">
+        <div class="col-sm-6" style="padding-left:0px;">
+            <ul class="breadcrumbs">
+                <li><a href="~/"><i class="fa fa-home"></i> Inicio</a></li>
+                <li>Proyectos</li>
+            </ul>
+        </div>
+        <div class="medium-6 column text-right">
+            <a href="#" data-bind="click:newProject" class="button action-button"><i></i> Nuevo</a>
+        </div>
+    </div>
+
+    <div class="row column">
+        <div data-bind="errorBox: mode() == 'list'"></div>
+        <div data-bind="alerts: alerts"></div>
+    </div>
+    <div class="row tit-page">PROYECTOS</div>
+    <div class="row table-header">
+        <div class="medium-6 column">Nombre</div>
+        <div class="medium-5 column">Sitio</div>
+        <div class="medium-1 column">&nbsp;</div>
+    </div>
+
+    <!-- ko foreach: Projects -->
+    <div class="row table-data">
+        <div class="medium-6 column"><div data-bind="text: Name"></div></div>
+        <div class="medium-5 column"><div data-bind="text: Site"></div></div>
+        <div class="medium-1 column text-center">
+            <ul class="menu">
+                <li><a href="#" data-bind="click:$root.edit" title="Editar"><i class="fa fa-list"></i></a></li>
+                <li><a href="#" data-bind="click:$root.delete" title="Eliminar"><i class="fa fa-trash"></i></a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- /ko -->
+
+    <pager params="ViewModel: Pager"></pager>
+</div>
+
+@section scripts {
+    <script src="~/Scripts/Views/projects.js"></script>
+    @RenderPage("~/Views/Components/_Pager.cshtml")
+    @RenderPage("~/Views/Components/_SingleFileUpload.cshtml")
+}
+
+

@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>@(ViewBag.Title ?? "TABLEAU")</title>
+    <link rel="stylesheet" href="~/Content/app.min.css">
+
+    <link rel="stylesheet" href="~/Content/main.css">
+    <!--[if gte IE 9]
+            <style type="text/css">
+            .gradient {
+            filter: none;
+            }
+            </style>
+            <![endif]-->
+</head>
+<body data-baseurl="@string.Concat(Context.Request.Url.Scheme, "://", Context.Request.Url.Authority, VirtualPathUtility.ToAbsolute("~/"))">
+    <div id="confirmBoxModal" class="tiny reveal fast" data-reveal data-animation-in="fade-in" data-animation-out="fade-out">
+        <p id="confirmBoxModal-text">[modal text]</p>
+        <div class="row text-right">
+            <a href="#" id="confirmBoxModal-ok" class="eliminar-tablero">Ok</a>
+            <a href="#" id="confirmBoxModal-cancel" class="eliminar-tablero">Cancelar</a>
+        </div>
+    </div>
+
+    <div class="row text-center" id="page-loading">
+        <img src="~/Content/Images/fadingblocks.gif" />
+    </div>
+
+    <div id="page-body" style="display:none">
+        <div id="page-content" class="container-background-login">
+            @RenderBody()
+        </div>
+    </div>
+
+    <script src="~/Scripts/bundle.min.js"></script>
+    <script src="~/Scripts/Views/app.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,192 @@
+﻿<!-- Edit form -->
+<div class="container" data-bind="slideVisible: ['new', 'edit'].indexOf(mode()) != -1, afterIn: afterFormIn, afterOut: afterFormOut">
+    <div class="row breadcrumb-content">
+        <ul class="breadcrumbs">
+            <li><a href="~/"><i class="fa fa-home"></i> Inicio</a></li>
+            <li><a href="#" data-bind="click:cancel">Tableros</a></li>
+            <li><span data-bind="text: mode() == 'new' ? 'Nuevo' : 'Edición'"></span></li>
+        </ul>
+    </div>
+
+    <div data-bind="errorBox:['new', 'edit'].indexOf(mode()) != -1"></div>
+
+    <!--ko with:tableau-->
+    <form data-bind="submit: $root.save" data-abide novalidate id="edit-form">
+        <div class="row">
+            <div class="col-sm-12 tit-page-edit">TABLERO</div>
+            <div class="medium-10 columns">
+                <div class="row">
+                    <div class="medium-10 columns">
+                        <div class="row">
+                            <div class="medium-6 columns" style="padding-left:0px;">
+                                <label>
+                                    Titulo
+                                    <input data-bind="textInput: Title, hasFocus: $root.titleFocus" type="text" maxlength="150" required />
+                                    <span class="form-error">
+                                        Debe ingresar un titulo
+                                    </span>
+                                </label>
+                            </div>
+                            <div class="medium-6 columns">
+                                <label>
+                                    Código
+                                    <input data-bind="textInput: Code" type="text" maxlength="150" required />
+                                    <span class="form-error">
+                                        Debe ingresar un codigo
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="medium-6 columns" style="padding-left:0px;">
+                                <label>
+                                    Descripcion
+                                    <textarea data-bind="textInput: Description" maxlength="255" required> </textarea>
+                                    <span class="form-error">
+                                        Debe ingresar una descripcion
+                                    </span>
+                                </label>
+                            </div>
+                            <div class="medium-6 columns">
+                                <label>
+                                    Proyecto<br />
+                                    <select data-bind="options: Projects,
+                                                       optionsText: 'Name',
+                                                       optionsValue: 'Id',
+                                                       value: ProjectId,
+                                                       optionsCaption: 'Seleccione...'" required></select>
+                                    <span class="form-error">
+                                        Debe seleccionar un proyecto
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="medium-6 columns" style="padding-left:0px;">
+                                <label>
+                                    <div style="padding-bottom:10px">Imagen</div>
+                                    <single-file-upload params="ViewModel: Image"></single-file-upload>
+                                    <span class="form-error">
+                                        Debe seleccionar una imagen
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="medium-2 columns" style="padding-left:0px;">
+                                <img src="about:blank" data-bind="if: ImageUrl() != null, attr:{src: ImageUrl}" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="medium-10 columns end" style="padding-left:0px;">
+                                <h1 class="section">Parámetros</h1>
+                                <!-- ko if: Params().length === 0 -->
+                                <ul class="menu">
+                                    <li><a href="#" data-bind="click: $root.addParam" class="tiny button"><i class="fa fa-plus"></i> Nuevo</a></li>
+                                </ul>
+                                <!-- /ko -->
+                                <!-- ko foreach: Params -->
+                                <div class="row">
+                                    <div class="small-4 columns">
+                                        <label data-bind="if: $index() == 0">Nombre</label>
+                                        <input data-bind="textInput: Name" type="text" required maxlength="150">
+                                        <span class="form-error">
+                                            Debe ingresar un nombre.
+                                        </span>
+                                    </div>
+                                    <div class="small-4 columns">
+                                        <label data-bind="if: $index() == 0">Valor</label>
+                                        <input data-bind="textInput: Value" type="text">
+                                    </div>
+                                    <div class="small-2 columns">
+                                        <label data-bind="if: $index() == 0">&nbsp;</label>
+                                        <ul class="menu">
+                                            <li><a href="#" data-bind="click: $root.deleteParam" class="tiny button"><i class="fa fa-remove"></i> Eliminar</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="small-2 columns">
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="small-2 columns">
+                                        <ul class="menu">
+                                            <!-- ko if: $index() == $parent.Params().length - 1 -->
+                                            <li><a href="#" data-bind="click: $root.addParam" class="tiny button"><i class="fa fa-plus"></i> Nuevo</a></li>
+                                            <!-- /ko -->
+                                        </ul>
+                                    </div>
+                                    <div class="small-8 columns">
+
+                                    </div>
+                                    <div class="small-2 columns">
+
+                                    </div>
+                                </div>
+                                <!-- /ko -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="medium-2 columns">
+
+                    </div>
+                </div>
+            </div>
+            <div class="medium-2 columns">
+                <button type="submit" class="button expanded action-button ok"><i class="fa fa-check"></i> Aceptar</button>
+                <a href="#" data-bind="click:$root.cancel" class="button expanded action-button cancel"><i class="fa fa-remove"></i> Cancelar</a>
+            </div>
+        </div>
+    </form>
+    <!--/ko-->
+</div>
+
+<!-- list -->
+<div class="container" data-bind="slideVisible: ['list'].indexOf(mode()) !== -1">
+    <div class="row breadcrumb-content">
+        <div class="col-sm-6" style="padding-left:0px;">
+            <ul class="breadcrumbs">
+                <li><a href="~/"><i class="fa fa-home"></i> Inicio</a></li>
+                <li>Tableros</li>
+            </ul>
+        </div>
+        <div class="medium-6 column text-right">
+            <a href="#" data-bind="click: $data.new" class="button action-button"><i></i> Nuevo</a>
+        </div>
+    </div>
+    <div class="row column">
+        <div data-bind="errorBox: mode() == 'list'"></div>
+        <div data-bind="alerts: alerts"></div>
+    </div>
+    <div class="row tit-page">TABLEROS</div>
+    <div class="row table-header">
+        <div class="medium-4 column">Titulo</div>
+        <div class="medium-4 column">Descripcion</div>
+        <div class="medium-3 column">Proyecto</div>
+        <div class="medium-1 column">&nbsp;</div>
+    </div>
+
+    <!-- ko foreach: Tableaux -->
+    <div class="row table-data">
+        <div class="medium-4 column"><div data-bind="text: Title"></div></div>
+        <div class="medium-4 column"><div data-bind="text: Description"></div></div>
+        <div class="medium-3 column"><div data-bind="text: Project"></div></div>
+        <div class="medium-1 column text-center">
+            <ul class="menu">
+                <li><a href="#" data-bind="click:$root.edit" title="Editar"><i class="fa fa-list"></i></a></li>
+                <li><a href="#" data-bind="click:$root.delete" title="Eliminar"><i class="fa fa-trash"></i></a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- /ko -->
+
+    <pager params="ViewModel: Pager"></pager>
+</div>
+
+@section scripts {
+    <script src="~/Scripts/Views/tableaux.js"></script>
+    @RenderPage("~/Views/Components/_Pager.cshtml")
+    @RenderPage("~/Views/Components/_SingleFileUpload.cshtml")
+}
+
+

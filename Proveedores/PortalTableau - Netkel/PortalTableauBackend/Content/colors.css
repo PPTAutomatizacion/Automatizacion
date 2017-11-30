@@ -1,0 +1,432 @@
+/* ----- DEFINIR COLORES ----- */
+
+/* ----- ESQUEMA DE COLORES 
+.color00-fill {
+	fill: #A;
+}
+.color00-borde {
+	border: 1px solid #B;
+}
+.color00-text {
+	color: #A;
+}
+.color00-fondo {
+	background-color: #A;
+}
+.color00-light-fondo {
+	background-color: #B;
+}
+.color00-lighter-fondo {
+	background-color: #C;
+}
+}----- */
+
+
+/* ----- color 00 gris ----- */
+.color00-fill {
+    fill: #acacac;
+}
+
+.color00-borde {
+    border: 1px solid #959595;
+}
+
+.color00-text {
+    color: #acacac;
+}
+
+.color00-fondo {
+    background-color: #acacac;
+}
+
+.color00-light-fondo {
+    background-color: #bcbcbc;
+}
+
+.color00-lighter-fondo {
+    background-color: #adacad;
+}
+/* ----- color 01  ----- */
+.color01-fill {
+    fill: #fe3980;
+}
+
+.color01-borde {
+    border: 1px solid #ff639a;
+}
+
+.color01-text {
+    color: #fe3980;
+}
+
+.color01-fondo {
+    background-color: #fe3980;
+}
+
+.color01-light-fondo {
+    background-color: #ff639a;
+}
+
+.color01-lighter-fondo {
+    background-color: #ff8bb2;
+}
+/* ----- color 02  ----- */
+.color02-fill {
+    fill: #9c3cab;
+}
+
+.color02-borde {
+    border: 1px solid #c48acd;
+}
+
+.color02-text {
+    color: #9c3cab;
+}
+
+.color02-fondo {
+    background-color: #9c3cab;
+}
+
+.color02-light-fondo {
+    background-color: #c48acd;
+}
+
+.color02-lighter-fondo {
+    background-color: #d7b1dd;
+}
+/* ----- color 03  ----- */
+.color03-fill {
+    fill: #00ae7d;
+}
+
+.color03-borde {
+    border: 1px solid #31bd98;
+}
+
+.color03-text {
+    color: #00ae7d;
+}
+
+.color03-fondo {
+    background-color: #00ae7d;
+}
+
+.color03-light-fondo {
+    background-color: #31bd98;
+}
+
+.color03-lighter-fondo {
+    background-color: #76cfb3;
+}
+/* ----- color 04  ----- */
+.color04-fill {
+    fill: #04c8df;
+}
+
+.color04-borde {
+    border: 1px solid #57e2f7;
+}
+
+.color04-text {
+    color: #04c8df;
+}
+
+.color04-fondo {
+    background-color: #07c7de;
+}
+
+.color04-light-fondo {
+    background-color: #57e2f7;
+}
+
+.color04-lighter-fondo {
+    background-color: #8deaf9;
+}
+/* ----- color 05  ----- */
+.color05-fill {
+    fill: #0f93a2;
+}
+
+.color05-borde {
+    border: 1px solid #92c1c7;
+}
+
+.color05-text {
+    color: #0f93a2;
+}
+
+.color05-fondo {
+    background-color: #0f93a2;
+}
+
+.color05-light-fondo {
+    background-color: #92c1c7;
+}
+
+.color05-lighter-fondo {
+    background-color: #afd0d5;
+}
+/* ----- color 06  ----- */
+.color06-fill {
+    fill: #967a5b;
+}
+
+.color06-borde {
+    border: 1px solid #c9b091;
+}
+
+.color06-text {
+    color: #967a5b;
+}
+
+.color06-fondo {
+    background-color: #967a5b;
+}
+
+.color06-light-fondo {
+    background-color: #c9b091;
+}
+
+.color06-lighter-fondo {
+    background-color: #d8c3ae;
+}
+/* ----- color 07  ----- */
+.color07-fill {
+    fill: #fb4d24;
+}
+
+.color07-borde {
+    border: 1px solid #fd947c;
+}
+
+.color07-text {
+    color: #fb4d24;
+}
+
+.color07-fondo {
+    background-color: #fb4d24;
+}
+
+.color07-light-fondo {
+    background-color: #fd947c;
+}
+
+.color07-lighter-fondo {
+    background-color: #fdb8a7;
+}
+/* ----- color 08  ----- */
+.color08-fill {
+    fill: #ee2b46;
+}
+
+.color08-borde {
+    border: 1px solid #f1556b;
+}
+
+.color08-text {
+    color: #ee2b46;
+}
+
+.color08-fondo {
+    background-color: #ee2b46;
+}
+
+.color08-light-fondo {
+    background-color: #f1556b;
+}
+
+.color08-lighter-fondo {
+    background-color: #f58090;
+}
+/* ----- color 09  ----- */
+.color09-fill {
+    fill: #e0ad12;
+}
+
+.color09-borde {
+    border: 1px solid #f0d06f;
+}
+
+.color09-text {
+    color: #e0ad12;
+}
+
+.color09-fondo {
+    background-color: #e0ad12;
+}
+
+.color09-light-fondo {
+    background-color: #f0d06f;
+}
+
+.color09-lighter-fondo {
+    background-color: #efd688;
+}
+/* ----- color 10  ----- */
+.color10-fill {
+    fill: #e36ca5;
+}
+
+.color10-borde {
+    border: 1px solid #e989b7;
+}
+
+.color10-text {
+    color: #e36ca5;
+}
+
+.color10-fondo {
+    background-color: #e36ca5;
+}
+
+.color10-light-fondo {
+    background-color: #e989b7;
+}
+
+.color10-lighter-fondo {
+    background-color: #f4c4db;
+}
+/* ----- color 11  ----- */
+.color11-fill {
+    fill: #7ca547;
+}
+
+.color11-borde {
+    border: 1px solid #b2ca93;
+}
+
+.color11-text {
+    color: #7ca547;
+}
+
+.color11-fondo {
+    background-color: #7ca547;
+}
+
+.color11-light-fondo {
+    background-color: #b2ca93;
+}
+
+.color11-lighter-fondo {
+    background-color: #cbdbb5;
+}
+/* ----- color 14  ----- */
+.color14-fill {
+    fill: #e5b463;
+}
+
+.color14-borde {
+    border: 1px solid #eac382;
+}
+
+.color14-text {
+    color: #e5b463;
+}
+
+.color14-fondo {
+    background-color: #e5b463;
+}
+
+.color14-light-fondo {
+    background-color: #eac382;
+}
+
+.color14-lighter-fondo {
+    background-color: #edca91;
+}
+/* ----- color 13  ----- */
+.color13-fill {
+    fill: #56c74b;
+}
+
+.color13-borde {
+    border: 1px solid #9add93;
+}
+
+.color13-text {
+    color: #56c74b;
+}
+
+.color13-fondo {
+    background-color: #56c74b;
+}
+
+.color13-light-fondo {
+    background-color: #9add93;
+}
+
+.color13-lighter-fondo {
+    background-color: #bbe9b7;
+}
+/* ----- color 12  ----- */
+.color12-fill {
+    fill: #ff6d89;
+}
+
+.color12-borde {
+    border: 1px solid #ff8ba0;
+}
+
+.color12-text {
+    color: #ff6d89;
+}
+
+.color12-fondo {
+    background-color: #ff6d89;
+}
+
+.color12-light-fondo {
+    background-color: #ff8ba0;
+}
+
+.color12-lighter-fondo {
+    background-color: #ffa8b8;
+}
+/* ----- color 15  ----- */
+.color15-fill {
+    fill: #7a7664;
+}
+
+.color15-borde {
+    border: 1px solid #afada2;
+}
+
+.color15-text {
+    color: #7a7664;
+}
+
+.color15-fondo {
+    background-color: #7a7664;
+}
+
+.color15-light-fondo {
+    background-color: #afada2;
+}
+
+.color15-lighter-fondo {
+    background-color: #cac8c1;
+}
+/* ----- color 16  ----- */
+.color16-fill {
+    fill: #3a71c1;
+}
+
+.color16-borde {
+    border: 1px solid #678dcc;
+}
+
+.color16-text {
+    color: #3a71c1;
+}
+
+.color16-fondo {
+    background-color: #3a71c1;
+}
+
+.color16-light-fondo {
+    background-color: #678dcc;
+}
+
+.color16-lighter-fondo {
+    background-color: #8dacda;
+}

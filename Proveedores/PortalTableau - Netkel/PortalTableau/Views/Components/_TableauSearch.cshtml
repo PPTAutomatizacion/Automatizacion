@@ -1,0 +1,32 @@
+﻿<script type="text/html" id="tableau-search">
+    
+    <!-- MD+ -->
+    <div class="input-group search-content hidden-xs hidden-sm col-md-12 col-lg-12">
+        <input type="text" style="color:#CCC!important; position: absolute; z-index: 3" class="form-control-search-md" disabled="disabled" data-bind="attr:{id:tableauTitleInputIdMd + '-x'}, textInput: suggestion" />
+        <input type="text" style="position: absolute; z-index: 4; background-color:transparent!important" class="form-control-search-md" placeholder="Buscar tableros" data-bind="textInput:Title, event: {blur: tableauTitleBlur }, attr:{id:tableauTitleInputIdMd}, autocomplete: { serviceUrl: searchByTitleUrl, onSelect: tableauSelected, values:'Options', displayField: 'Title', minChars: 3, noCache: true , formatResult: formatSuggestion, onInvalidateSelection: invalidateSelection, onSearchStart: searchStart, onHint: setBackgroundSuggestion }, hasFocus: tableauFocus, validator: validate, enable: enable" />
+    </div>
+    <div class="search-tooltip hidden-xs hidden-sm col-md-12 col-lg-12">
+        <a href="#" data-toggle="tooltip" data-placement="right" title="Ingrese al menos 3 caracteres para buscar por nombre o descripción de tablero"><img src="@Url.Content("~/Content/Images/iconToolTip-search.jpg")" width="30" height="30" style="max-width:20px; min-width:20px; opacity: 0.5; padding-top:15px;" alt="" /></a>
+    </div>
+
+    <!-- SM -->
+    <div class="input-group search-content hidden-xs col-sm-12 hidden-md hidden-lg">
+        <input type="text" style="color:#a3dae1!important; position: absolute; z-index: 3" class="form-control-search-sm" disabled="disabled" data-bind="attr:{id:tableauTitleInputIdSm + '-x'}, textInput: suggestion" />
+        <input type="text" style="position: absolute; z-index: 4;" class="form-control-search-sm" placeholder="Buscar tableros" data-bind="textInput:Title, event: {blur: tableauTitleBlur }, attr:{id:tableauTitleInputIdSm}, autocomplete: { serviceUrl: searchByTitleUrl, onSelect: tableauSelected, values:'Options', displayField: 'Title', minChars: 3, noCache: true , formatResult: formatSuggestion, onInvalidateSelection: invalidateSelection, onSearchStart: searchStart, onHint: setBackgroundSuggestion }, hasFocus: tableauFocus, validator: validate, enable: enable" />
+    </div>
+    <div class="search-tooltip hidden-xs col-sm-12 hidden-md hidden-lg">
+        <a href="#" data-toggle="tooltip" data-placement="right" title="Ingrese al menos 3 caracteres para buscar por nombre o descripción de tablero"><img src="@Url.Content("~/Content/Images/iconToolTip-search-blue.jpg")" width="30" height="30" style="max-width:20px; min-width:20px; opacity: 0.5; padding-top:15px;" alt="" /></a>
+    </div>
+
+    <!-- XS -->
+    <div class="input-group search-content-xs col-xs-12 hidden-sm hidden-md hidden-lg">
+        <input type="text" style="color:#CCC!important; position: absolute; z-index: 3" class="form-control-search-xs" disabled="disabled" data-bind="attr:{id:tableauTitleInputIdXs + '-x'}, textInput: suggestion" />
+        <input type="text" style="position: absolute; z-index: 4; background-color:transparent!important" class="form-control-search-xs" placeholder="Buscar tableros" data-bind="textInput:Title, event: {blur: tableauTitleBlur }, attr:{id:tableauTitleInputIdXs}, autocomplete: { serviceUrl: searchByTitleUrl, onSelect: tableauSelected, values:'Options', displayField: 'Title', minChars: 3, noCache: true , formatResult: formatSuggestion, onInvalidateSelection: invalidateSelection, onSearchStart: searchStart, onHint: setBackgroundSuggestion }, hasFocus: tableauFocus, validator: validate, enable: enable" />
+    </div>
+    <div class="search-tooltip-xs col-xs-12 hidden-sm hidden-md hidden-lg">
+        <a href="#" data-toggle="tooltip" data-placement="right" title="Ingrese al menos 3 caracteres para buscar por nombre o descripción de tablero"><img src="@Url.Content("~/Content/Images/iconToolTip-search.jpg")" width="30" height="30" style="max-width:20px; min-width:20px; opacity: 0.5; padding-top:15px;" alt="" /></a>
+    </div>
+
+   
+</script>
+<script type="text/javascript" src="~/Scripts/Components/tableauSearch.js"></script>

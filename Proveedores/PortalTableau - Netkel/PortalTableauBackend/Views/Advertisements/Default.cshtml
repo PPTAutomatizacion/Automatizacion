@@ -1,0 +1,158 @@
+﻿<!-- Edit form -->
+<div class="container" data-bind="slideVisible: ['new', 'edit'].indexOf(mode()) != -1, afterIn: afterFormIn, afterOut: afterFormOut">
+    <div class="row breadcrumb-content">
+        <ul class="breadcrumbs">
+            <li><a href="~/"><i class="fa fa-home"></i> Inicio</a></li>
+            <li><a href="#" data-bind="click:cancel">Publicidades</a></li>
+            <li><span data-bind="text: mode() == 'new' ? 'Nueva' : 'Edición'"></span></li>
+        </ul>
+    </div>
+
+    <div data-bind="errorBox:['new', 'edit'].indexOf(mode()) != -1"></div>
+
+    <!--ko with:Advertising-->
+    <form data-bind="submit: $root.save" data-abide novalidate id="edit-form">
+        <div class="row">
+            <div class="col-sm-12 tit-page-edit">PUBLICIDAD</div>
+            <div class="medium-10 columns">
+                <div class="row">
+                    <div class="medium-10 columns">
+                        <div class="row">
+                            <div class="medium-6 columns" style="padding-left:0px;">
+                                <label>
+                                    Titulo
+                                    <input data-bind="textInput: Title, hasFocus: $root.titleFocus" type="text" maxlength="150" required />
+                                    <span class="form-error">
+                                        Debe ingresar un titulo
+                                    </span>
+                                </label>
+                            </div>
+                            <div class="medium-6 columns">
+                                <label>
+                                    Url <small>(http://www.ejemplo.com)</small>
+                                    <input data-bind="textInput: Link" type="text" pattern="url" maxlength="150" required />
+                                    <span class="form-error">
+                                        Debe ingresar una url
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="medium-6 columns" style="padding-left:0px;">
+                                <label>
+                                    Fecha desde
+                                    <input type="text" data-bind="datePicker: PublishFrom, utc: false" data-validator="moment" required />
+                                    <span class="form-error">
+                                        Ingrese una fecha válida
+                                    </span>
+                                </label>
+                            </div>
+                            <div class="medium-6 columns">
+                                <label>
+                                    Fecha hasta
+                                    <input type="text" data-bind="datePicker: PublishTo, utc: false" data-validator="moment" />
+                                    <span class="form-error">
+                                        Ingrese una fecha válida
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="medium-6 columns" style="padding-left:0px;">
+                                <label>
+                                    Descripcion
+                                    <textarea data-bind="textInput: Description" maxlength="255" required> </textarea>
+                                    <span class="form-error">
+                                        Debe ingresar una descripcion
+                                    </span>
+                                </label>
+                            </div>
+                            <div class="medium-6 columns">
+                                <label>Por defecto <small>(aparece unicamente si no existen noticias)</small></label>
+                                <div class="switch small" data-bind="switch: IsDefault">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="medium-6 columns" style="padding-left:0px;">
+                                <label>
+                                    <div style="padding-bottom:10px">Imagen</div> 
+                                    <single-file-upload params="ViewModel: Image"></single-file-upload>
+                                    <span class="form-error">
+                                        Debe seleccionar una imagen
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="medium-2 columns" style="padding-left:0px;">
+                                <img src="about:blank" data-bind="if: ImageUrl() != null, attr:{src: ImageUrl}" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="medium-2 columns">
+
+                    </div>
+                </div>
+            </div>
+            <div class="medium-2 columns">
+                <button type="submit" class="button expanded action-button ok"><i class="fa fa-check"></i> Aceptar</button>
+                <a href="#" data-bind="click:$root.cancel" class="button expanded action-button cancel"><i class="fa fa-remove"></i> Cancelar</a>
+            </div>
+        </div>
+    </form>
+    <!--/ko-->
+</div>
+
+<!-- list -->
+<div class="container" data-bind="slideVisible: ['list'].indexOf(mode()) !== -1">
+    <div class="row breadcrumb-content">
+        <div class="col-sm-6" style="padding-left:0px;">
+            <ul class="breadcrumbs">
+                <li><a href="~/"><i class="fa fa-home"></i> Inicio</a></li>
+                <li>Publicidades</li>
+            </ul>
+        </div>
+        <div class="medium-6 column text-right">
+            <a href="#" data-bind="click: $data.new" class="button action-button"><i></i> Nueva</a>
+        </div>
+    </div>
+
+    <div class="row column">
+        <div data-bind="errorBox: mode() == 'list'"></div>
+        <div data-bind="alerts: alerts"></div>
+    </div>
+    <div class="row tit-page">PUBLICIDADES</div>
+    <div class="row table-header">
+        <div class="medium-3 column">Titulo</div>
+        <div class="medium-4 column">Descripcion</div>
+        <div class="medium-2 column">Inicio Publicacion</div>
+        <div class="medium-2 column">Fin Publicacion</div>
+        <div class="medium-1 column">&nbsp;</div>
+    </div>
+
+    <!-- ko foreach: Advertisements -->
+    <div class="row table-data">
+        <div class="medium-3 column"><div data-bind="text: Title"></div></div>
+        <div class="medium-4 column"><div data-bind="text: Description"></div></div>
+        <div class="medium-2 column"><div data-bind="text: moment(PublishFrom).format('DD/MM/YYYY')"></div></div>
+        <div class="medium-2 column"><div data-bind="notEmptyText: PublishTo !== null ? moment(PublishTo).format('DD/MM/YYYY') : ''"></div></div>
+        <div class="medium-1 column text-center">
+            <ul class="menu">
+                <li><a href="#" data-bind="click:$root.edit" title="Editar"><i class="fa fa-list"></i></a></li>
+                <li><a href="#" data-bind="click:$root.delete" title="Eliminar"><i class="fa fa-trash"></i></a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- /ko -->
+
+    <pager params="ViewModel: Pager"></pager>
+</div>
+
+@section scripts {
+    <script src="~/Scripts/Views/adverts.js"></script>
+    @RenderPage("~/Views/Components/_Pager.cshtml")
+    @RenderPage("~/Views/Components/_SingleFileUpload.cshtml")
+}
+
+

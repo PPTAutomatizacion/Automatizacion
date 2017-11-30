@@ -1,0 +1,106 @@
+﻿@using System.Configuration;
+@using Newtonsoft.Json;
+@using Microsoft.AspNet.Identity;
+@using FiberCorp.PortalTableau.Backend;
+
+@{
+    //No está logueado => login
+    if (!HttpContext.Current.Request.IsAuthenticated)
+    {
+        HttpContext.Current.GetOwinContext().Authentication.Challenge(DefaultAuthenticationTypes.ApplicationCookie);
+        HttpContext.Current.Response.End();
+    }
+
+    //El token es inválido => login
+    if (Security.CurrentUser == null)
+    {
+        Security.Logout();
+        Response.Redirect(Url.RouteUrl(new { controller = "Home", action = "Login" }));
+        Response.End();
+    }
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" href="~/Content/app.min.css">
+    <link rel="stylesheet" href="~/Content/Site.css">
+    <link rel="stylesheet" href="~/Content/main.css">
+</head>
+<body data-baseurl="@string.Concat(Context.Request.Url.Scheme, "://", Context.Request.Url.Authority, VirtualPathUtility.ToAbsolute("~/"))">
+    <div id="confirmBoxModal" class="tiny reveal fast" data-reveal data-animation-in="fade-in" data-animation-out="fade-out">
+        <p class="lead" id="confirmBoxModal-title">[modal title]</p>
+        <p id="confirmBoxModal-text">[modal text]</p>
+        <div class="row column text-right">
+            <a href="#" id="confirmBoxModal-ok" class="primary button">Ok</a>
+            <a href="#" id="confirmBoxModal-cancel" class="secondary button cancel">Cancelar</a>
+        </div>
+    </div>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Fibertel Tableau", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav pull-right">
+                    <li>@Html.ActionLink("Home", "Index", "Home", new { area = "" }, null)</li>
+                    <li>
+                        <a href="~/Sites/Default">
+                            <i></i> Sitios
+                        </a>
+                    </li>
+                    <li>
+                        <a href="~/Projects/Default">
+                            <i></i> Proyectos
+                        </a>
+                    </li>
+                    <li>
+                        <a href="~/Advertisements/Default">
+                            <i></i> Publicidades
+                        </a>
+                    </li>
+                    <li>
+                        <a href="~/Tableaux/Default">
+                            <i></i> Tableros
+                        </a>
+                    </li>
+                    <li>
+                        <a href="~/Users/Default">
+                            <i></i> Usuarios
+                        </a>
+                    </li>
+                    <li>
+                        <a href="~/Permissions/Default">
+                            <i></i> Permisos
+                        </a>
+                    </li>
+                    <li>
+                        @Html.ActionLink("Salir", "Logout", "Home", new { area = "" }, null)
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="column row text-center" id="page-loading">
+        <img src="~/Content/Images/fadingblocks.gif" />
+    </div>
+    <div id="page-body" style="display:none">
+        <div id="page-content">
+            @RenderBody()
+        </div>
+    </div>
+    <script src="~/Scripts/bundle.min.js"></script>
+    <script src="~/Scripts/Views/app.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

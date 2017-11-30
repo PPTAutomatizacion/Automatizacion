@@ -1,0 +1,29 @@
+﻿<div class="jumbotron text-center">
+    <img src="~/Content/Images/webTaleau.png" alt="" />
+</div>
+<div class="row">
+    <div class="col-md-3 text-center">
+        <h2>Sitios</h2>
+        <p><a class="btn btn-default" href="~/Sites/Default"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></p>
+    </div>
+    <div class="col-md-3 text-center">
+        <h2>Proyectos</h2>
+        <p><a class="btn btn-default" href="~/Projects/Default"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></p>
+    </div>
+    <div class="col-md-3 text-center">
+        <h2>Publicidades</h2>
+        <p><a class="btn btn-default" href="~/Advertisements/Default"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></p>
+    </div>
+    <div class="col-md-3 text-center">
+        <h2>Tableros</h2>
+        <p><a class="btn btn-default" href="~/Tableaux/Default"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></a></p>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+		$(function () {
+			$(document).trigger("app.initialized");
+		});
+    </script>
+}

@@ -1,0 +1,185 @@
+﻿<!-- Edit form -->
+<div class="container" data-bind="slideVisible: ['new', 'edit'].indexOf(mode()) != -1, afterIn: afterFormIn, afterOut: afterFormOut">
+    <div class="row breadcrumb-content">
+        <ul class="breadcrumbs">
+            <li><a href="~/"><i class="fa fa-home"></i> Inicio</a></li>
+            <li><a href="#" data-bind="click:cancel">Usuarios</a></li>
+            <li><span data-bind="text: mode() == 'new' ? 'Nuevo' : 'Edición'"></span></li>
+        </ul>
+    </div>
+
+    <div data-bind="errorBox:['new', 'edit'].indexOf(mode()) != -1"></div>
+
+    <!--ko with:user-->
+    <form data-bind="submit: $root.save" data-abide novalidate id="edit-form">
+        <div class="row">
+            <div class="col-sm-12 tit-page-edit">USUARIO</div>
+            <div class="medium-10 columns">
+                <div class="row">
+                    <div class="medium-10 columns">
+                        <div class="row">
+                            <div class="medium-6 columns" style="padding-left:0px;">
+                                <label>
+                                    Nombre
+                                    <input data-bind="textInput: FirstName, hasFocus: $root.nameFocus" type="text" maxlength="50" required />
+                                    <span class="form-error">
+                                        Debe ingresar un nombre
+                                    </span>
+                                </label>
+                            </div>
+                            <div class="medium-6 columns">
+                                <label>
+                                    Apellido
+                                    <input data-bind="textInput: LastName" type="text" maxlength="50" required />
+                                    <span class="form-error">
+                                        Debe ingresar un apellido
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="medium-6 columns" style="padding-left:0px;">
+                                <label>
+                                    Correo Electronico
+                                    <input data-bind="textInput: Email" type="text" pattern="email" maxlength="50" required />
+                                    <span class="form-error">
+                                        Debe ingresar un correo electronico
+                                    </span>
+                                </label>
+                            </div>
+                            <div class="medium-6 columns">
+                                <label>Administrador</label>
+                                <div class="switch small" data-bind="switch: IsAdmin">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="medium-6 columns" style="padding-left:0px;">
+                                <label>
+                                    Área
+                                    <input data-bind="textInput: Area" type="text" maxlength="50" required />
+                                    <span class="form-error">
+                                        Debe ingresar un nombre de área
+                                    </span>
+                                </label>
+                            </div>
+                            <div class="medium-6 columns">
+                                <label>Habilitado</label>
+                                <div class="switch small" data-bind="switch: Enabled">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="medium-10 columns end" style="padding-left:0px;">
+                                <h1 class="section">Permisos</h1>
+                                <!-- ko if: UserPermissions().length === 0 -->
+                                <ul class="menu">
+                                    <li><a href="#" data-bind="click: $root.addPermission" class="tiny button"><i class="fa fa-plus"></i> Nuevo</a></li>
+                                </ul>
+                                <!-- /ko -->
+                                <!-- ko foreach: UserPermissions -->
+                                <div class="row">
+                                    <div class="small-8 columns">
+                                        <label data-bind="if: $index() == 0">Permiso</label>
+                                        <select data-bind="options: $parent.Permissions,
+                                                           optionsText: 'Name',
+                                                           optionsValue: 'Id',
+                                                           value: PermissionId,
+                                                           optionsCaption: 'Seleccione...'" required></select>
+                                        <span class="form-error">
+                                            Debe ingresar un permiso.
+                                        </span>
+                                    </div>
+                                    <div class="small-4 columns">
+                                        <label data-bind="if: $index() == 0">&nbsp;</label>
+                                        <ul class="menu">
+                                            <li><a href="#" data-bind="click: $root.deletePermission" class="tiny button"><i class="fa fa-remove"></i> Eliminar</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="small-2 columns">
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="small-2 columns">
+                                        <ul class="menu">
+                                            <!-- ko if: $index() == $parent.UserPermissions().length - 1 -->
+                                            <li><a href="#" data-bind="click: $root.addPermission" class="tiny button"><i class="fa fa-plus"></i> Nuevo</a></li>
+                                            <!-- /ko -->
+                                        </ul>
+                                    </div>
+                                    <div class="small-8 columns">
+
+                                    </div>
+                                    <div class="small-2 columns">
+
+                                    </div>
+                                </div>
+                                <!-- /ko -->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="medium-2 columns">
+
+                    </div>
+                </div>
+            </div>
+            <div class="medium-2 columns">
+                <button type="submit" class="button expanded action-button ok"><i class="fa fa-check"></i> Aceptar</button>
+                <a href="#" data-bind="click:$root.cancel" class="button expanded action-button cancel"><i class="fa fa-remove"></i> Cancelar</a>
+            </div>
+        </div>
+    </form>
+    <!--/ko-->
+</div>
+
+<!-- list -->
+<div class="container" data-bind="slideVisible: ['list'].indexOf(mode()) !== -1">
+    <div class="row breadcrumb-content">
+        <div class="col-sm-6" style="padding-left:0px;">
+            <ul class="breadcrumbs">
+                <li><a href="~/"><i class="fa fa-home"></i> Inicio</a></li>
+                <li>Usuarios</li>
+            </ul>
+        </div>
+        <div class="medium-6 column text-right">
+            <a href="#" data-bind="click: $data.new" class="button action-button"><i></i> Nuevo</a>
+        </div>
+    </div>
+
+    <div class="row column">
+        <div data-bind="errorBox: mode() == 'list'"></div>
+        <div data-bind="alerts: alerts"></div>
+    </div>
+    <div class="row tit-page">USUARIOS</div>
+    <div class="row table-header">
+        <div class="medium-4 column">Nombre</div>
+        <div class="medium-4 column">Email</div>
+        <div class="medium-2 column">¿Es administrador?</div>
+        <div class="medium-2 column">&nbsp;</div>
+    </div>
+
+    <!-- ko foreach: Users -->
+    <div class="row table-data">
+        <div class="medium-4 column"><div data-bind="text: Name"></div></div>
+        <div class="medium-4 column"><div data-bind="text: Email"></div></div>
+        <div class="medium-2 column"><i data-bind="visible:IsAdmin" class="fa fa-check"></i>&nbsp;</div>
+        <div class="medium-2 column text-center">
+            <ul class="menu">
+                <li><a href="#" data-bind="click:$root.edit" title="Editar"><i class="fa fa-list"></i></a></li>
+                <li><a href="#" data-bind="click:$root.resetPass" title="Restablecer contraseña"><i class="fa fa-undo"></i></a></li>
+                <li><a href="#" data-bind="click:$root.delete" title="Eliminar"><i class="fa fa-trash"></i></a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- /ko -->
+
+    <pager params="ViewModel: Pager"></pager>
+</div>
+
+@section scripts {
+    <script src="~/Scripts/Views/users.js"></script>
+    @RenderPage("~/Views/Components/_Pager.cshtml")
+}
+
+

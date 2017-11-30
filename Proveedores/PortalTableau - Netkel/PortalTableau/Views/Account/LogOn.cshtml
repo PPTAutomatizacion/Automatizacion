@@ -1,0 +1,153 @@
+﻿@model FiberCorp.PortalTableau.Web.Controllers.LogOnModel
+
+@{
+    ViewBag.Title = "Portal Tableau - Login";
+    Layout = "../Shared/_LayoutPublic.cshtml";
+}
+
+<div id="login-layer" class="container-fluid">
+
+    <!-- comienza contenido -->
+    <!-- login + slide imagen -->
+    <div id="news" class="row">
+
+        <!-- MD+ -->
+        <div class="hidden-xs hidden-sm col-md-6 col-lg-6 pad-top-logon">
+            <div class="titPortal">Portal de Monitoreo de Procesos</div>
+            <div class="textPortal">Monitorear nuestros procesos nos permite entender nuestra operación, mejorar la comunicación, identificar puntos de mejora y necesidades de automatización de circuitos.</div>
+            <form method="post">
+                <div id="login">
+                    <div class="col-sm-12 col-lg-12 login-content">
+                        <!-- mensaje error -->
+                        @if (Model.IsLoggedIn.HasValue)
+                        {
+                            <div class="col-md-12 alert callout" data-closable>
+                                @(Model.Message)
+                                <button class="close-button" aria-label="Cerrar alerta" type="button" data-close>
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        }
+                        <!-- --- -->
+                        <div class="col-md-5 login-campo-new">
+                            <input value="@Model.UserName" tabindex="1" name="Username" class="form-control-login" placeholder="Usuario" autofocus>
+                        </div>
+                        <div class="col-md-4 col-md-offset-1 login-campo-clave-new">
+                            <input type="password" name="Password" tabindex="1" class="form-control-login" placeholder="Contraseña">
+                        </div>
+                        <div class="col-md-1 login-campo-new-tooltip">
+                            <a href="#" data-toggle="tooltip" data-placement="top" title="Olvidaste tu clave?"><img src="~/Content/Images/iconHelp.png" style="min-height:30px; min-width:30px;" alt="" data-bind="click: resetPassword" /></a>
+                        </div>
+                        <div class="col-md-1 login-button">
+                            <button type="submit" class="btnLog btn-login"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-xs-12 login-button-ubicacion">
+                    <button type="button" onclick="location.href='@Url.Action("SignUp", "Account")'" class="btnLog btn-login-registrame">Registrarme<i class="fa fa-arrow-right" aria-hidden="true" style="padding-left: 20px;"></i></button>
+                </div>
+
+            </form>
+        </div>
+        <div class="hidden-xs hidden-sm col-md-6 col-lg-6 pad-top-logon">
+            <news-carousel params="ViewModel: News"></news-carousel>
+        </div>
+
+        <!-- SM -->
+        <div class="hidden-xs col-sm-offset-1 col-sm-10 hidden-md hidden-lg  text-left">
+            <div class="titPortal-sm">Portal de Monitoreo de Procesos</div>
+            <div class="textPortal-sm">Monitorear nuestros procesos nos permite entender nuestra operación, mejorar la comunicación, identificar puntos de mejora y necesidades de automatización de circuitos.</div>
+            <form method="post">
+                <div id="login">
+                    <div class="col-sm-12 login-content">
+
+                        <!-- mensaje error -->
+                        @if (Model.IsLoggedIn.HasValue)
+                        {
+                            <div class="col-sm-7 alert callout" data-closable>
+                                @(Model.Message)
+                                <button class="close-button" aria-label="Cerrar alerta" type="button" data-close>
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        }
+                        <!-- --- -->
+                        <div class="col-sm-8 login-campo-new" style="margin-bottom:10px;">
+                            <input value="@Model.UserName" tabindex="1" name="Username" class="form-control-login" placeholder="Usuario" autofocus>
+                        </div>
+                        <div class="col-sm-6 login-campo-clave-new">
+                            <input type="password" name="Password" tabindex="1" class="form-control-login" placeholder="Contraseña">
+                        </div>
+                        <div class="col-sm-1 login-campo-new-tooltip">
+                            <a href="#" data-toggle="tooltip" data-placement="top" title="Olvidaste tu clave?"><img src="~/Content/Images/iconHelp.png" style="min-height:30px; min-width:30px;" alt="" data-bind="click: resetPassword" /></a>
+                        </div>
+                        <div class="col-sm-1 login-button">
+                            <button type="submit" class="btnLog btn-login"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 login-button-ubicacion-sm">
+                    <button type="button" onclick="location.href='@Url.Action("SignUp", "Account")'" class="btnLog-sm btn-login-registrame">Registrarme<i class="fa fa-arrow-right" aria-hidden="true" style="padding-left: 20px;"></i></button>
+                </div>
+
+            </form>
+        </div>
+
+        <!-- XS -->
+        <div class="col-xs-offset-1 col-xs-10 hidden-sm hidden-md hidden-lg text-left">
+            <div class="titPortal">Portal de Monitoreo de Procesos</div>
+            <div class="textPortal-xs">Monitorear nuestros procesos nos permite entender nuestra operación, mejorar la comunicación, identificar puntos de mejora y necesidades de automatización de circuitos.</div>
+            <form method="post">
+                <div id="login">
+                    <div class="col-xs-12 login-content">
+                        <!-- mensaje error -->
+                        @if (Model.IsLoggedIn.HasValue)
+                        {
+                            <div class="col-xs-12 alert callout" data-closable>
+                                @(Model.Message)
+                                <button class="close-button" aria-label="Cerrar alerta" type="button" data-close>
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        }
+                        <!-- --- -->
+                        <div class="col-xs-12 login-campo-new" style="margin-bottom:10px;">
+                            <input value="@Model.UserName" tabindex="1" name="Username" class="form-control-login" placeholder="Usuario" autofocus>
+                        </div>
+                        <div class="col-xs-9 login-campo-clave-new">
+                            <input type="password" name="Password" tabindex="1" class="form-control-login" placeholder="Contraseña">
+                        </div>
+                        <div class="col-xs-2 login-campo-new-tooltip">
+                            <a href="#" data-toggle="tooltip" data-placement="top" title="Olvidaste tu clave?"><img src="~/Content/Images/iconHelp.png" style="min-height:30px; min-width:30px; padding-right:3px;" alt="" data-bind="click: resetPassword" /></a>
+                        </div>
+                        <div class="col-xs-1 login-button">
+                            <button type="submit" class="btnLog btn-login"><i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+
+                <div class="col-xs-12 login-button-ubicacion-xs">
+                    <button type="button" onclick="location.href='@Url.Action("SignUp", "Account")'" class="btnLog btn-login-registrame">Registrarme<i class="fa fa-arrow-right" aria-hidden="true" style="padding-left: 20px;"></i></button>
+                </div>
+
+            </form>
+        </div>
+
+
+       
+    </div>
+    <!-- --- -->
+    <!-- finaliza contenido -->
+</div>
+
+@section scripts {
+    <script src="~/Scripts/Views/logon.js"></script>
+    @RenderPage("~/Views/Components/_NewsCarousel.cshtml")
+}

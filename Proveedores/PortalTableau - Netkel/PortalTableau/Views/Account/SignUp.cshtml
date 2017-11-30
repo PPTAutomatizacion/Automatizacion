@@ -1,0 +1,75 @@
+﻿@{
+    ViewBag.Title = "Portal Tableau";
+    Layout = "../Shared/_LayoutPublic.cshtml";
+}
+
+<div data-bind="errorBox: true"></div>
+<form data-bind="submit: save" data-abide novalidate id="edit-form" class="">
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2 text-center titRegistro">
+            <span class="titPortalRegistro">Portal de Monitoreo de Procesos</span><br />
+            <span class="textPortal">REGISTRO</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12 text-center">
+            <div class="row">
+                <div class="col-sm-4 col-sm-offset-4 spaceRegister">
+                    
+                        <input placeholder="Nombre" class="form-control" data-bind="textInput: FirstName, hasFocus: $root.nameFocus" type="text" maxlength="50" required />
+                        <span class="form-error">
+                            Debe ingresar un nombre
+                        </span>
+                   
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4 col-sm-offset-4 spaceRegister">
+                    
+                        <input placeholder="Apellido" class="form-control" data-bind="textInput: LastName" type="text" maxlength="50" required />
+                        <span class="form-error">
+                            Debe ingresar un apellido
+                        </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4 col-sm-offset-4 spaceRegister">            
+                        <input placeholder="Area" class="form-control" data-bind="textInput: Area" type="text" maxlength="50" required />
+                        <span class="form-error">
+                            Debe ingresar un área
+                        </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4 col-sm-offset-4 spaceRegister">
+                    <input placeholder="Correo electrónico" class="form-control" data-bind="textInput: Email" type="text" pattern="email" maxlength="50" required />
+                        <span class="form-error">
+                            Debe ingresar un correo electrónico
+                        </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4 col-sm-offset-4 spaceRegister">
+                   <input placeholder="Contraseña" class="form-control" data-bind="textInput: Password" type="password" maxlength="50" required />
+                        <span class="form-error">
+                            Debe ingresar una contraseña de al menos 6 caracteres
+                        </span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4 col-sm-offset-4 spaceRegister">
+                       <input placeholder="Confirme su contraseña" class="form-control" data-bind="textInput: ConfirmPassword" type="password" maxlength="50" required />
+</div>
+            </div>
+        </div>
+    </div>
+    <div class="row spaceRegisterButton">
+        <div class="col-sm-4 col-sm-offset-4 text-center">
+            <button type="submit" class="buttonRegister action-button ok"><i class="fa fa-check"></i> Aceptar</button>
+            <a href="#" data-bind="click:goToHome" class="buttonRegister action-button cancel"><i class="fa fa-remove"></i> Cancelar</a>
+        </div>
+    </div>
+</form>
+@section scripts {
+    <script src="~/Scripts/Views/signUp.js"></script>
+}
