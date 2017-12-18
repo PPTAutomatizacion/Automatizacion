@@ -46,9 +46,7 @@ $(function () {
 
         ko.mapping.fromJS(data, {
             copy: ["UserPermissionTemplate"],
-            Users: {
-                create: (options) => options.data
-            },
+            Users: userMapping,
             Pager: {
                 create: (options) => new PagerViewModel(options.data, () => self.applyFilters())
             }
@@ -95,9 +93,23 @@ $(function () {
             .always(() => $.unblockUI());
         }
 
+        $(document).one("app.initialized", function () {
+            self.enableUser = function (user) {
+                $.blockUI();
+                $.apiCall(URL.SaveUpdate, {
+                    User: ko.mapping.toJS(user, { 'ignore': ['Permissions'] }),
+                    Pager: ko.mapping.toJS(self.Pager)
+                })
+                    .then((model) => {
+                        $.confirm('El estado ha sido actualizado', 'Operación Exitosa', false);
+                    })
+                    .always(() => $.unblockUI());
+            }
+        });
+
         self.edit = function (user) {
             $.blockUI();
-            $.apiCall(URL.Edit, { User: { Id: user.Id } }).then((model) => {
+            $.apiCall(URL.Edit, { User: { Id: user.Id() } }).then((model) => {
                 self.user(ko.mapping.fromJS(model.User, userMapping));
                 self.mode("edit");
                 self.nameFocus(true);
@@ -118,7 +130,7 @@ $(function () {
         self.delete = function (user) {
             $.confirm("Se dispone a eliminar el usuario " + user.Name + ". ¿Está ud. seguro?").then(function () {
                 $.blockUI();
-                $.apiCall(URL.Delete, { User: { Id: user.Id }, Pager: ko.mapping.toJS(self.Pager) }).then((model) => {
+                $.apiCall(URL.Delete, { User: { Id: user.Id() }, Pager: ko.mapping.toJS(self.Pager) }).then((model) => {
                     ko.mapping.fromJS({ Users: model.Users, Pager: model.Pager }, self);
                 })
                 .always(() => $.unblockUI());

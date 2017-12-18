@@ -1,0 +1,4 @@
+﻿USE PortalTableau
+GO
+ALTER TABLE Tableaux ALTER COLUMN Description NVARCHAR(4000) NOT NULL
+GO

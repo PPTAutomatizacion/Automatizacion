@@ -458,7 +458,9 @@ $(function () {
                     else {
                         return { suggestions: [] };
                     }
-                }
+                },
+                showNoSuggestionNotice: true,
+                noSuggestionNotice: 'No se encontraron resultados'
             };
 
             var options = $.extend({}, defaults, ko.unwrap(valueAccessor()));

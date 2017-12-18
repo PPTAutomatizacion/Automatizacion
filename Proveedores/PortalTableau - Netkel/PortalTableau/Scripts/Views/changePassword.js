@@ -17,7 +17,7 @@ $(function () {
             $.blockUI();
             $.apiCall(self.URL.Save, ko.mapping.toJS(self)).then((model) => {
                 if (model === true) {
-                    $.confirm("Su contraseña fue modificada. Debera ingresar al sistema nuevamente.").always(function () {
+                    $.confirm("Su contraseña fue modificada. Debera ingresar al sistema nuevamente.", "", false).always(function () {
                         self.goToHome();
                     });
                 }

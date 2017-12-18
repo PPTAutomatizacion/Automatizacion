@@ -8,7 +8,7 @@
             <div class="titPortal">Portal de Monitoreo de Procesos</div>
             <div class="textPortal">Monitorear nuestros procesos nos permite entender nuestra operación, mejorar la comunicación, identificar puntos de mejora y necesidades de automatización de circuitos.</div>
             <div class="col-md-12 saludo-content">
-                <div class="col-md-9 saludo">¡Hola @Security.CurrentUser.FirstName!</div>
+                <div class="col-md-9 saludo">¡Hola @Security.CurrentUserName!</div>
                 <div class="col-md-3 saludo-boton">
                     <button type="submit" class="btnLog btn-login-registrame" data-bind="click: ()=> mode('projects')">Acceder<i class="fa fa-arrow-right login-icon-button" aria-hidden="true"></i></button>
                 </div>
@@ -22,7 +22,7 @@
             <div class="titPortal-sm">Portal de Monitoreo de Procesos</div>
             <div class="textPortal-sm">Monitorear nuestros procesos nos permite entender nuestra operación, mejorar la comunicación, identificar puntos de mejora y necesidades de automatización de circuitos.</div>
             <div class="col-sm-12 saludo-content">
-                <div class="col-sm-12 saludo-sm">¡Hola @Security.CurrentUser.FirstName!</div>
+                <div class="col-sm-12 saludo-sm">¡Hola @Security.CurrentUserName!</div>
                 <div class="col-sm-12 saludo-boton-sm">
                     <button type="submit" class="btnLog-sm btn-login-registrame" data-bind="click: ()=> mode('projects')">Acceder<i class="fa fa-arrow-right login-icon-button" aria-hidden="true"></i></button>
                 </div>
@@ -33,7 +33,7 @@
             <div class="titPortal">Portal de Monitoreo de Procesos</div>
             <div class="textPortal-xs">Monitorear nuestros procesos nos permite entender nuestra operación, mejorar la comunicación, identificar puntos de mejora y necesidades de automatización de circuitos.</div>
             <div class="col-sm-12 saludo-content">
-                <div class="col-sm-12 saludo-sm">¡Hola @Security.CurrentUser.FirstName!</div>
+                <div class="col-sm-12 saludo-sm">¡Hola @Security.CurrentUserName!</div>
                 <div class="col-sm-12 saludo-boton-sm">
                     <button type="submit" class="btnLog btn-login-registrame" data-bind="click: ()=> mode('projects')">Acceder<i class="fa fa-arrow-right login-icon-button" aria-hidden="true"></i></button>
                 </div>
@@ -52,7 +52,7 @@
             <div class="col-md-5 new-portal-md">Portal de Monitoreo de Procesos</div>
             <div class="col-md-3"><tableau-search params="ViewModel: TableauSearcher"></tableau-search></div>
             <div class="col-md-4 new-portal-user-md">
-                <div class="col-md-9 pad-top-5"><a href="@Url.Action("ChangePassword", "Account")"><span class="new-portal-user-name-md" title="Cambiar contraseña">@Security.CurrentUser.FullName</span></a></div>
+                <div class="col-md-9 pad-top-5"><a href="@Url.Action("ChangePassword", "Account")"><span class="new-portal-user-name-md" title="Cambiar contraseña">@Security.CurrentUserName</span></a></div>
                 <div class="col-md-3 pad-top-5 text-left"><a href="@Url.Action("Logout", "Home")"><span class="new-portal-user-log-out-md" title="Salir">Logout</span></a></div>
             </div>
         </div>
@@ -60,7 +60,7 @@
         <!-- TOP SM -->
         <div id="mySidenavMD" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNavMD()">&times;</a>
-            <div style="padding-top:30px;"><a href="@Url.Action("ChangePassword", "Account")"><span class="new-portal-user-name-sm" title="Cambiar contraseña">@Security.CurrentUser.FullName</span></a></div>
+            <div style="padding-top:30px;"><a href="@Url.Action("ChangePassword", "Account")"><span class="new-portal-user-name-sm" title="Cambiar contraseña">@Security.CurrentUserName</span></a></div>
             <a href="@Url.Action("Logout", "Home")"><span class="new-portal-user-log-out-sm" title="Salir">Logout</span></a>
         </div>
         <div class="hidden-xs col-sm-12 hidden-md hidden-lg no-pad-left-right">
@@ -75,7 +75,7 @@
         <!-- TOP XS -->
         <div id="mySidenav" class="sidenav-xs">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <div style="padding-top:30px;"><a href="@Url.Action("ChangePassword", "Account")"><span class="new-portal-user-name" title="Cambiar contraseña">@Security.CurrentUser.FullName</span></a></div>
+            <div style="padding-top:30px;"><a href="@Url.Action("ChangePassword", "Account")"><span class="new-portal-user-name" title="Cambiar contraseña">@Security.CurrentUserName</span></a></div>
             <a href="@Url.Action("Logout", "Home")"><span class="new-portal-user-log-out" title="Salir">Logout</span></a>
         </div>
         <div class="col-xs-12 hidden-sm hidden-md hidden-lg" style="padding-right:0px; padding-left:0px;">

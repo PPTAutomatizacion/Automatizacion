@@ -9,6 +9,12 @@ body, html {
     background: url(../Content/Images/backgroundTablero.jpg) top left no-repeat;
     padding: 0px;
 }
+input.search-sm::placeholder {
+  color: #fff;
+}
+.buttonRegister:focus {
+    outline: 0px!important;
+  }
 .no-pad-left-right{
     padding-left:0px!important;
     padding-right:0px!important;
@@ -33,6 +39,10 @@ a:focus,
 a:visited{
     text-decoration:none;
 }
+p{
+    line-height:30px!important;
+    margin-bottom:30px;
+}
 /* ----- ELIMINAR TABLERO  ---------------------------------------------------------------- */
 a.eliminar-tablero{
     color:#fff;
@@ -40,7 +50,6 @@ a.eliminar-tablero{
     text-decoration:none;
     font-family: 'Lato', sans-serif;
     font-weight:100;
-    padding-left:15px;
         padding-right: 15px;
         border: 1px solid transparent!important;
         margin-left:15px;
@@ -1535,8 +1544,7 @@ tbody {
     border-left: 0px !important;
     border-bottom: 0px !important;
     border-radius: 0px !important;
-    -webkit-box-shadow: inset 0 0 0 0 rgba(0,0,0,0) !important;
-    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-box-shadow: 0 0 0 30px white inset;
     -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
     -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
     transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;

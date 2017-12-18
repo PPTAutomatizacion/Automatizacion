@@ -6,6 +6,21 @@
 	height: 100%;
 	margin: 0px;
 }
+
+.callout.alert {
+    background: #66656b !important;
+    color:#5fe2d2;
+    font-size:18px;
+    border-radius:0px;
+}
+.alert{
+    text-shadow:none;
+    box-shadow:none;
+    border:0px;
+    font-size:18px;
+}
+
+
 .navbar-inverse {
     background-color: #bebaba;
     border-color: #bebaba;
