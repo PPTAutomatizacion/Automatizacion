@@ -98,21 +98,23 @@
                     <div class="grid-stack-item" data-bind="hoverVisible: {targetSelector: '[data-hover=\'' + TableauId() + '\']', effect: 'fade'}, attr: {'data-gs-id' : Id, 'data-gs-x': X, 'data-gs-y': Y, 'data-gs-width': Width, 'data-gs-height': Height, 'data-gs-auto-position': AutoPosition}">
                         <div class="grid-stack-item-content">
                             <div class="col-sm-12 tablero-content collapse in" data-bind="style: { backgroundImage: 'url(\'' + Tableau.ImageUrl() + '\')'}">
-                                <div class="tablero-100-fondo">
-                                    <div class="pull-right tablero-boton-close-mobile hidden-md hidden-lg"> <a href="#" data-bind="click: $parent.deleteUserTableau,"><img src="~/Content/Images/closeMobile.png" alt="" /></a></div>
-                                    <div class="pull-right tablero-boton-close hidden-xs hidden-sm"> <a href="#" data-bind="enable: Id() > 0, click: $parent.deleteUserTableau, attr: {'data-hover': TableauId() }"><img src="~/Content/Images/botonClose.png" alt="" /></a></div>
-                                    <div class="tablero-100 color-borde">
-                                        <div class="tablero-tit color-fondo">&nbsp;</div>
-                                        <div class="tablero-text-tit color-text">
-                                            <div class="tit-space" data-bind="text: Tableau.Title"></div>
-                                            <div data-bind="attr: {'data-hover': TableauId() }" class="tablero-text-bajada hidden-xs hidden-sm">
-                                                <div class="tablero-text-bajada-italic" data-bind="text: Tableau.Description"></div>
-                                                <a href="#" data-bind="click: ()=> $root.showTableau(Tableau)" class="btn btnLog btn-ver">Ver Tablero <i class="fa fa-arrow-right" aria-hidden="true" style="padding-left: 20px;"></i></a>
+                                <div class="tablero-100 tablero-gradient">
+                                    <div class="tablero-100-fondo">
+                                        <div class="pull-right tablero-boton-close-mobile hidden-md hidden-lg"> <a href="#" data-bind="click: $parent.deleteUserTableau,"><img src="~/Content/Images/closeMobile.png" alt="" /></a></div>
+                                        <div class="pull-right tablero-boton-close hidden-xs hidden-sm"> <a href="#" data-bind="enable: Id() > 0, click: $parent.deleteUserTableau, attr: {'data-hover': TableauId() }"><img src="~/Content/Images/botonClose.png" alt="" /></a></div>
+                                        <div class="tablero-100 color-borde">
+                                            <div class="tablero-tit color-fondo">&nbsp;</div>
+                                            <div class="tablero-text-tit color-text">
+                                                <div class="tit-space" data-bind="text: Tableau.Title"></div>
+                                                <div data-bind="attr: {'data-hover': TableauId() }" class="tablero-text-bajada hidden-xs hidden-sm">
+                                                    <div class="tablero-text-bajada-italic" data-bind="text: Tableau.Description"></div>
+                                                    <a href="#" data-bind="click: ()=> $root.showTableau(Tableau)" class="btn btnLog btn-ver">Ver Tablero <i class="fa fa-arrow-right" aria-hidden="true" style="padding-left: 20px;"></i></a>
+                                                </div>
                                             </div>
+
+                                            <div class="hidden-md hidden-lg tablero-boton-ver"><a href="#" data-bind="click: ()=> $root.showTableau(Tableau)"><img src="~/Content/Images/tablero-mobile.png" alt="" /></a></div>
+
                                         </div>
-
-                                        <div class="hidden-md hidden-lg tablero-boton-ver"><a href="#" data-bind="click: ()=> $root.showTableau(Tableau)"><img src="~/Content/Images/tablero-mobile.png" alt="" /></a></div>
-
                                     </div>
                                 </div>
                             </div>
