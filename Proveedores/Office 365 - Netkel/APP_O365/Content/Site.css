@@ -61,12 +61,12 @@ a:hover{
 .headerTableText-line{
     border-left:3px solid #fff;
 }
-.line{
-    border-bottom:1px solid #787878;
-    height:39px;
-    padding-top:5px;
-    padding-bottom:5px;
-    padding-left:15px;
+.line {
+    border-bottom: 1px solid #787878;
+    /*height:39px;*/
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 15px;
 }
 .nopadding{
     padding-bottom:0px;
@@ -424,4 +424,7 @@ input.txt-cuic:focus{
 .btn.btn-select-customer.btn-select{
     outline:0px;
     box-shadow:0px;
+}
+.li-addon-item > a {
+    width:100%
 }
