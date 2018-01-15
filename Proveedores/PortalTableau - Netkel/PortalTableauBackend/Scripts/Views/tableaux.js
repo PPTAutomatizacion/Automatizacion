@@ -54,10 +54,11 @@ $(function () {
         self.mode = ko.observable('list');
         self.tableau = ko.observable(null);
         self.titleFocus = ko.observable(false);
+        self.projectSelectedId = ko.observable(null);
 
         self.applyFilters = function () {
             $.blockUI();
-            $.apiCall(URL.GetList, { Pager: ko.mapping.toJS(self.Pager) }).then((model) => {
+            $.apiCall(URL.GetList, { Pager: ko.mapping.toJS(self.Pager), ProjectSelectedId: self.projectSelectedId() }).then((model) => {
                 ko.mapping.fromJS({ Tableaux: model.Tableaux, Pager: model.Pager }, self);
             })
             .always(() => $.unblockUI());

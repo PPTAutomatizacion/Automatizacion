@@ -159,6 +159,17 @@
         <div data-bind="alerts: alerts"></div>
     </div>
     <div class="row tit-page">TABLEROS</div>
+    <div class="row">
+        <label>
+            Proyecto:
+            <select data-bind="options: Tableau.Projects(),
+                optionsText: 'Name',
+                optionsValue: 'Id',
+                value: projectSelectedId,
+                optionsCaption: 'Seleccione...',
+                event:{ change: applyFilters }"></select>
+        </label>
+    </div>
     <div class="row table-header">
         <div class="medium-4 column">Titulo</div>
         <div class="medium-4 column">Descripcion</div>
