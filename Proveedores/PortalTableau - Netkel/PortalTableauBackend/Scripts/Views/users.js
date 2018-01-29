@@ -57,10 +57,11 @@ $(function () {
         self.mode = ko.observable('list');
         self.nameFocus = ko.observable(false);
         self.user = ko.observable(null);
+        self.userSearch = ko.observable('');
 
         self.applyFilters = function () {
             $.blockUI();
-            $.apiCall(URL.GetList, { Pager: ko.mapping.toJS(self.Pager) }).then((model) => {
+            $.apiCall(URL.GetList, { Pager: ko.mapping.toJS(self.Pager), UserSearch: self.userSearch() }).then((model) => {
                 ko.mapping.fromJS({ Users: model.Users, Pager: model.Pager }, self);
             })
             .always(() => $.unblockUI());
@@ -96,6 +97,7 @@ $(function () {
         $(document).one("app.initialized", function () {
             self.enableUser = function (user) {
                 $.blockUI();
+
                 $.apiCall(URL.SaveUpdate, {
                     User: ko.mapping.toJS(user, { 'ignore': ['Permissions'] }),
                     Pager: ko.mapping.toJS(self.Pager)
@@ -118,9 +120,9 @@ $(function () {
         }
         
         self.resetPass = function (user) {
-            $.confirm("Se dispone a restablecer la contraseña del usuario " + user.Name + ". ¿Está ud. seguro?").then(function () {
+            $.confirm("Se dispone a restablecer la contraseña del usuario " + user.Name() + ". ¿Está ud. seguro?").then(function () {
                 $.blockUI();
-                $.apiCall(URL.ResetPassword, { User: { Id: user.Id }, Pager: ko.mapping.toJS(self.Pager) }).then((model) => {
+                $.apiCall(URL.ResetPassword, { User: { Id: user.Id() }, Pager: ko.mapping.toJS(self.Pager) }).then((model) => {
 
                 })
                 .always(() => $.unblockUI());
@@ -128,7 +130,7 @@ $(function () {
         }
 
         self.delete = function (user) {
-            $.confirm("Se dispone a eliminar el usuario " + user.Name + ". ¿Está ud. seguro?").then(function () {
+            $.confirm("Se dispone a eliminar el usuario " + user.Name() + ". ¿Está ud. seguro?").then(function () {
                 $.blockUI();
                 $.apiCall(URL.Delete, { User: { Id: user.Id() }, Pager: ko.mapping.toJS(self.Pager) }).then((model) => {
                     ko.mapping.fromJS({ Users: model.Users, Pager: model.Pager }, self);
