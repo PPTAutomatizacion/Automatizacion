@@ -763,6 +763,8 @@
                                 disableLicenseQuantityTextBox(subscriptionId);
                                 saveLicenseQuantity(subscriptionId,
                                     function () {
+                                        var $licenseLabel = selectBySubscriptionId('.txt-license-label', subscriptionId);
+                                        $licenseLabel.text($textbox.val());
                                         $.LoadingOverlay('hide');
                                         disableLicenseEdition(subscriptionId);
                                         enableSaveButton(subscriptionId);
