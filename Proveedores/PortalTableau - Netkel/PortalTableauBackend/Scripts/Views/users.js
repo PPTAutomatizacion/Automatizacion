@@ -58,13 +58,17 @@ $(function () {
         self.nameFocus = ko.observable(false);
         self.user = ko.observable(null);
         self.userSearch = ko.observable('');
+        self.searchTimer = 0;
 
         self.applyFilters = function () {
-            $.blockUI();
-            $.apiCall(URL.GetList, { Pager: ko.mapping.toJS(self.Pager), UserSearch: self.userSearch() }).then((model) => {
-                ko.mapping.fromJS({ Users: model.Users, Pager: model.Pager }, self);
-            })
-            .always(() => $.unblockUI());
+            clearTimeout(self.searchTimer);
+            self.searchTimer = setTimeout(function () {
+                $.blockUI();
+                $.apiCall(URL.GetList, { Pager: ko.mapping.toJS(self.Pager), UserSearch: self.userSearch() }).then((model) => {
+                    ko.mapping.fromJS({ Users: model.Users, Pager: model.Pager }, self);
+                })
+                    .always(() => $.unblockUI());
+            }, 1000);
         };
 
         self.cancel = function () {
@@ -94,20 +98,26 @@ $(function () {
             .always(() => $.unblockUI());
         }
 
-        $(document).one("app.initialized", function () {
-            self.enableUser = function (user) {
-                $.blockUI();
-
-                $.apiCall(URL.SaveUpdate, {
-                    User: ko.mapping.toJS(user, { 'ignore': ['Permissions'] }),
-                    Pager: ko.mapping.toJS(self.Pager)
-                })
+        self.toggleEnable = function (user) {
+            $.confirm("Se dispone a " + ((user.Enabled()) ? "Habilitar" : "Deshabilitar") + " el usuario " + user.Name() + ". ¿Está ud. seguro?")
+                .then(function () {
+                    $.blockUI();
+                    $.apiCall(URL.SaveUpdate, {
+                        User: ko.mapping.toJS(user, { 'ignore': ['Permissions'] }),
+                        Pager: ko.mapping.toJS(self.Pager)
+                    })
                     .then((model) => {
                         $.confirm('El estado ha sido actualizado', 'Operación Exitosa', false);
                     })
                     .always(() => $.unblockUI());
-            }
-        });
+                })
+                .fail(function () {
+                    // user.Enabled(!user.Enabled());
+                    $.apiCall(URL.GetList, { Pager: ko.mapping.toJS(self.Pager), UserSearch: self.userSearch() }).then((model) => {
+                        ko.mapping.fromJS({ Users: model.Users, Pager: model.Pager }, self);
+                    })
+                });
+        };
 
         self.edit = function (user) {
             $.blockUI();
