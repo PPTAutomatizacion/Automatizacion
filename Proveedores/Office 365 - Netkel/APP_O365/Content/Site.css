@@ -6,6 +6,28 @@ body{
 	font-size: 14px;
 	background:#fff;
 }
+
+.add-on{
+    color: #7d7d7d;
+    padding-top:10px!important;
+    padding-bottom:10px!important;
+}
+.pad-addon-cantidad{
+    padding-bottom:13px!important;
+    padding-top:13px!important;
+    color:#7d7d7d;
+}
+.addon-new-space{
+    padding-right:20px!important;
+}
+.space-add-addon{
+    padding-top:10px;
+    padding-right:0px;
+}
+.space-addon-button{
+    padding-left:8px!important;
+    padding-top:10px!important;
+}
 .contentWidth{
 	min-width:800px;
 }
@@ -39,6 +61,12 @@ a{
 }
 a:hover{
     color:#787878;
+}
+a:focus{
+    outline:none;
+}
+.btn{
+    outline:none;
 }
 .separate{
     border-right:2px solid #f4f4f4;
@@ -309,12 +337,12 @@ a.precios-cursor:hover {
     padding-top:20px;
 }
 a.link-portal{
-    text-decoration:none;
+    text-decoration:underline;
     color:#5ca2e0;
     font-size:17px;
 }
 a.link-portal:hover{
-    text-decoration:none;
+    text-decoration:underline;
     color:#787878;
     font-size:17px;
 }
@@ -329,12 +357,23 @@ a.link-portal:hover{
 .header-portal-office{
     padding-left:0px;
 }
+.header-outline{
+    background:#ebeaea;
+    height:34px;
+    padding:3px 10px;
+    border:1px solid #cac8c8;
+}
+.header-outline-small{
+    background:#ebeaea;
+    height:34px;
+    padding:5px 10px;
+    border:1px solid #cac8c8;
+}
 .usuario{
     font-size:17px;
-    color:#787878;
+    color:#7d7d7d;
     font-weight:bold;
     padding-bottom:17px;
-    text-transform:capitalize;
 }
 .usuario-cliente{
     font-size:17px;
@@ -391,11 +430,26 @@ a.link-portal:hover{
 .form-control-number.txt-license-quantity:focus{
     outline:0px;
 }
+.btn.btn-default.btn-circle.btn-add-addon{
+    outline:0px;
+}
 .add-license-controls{
     padding-left:0px;
 }
 .space-licencias{
-    padding-right:13px;
+    padding-right:0px;
+}
+.tabla-space-plan{
+    padding-left:8px!important;
+}
+.pad-botones{
+    padding-left:8px!important;
+}
+.table-text-space{
+    padding-left:0px !important;
+}
+.padding-agregar-plan{
+    padding-left:0px;
 }
 .pad-left-0{
     padding-left:0px;
@@ -427,4 +481,10 @@ input.txt-cuic:focus{
 }
 .li-addon-item > a {
     width:100%
+}
+.addon-space{
+    padding:10px 0px 10px 0px!important;
+}
+.input-space{
+    padding-right:0px!important;
 }
