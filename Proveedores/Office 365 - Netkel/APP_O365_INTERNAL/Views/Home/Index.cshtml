@@ -218,12 +218,15 @@
                     <div class="row">
                         @foreach (SubscriptionViewModel addon in subscription.AddOns)
                         {
-                            <div class="col-md-8 col-xs-8 nopadding add-on">
-                                @addon.Name
+                        <div class="col-md-8 col-xs-8 nopadding add-on">
+                            @addon.Name
+                            @if (!ViewBag.IsInternalEnvironment)
+    {
                                 <button type="button" class="btn btn-default btn-circle btn-suspend-addon" data-addon-id="@addon.Id" data-subscription-name="@addon.Name" title="Suspender">
                                     <img src="~/Content/Images/delete_addon.png" />
                                 </button>
-                            </div>
+                            }
+                        </div>
 
                             <div class="col-xs-1 nopadding pad-addon-cantidad">
                                 @addon.Quantity
