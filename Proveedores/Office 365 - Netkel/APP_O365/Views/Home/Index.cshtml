@@ -205,7 +205,7 @@
                                     }
                                     <span>
                                         Agregar Add-On &nbsp;
-                                        <button type="button" class="btn btn-default btn-circle btn-add-addon" data-subscription-id="@subscription.Id" data-offer-id="@subscription.OfferId" title="Agregar Addon">
+                                        <button type="button" class="btn btn-default btn-circle btn-add-addon" data-subscription-id="@subscription.Id" data-offer-id="@subscription.OfferId" data-customer-id="@ViewBag.CustomerId" title="Agregar Addon">
                                             <img src="~/Content/Images/add_addon.png" />
                                         </button>
                                     </span>
@@ -1112,14 +1112,17 @@
             });
         }
         function onAddAddonButtonClick($button) {
-            var subscriptionId = $button.data('subscription-id');
+            var parentSubscriptionId = $button.data('subscription-id');
             var offerId = $button.data('offer-id');
-            getAddOns(subscriptionId, offerId);
+            var customerId = $button.data('customer-id');
+            getAddOns(parentSubscriptionId, offerId, customerId);
             event.preventDefault();
         }
-        function getAddOns(subscriptionId, offerId) {
+        function getAddOns(parentSubscriptionId, offerId, customerId) {
             var data = {
-                parentSuscriptionId: offerId
+                parentSubscriptionId: parentSubscriptionId,
+                offerParentId: offerId,
+                customerId: customerId
             };
 
             var $errAlert = $('.errAlert').first();
@@ -1132,13 +1135,13 @@
                     if (res.length == 0)
                         return;
 
-                    var $cmb = selectBySubscriptionId('.cbo-addon', subscriptionId);
+                    var $cmb = selectBySubscriptionId('.cbo-addon', parentSubscriptionId);
                     $cmb.empty();
 
                     $.each(res, function (i, value) {
                         $cmb.append($('<option>').text(value.addOnDescription).attr('value', value.addOnId));
                     });
-                    enableAddonEdition(subscriptionId);
+                    enableAddonEdition(parentSubscriptionId);
                 })
                 .fail(function (xhr, status, error) {
                     $errAlert.removeClass('hidden');
