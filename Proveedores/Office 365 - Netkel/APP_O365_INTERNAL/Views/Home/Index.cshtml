@@ -20,7 +20,7 @@
                     <div class="form-group form-inline">
                         <label class="header-portal">CUIC:&nbsp;&nbsp;</label>
                         <input type="text" class="txt-cuic" placeholder="Ingresar" />
-                        <button type="button" class="btn btn-select-customer btn-select">Seleccionar</button>
+                        <button type="button" class="btn btn-select btn-select-customer">Seleccionar</button>
                     </div>
                 </div>
             </div>
@@ -167,11 +167,11 @@
                         <div class="col-xs-1 nopadding  input-space">
 
                             <!--mostrar si sólo va el número de licencias sin editar-->
-                            <div class="licencias txt-license-label" data-subscription-id="@subscription.Id">@subscription.Quantity</div>
+                            <div class="licencias txt-licenses-label" data-subscription-id="@subscription.Id">@subscription.Quantity</div>
 
                             <!--mostrar en la edición de cantidad de licencias-->
                             <div class="form-group">
-                                <input type="number" min="1" class="form-control-number txt-license-quantity"
+                                <input type="number" min="1" class="form-control-number txt-licenses-quantity"
                                        data-subscription-id="@subscription.Id" placeholder="@subscription.Quantity"
                                        data-subscription-quantity="@subscription.Quantity" style="cursor:default; display:none;" disabled>
                             </div>
@@ -205,6 +205,7 @@
                                     }
                                     <span>
                                         Agregar Add-On &nbsp;
+                                        
                                         <button type="button" class="btn btn-default btn-circle btn-add-addon" data-subscription-id="@subscription.Id" data-offer-id="@subscription.OfferId" data-customer-id="@ViewBag.CustomerId" title="Agregar Addon">
                                             <img src="~/Content/Images/add_addon.png" />
                                         </button>
@@ -218,24 +219,45 @@
                     <div class="row">
                         @foreach (SubscriptionViewModel addon in subscription.AddOns)
                         {
-                        <div class="col-md-8 col-xs-8 nopadding add-on">
-                            @addon.Name
-                            @if (!ViewBag.IsInternalEnvironment)
-    {
-                                <button type="button" class="btn btn-default btn-circle btn-suspend-addon" data-addon-id="@addon.Id" data-subscription-name="@addon.Name" title="Suspender">
-                                    <img src="~/Content/Images/delete_addon.png" />
-                                </button>
-                            }
-                        </div>
+                            <div class="col-md-8 col-xs-8 nopadding add-on">
+                                @addon.Name
 
+                                @if (!ViewBag.IsInternalEnvironment)
+                                {
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-default btn-circle btn-modify-addons" data-addon-id="@addon.Id" title="Modificar Addon">
+                                            <svg version="1.1" id="" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                                    viewBox="0 0 512 512" xml:space="preserve" class="fill-svg">
+                                            <path d="M397.736,78.378c6.824,0,12.358-5.533,12.358-12.358V27.027C410.094,12.125,397.977,0,383.08,0H121.641    c-3.277,0-6.42,1.303-8.739,3.62L10.527,105.995c-2.317,2.317-3.62,5.461-3.62,8.738v370.239C6.908,499.875,19.032,512,33.935,512    h349.144c14.897,0,27.014-12.125,27.014-27.027V296.289c0.001-6.824-5.532-12.358-12.357-12.358    c-6.824,0-12.358,5.533-12.358,12.358v188.684c0,1.274-1.031,2.311-2.297,2.311H33.936c-1.274,0-2.311-1.037-2.311-2.311v-357.88    h75.36c14.898,0,27.016-12.12,27.016-27.017V24.716H383.08c1.267,0,2.297,1.037,2.297,2.311V66.02    C385.377,72.845,390.911,78.378,397.736,78.378z M109.285,100.075c0,1.269-1.032,2.301-2.3,2.301H49.107l60.178-60.18V100.075z"></path>
+                                            <path d="M492.865,100.396l-14.541-14.539c-16.304-16.304-42.832-16.302-59.138,0L303.763,201.28H103.559    c-6.825,0-12.358,5.533-12.358,12.358c0,6.825,5.533,12.358,12.358,12.358h175.488l-74.379,74.379H103.559    c-6.825,0-12.358,5.533-12.358,12.358s5.533,12.358,12.358,12.358h76.392l-0.199,0.199c-1.508,1.508-2.598,3.379-3.169,5.433    l-19.088,68.747h-53.936c-6.825,0-12.358,5.533-12.358,12.358s5.533,12.358,12.358,12.358h63.332c0.001,0,2.709-0.306,3.107-0.41    c0.065-0.017,77.997-21.642,77.997-21.642c2.054-0.57,3.926-1.662,5.433-3.169l239.438-239.435    C509.168,143.228,509.168,116.7,492.865,100.396z M184.644,394.073l10.087-36.326l26.24,26.24L184.644,394.073z M244.69,372.752    l-38.721-38.721l197.648-197.648l38.722,38.721L244.69,372.752z M475.387,142.054l-15.571,15.571l-38.722-38.722l15.571-15.571    c6.669-6.668,17.517-6.667,24.181,0l14.541,14.541C482.054,124.54,482.054,135.388,475.387,142.054z"></path>
+                                            </svg>
+                                        </button>
+                                        <button type="button" class="btn btn-default btn-circle btn-save-addons" data-addon-id="@addon.Id" title="Guardar" style="display:none">
+                                            <img src="~/Content/Images/edit.png" />
+                                        </button>
+                                        <button type="button" class="btn btn-default btn-circle btn-suspend-addons" data-addon-id="@addon.Id" data-addon-name="@addon.Name" title="Suspender">
+                                            <img src="~/Content/Images/delete_addon.png" />
+                                        </button>
+                                    </div>
+                                }
+                            </div>
                             <div class="col-xs-1 nopadding pad-addon-cantidad">
-                                @addon.Quantity
+                                <!--mostrar si sólo va el número de licencias sin editar-->
+                                <div class="txt-addons-label" data-addon-id="@addon.Id">
+                                    @addon.Quantity
+                                </div>
+
+                                <!--mostrar en la edición de cantidad de licencias-->
+                                <div class="form-group">
+                                    <input type="number" min="1" class="form-control-number txt-addons-quantity"
+                                        data-addon-id="@addon.Id" placeholder="@addon.Quantity"
+                                        data-addon-quantity="@addon.Quantity" style="cursor:default; display:none;" disabled>
+                                </div>
                             </div>
                         }
                     </div>
                     <!-- AddOn List -->
                     <!-- Add AddOn -->
-
 
                     <div class="row">
                             <div class="form-group add-addon-controls" style="display:none;" data-subscription-id="@subscription.Id">
@@ -693,163 +715,29 @@
 @section scripts {
     <script>
 
-        // handle select customer button clicks
-        $(function () {
+'use strict';
+
+(function($, window) {
+    let vm = function() {
+
+        let vmSelf = {};
+
+        // ---------------------------------------
+        // Bindings
+        // ---------------------------------------
+
+        // botón seleccionar cliente (IsInternalEnvironment == true)
+        function bindSelectCustomerClick() {
             $('.btn-select-customer').each(function () {
                 $(this).on('click', function () {
-                    onSelectCustomerClick($(this));
+                    onSelectCustomerClick();
                 });
             });
-        });
-        function onSelectCustomerClick($button) {
-            var $textbox = $('.txt-cuic').first();
-
-            if ($textbox) {
-                var cuic = $textbox.val();
-                var url = '@Url.Action("index","home")?id=' + cuic;
-                window.location.href = url;
-            }
         }
 
-        // handle modify button clicks
-        $(function () { bindModifyLicensesButtons(); });
-        function bindModifyLicensesButtons() {
-            $('.btn-modify-licenses').each(function () {
-                $(this).off('click');
-                $(this).on('click', function () { onModifyLicensesButtonClick($(this)); });
-            });
-        }
-        function onModifyLicensesButtonClick($button) {
-            var subscriptionId = $button.data('subscription-id');
-            enableLicenseEdition(subscriptionId);
-            event.preventDefault();
-        }
-
-        // handle save button clicks
-        $(function () { bindSaveLicensesButtons(); });
-        function bindSaveLicensesButtons() {
-            $('.btn-save-licenses').each(function () {
-                $(this).off('click');
-                $(this).on('click', function () { onSaveLicensesButtonClick($(this)); });
-            });
-        }
-        function onSaveLicensesButtonClick($button) {
-
-            var $minAlert = $('.minAlert').first();
-            var $minOfferAlert = $('.minOfferAlert').first();
-            var $maxOfferAlert = $('.maxOfferAlert').first();
-            var $errAlert = $('.errAlert').first();
-
-            $minAlert.addClass('hidden');
-            $minOfferAlert.addClass('hidden');
-            $maxOfferAlert.addClass('hidden');
-            $errAlert.addClass('hidden');
-
-            var subscriptionId = $button.data('subscription-id');
-            var $textbox = selectBySubscriptionId('.txt-license-quantity', subscriptionId);
-            if ($textbox.val() < 1) {
-                $minAlert.removeClass('hidden');
-                return;
-            }
-
-            confirmDialog('¿Está seguro que desea guardar los cambios?'
-                            , function () {
-                                $.LoadingOverlay('show');
-
-                                var subscriptionId = $button.data('subscription-id');
-                                disableSaveButton(subscriptionId);
-                                disableLicenseQuantityTextBox(subscriptionId);
-                                saveLicenseQuantity(subscriptionId,
-                                    function () {
-                                        var $licenseLabel = selectBySubscriptionId('.txt-license-label', subscriptionId);
-                                        $licenseLabel.text($textbox.val());
-                                        $.LoadingOverlay('hide');
-                                        disableLicenseEdition(subscriptionId);
-                                        enableSaveButton(subscriptionId);
-                                    },
-                                    function (xhr, status, error) {
-                                        $.LoadingOverlay('hide');
-                                        enableSaveButton(subscriptionId);
-                                        enableLicenseQuantityTextBox(subscriptionId);
-
-                                        if (error.match("^MaximunQuantity:")) {
-                                            $maxOfferAlert.removeClass('hidden');
-                                            return;
-
-                                        }
-
-                                        if (error.match("^MinimumQuantity:")) {
-                                            $minOfferAlert.removeClass('hidden');
-                                            return;
-
-                                        }
-
-                                        $errAlert.removeClass('hidden');
-                                    }
-                                );
-                                event.preventDefault();
-                            });
-        }
-
-        // handle suspend button clicks
-        $(function () { bindSuspendLicensesButtons(); });
-        function bindSuspendLicensesButtons() {
-            $('.btn-suspend-licenses').each(function () {
-                $(this).off('click');
-                $(this).on('click', function () { onSuspendLicensesButtonClick($(this)); });
-            });
-        }
-        function onSuspendLicensesButtonClick($button) {
-
-            var $errAlert = $('.errAlert').first();
-            $errAlert.addClass('hidden');
-
-            confirmDialog('¿Est&aacute;s seguro que quer&eacute;s eliminar el plan <span class="color-01">' + $button.data('subscription-name') + '</span>?'
-                            , function () {
-                                var subscriptionId = $button.data('subscription-id');
-                                disableModifyButton(subscriptionId);
-                                disableSuspendButton(subscriptionId);
-                                disableSaveButton(subscriptionId);
-
-                                $.LoadingOverlay('show');
-                                suspendLicense(subscriptionId,
-                                    function () {
-                                        location.reload();
-                                    },
-                                    function (xhr, status, error) {
-                                        $.LoadingOverlay('hide');
-                                        enableModifyButton(subscriptionId);
-                                        enableSuspendButton(subscriptionId);
-                                        enableSaveButton(subscriptionId);
-                                        $errAlert.removeClass('hidden');
-                                    }
-                                );
-                                event.preventDefault();
-                            });
-        }
-
-        // Confirm Dialog
-        function confirmDialog(confirmText, onConfirm) {
-
-            var modal = $('#modalConfirm');
-
-            var fClose = function () {
-                modal.unbind();
-                modal.modal("hide");
-            };
-
-            var modalTextDiv = $('#modal-body-text');
-            modalTextDiv.html(confirmText);
-
-            modal.modal("show");
-
-            $("#confirmOK").off('click').one('click', onConfirm);
-            $("#confirmOK").one('click', fClose);
-            $("#confirmCancel").off('click').one('click', fClose);
-        }
-
-        // handle add license buttons click
-        $(function () {
+        // License (NEW)
+        function bindAddLicenseButtons()
+        {
             $('#btn-add-license').on('click', function () {
                 onAddLicensesButtonClick();
             });
@@ -859,67 +747,229 @@
             $('#btn-cancel-add-license').on('click', function () {
                 onCancelAddLicensesButtonClick();
             });
-        });
+        }
+
+        // Licenses (subscriptions)
+
+        function bindModifyLicensesButtons() {
+            $('.btn-modify-licenses').each(function () {
+                $(this).off('click');
+                $(this).on('click', function () { onModifyLicensesButtonClick($(this)); });
+            });
+        }
+
+        function bindSaveLicensesButtons() {
+            $('.btn-save-licenses').each(function () {
+                $(this).off('click');
+                $(this).on('click', function () { onSaveLicensesButtonClick($(this)); });
+            });
+        }
+
+        function bindSuspendLicensesButtons() {
+            $('.btn-suspend-licenses').each(function () {
+                $(this).off('click');
+                $(this).on('click', function () { onSuspendLicensesButtonClick($(this)); });
+            });
+        }
+        
+        // Addon
+
+        function bindAddAddonButtons() {
+            $('.btn-add-addon').each(function () {
+                $(this).off('click');
+                $(this).on('click', function () { onAddAddonButtonClick($(this)); });
+            });
+        }
+
+        function bindCancelAddonButtons() {
+            $('.btn-cancel-add-addon').each(function () {
+                $(this).off('click');
+                $(this).on('click', function () { onCancelAddonButtonClick($(this)); });
+            });
+        }
+
+        function bindSaveAddonButtons() {
+            $('.btn-save-addon').each(function () {
+                $(this).off('click');
+                $(this).on('click', function () { onSaveAddonButtonClick($(this)); });
+            });
+        }
+
+        // Addons
+        function bindSuspendAddOnButtons() {
+            $('.btn-suspend-addons').each(function () {
+                $(this).off('click');
+                $(this).on('click', function () { onSuspendAddOnButtonClick($(this)); });
+            });
+        }
+
+        function bindModifyAddonsButtons() {
+            $('.btn-modify-addons').each(function () {
+                $(this).off('click');
+                $(this).on('click', function () { onModifyAddonsButtonClick($(this)); });
+            });
+        }
+
+        function bindSaveAddonsButtons() {
+            $('.btn-save-addons').each(function () {
+                $(this).off('click');
+                $(this).on('click', function () { onSaveAddonsButtonClick($(this)); });
+            });
+        }
+
+        // bindPage
+        vmSelf.bindPage= function() {
+            bindSelectCustomerClick();
+            bindModifyLicensesButtons();
+            bindSaveLicensesButtons();
+            bindSuspendLicensesButtons();
+            bindAddLicenseButtons();
+            bindAddAddonButtons();
+            bindCancelAddonButtons();
+            bindSaveAddonButtons();
+            bindSuspendAddOnButtons();
+            bindModifyAddonsButtons();
+            bindSaveAddonsButtons();
+        };
+
+        // ---------------------------------------
+        // Handlers
+        // ---------------------------------------
+
+        function onSelectCustomerClick() {
+            let $textbox = $('.txt-cuic').first();
+            if ($textbox) {
+                let cuic = $textbox.val();
+                let url = '@Url.Action("index","home")?id=' + cuic;
+                window.location.href = url;
+            }
+        }
+
+        // License
 
         function onAddLicensesButtonClick() {
-            enableLicenseAddition();
+            formStatusLicenseAddition();
             event.preventDefault();
         }
 
         function onConfirmAddLicensesButtonClick() {
-
-            confirmDialog(
-                '¿Confirma agregar el plan seleccionado?',
-                function () {
-                    var $cmb = $('#cmb-price');
-                    var parts = $cmb.val().split('|');
-                    var $txt = $('#txt-license-quantity');
-
-                    var data = {
-                        customerId: '@ViewBag.CustomerId',
-                        offerId: parts[0],
-                        subscriptionId: parts[1],
-                        offerFriendlyName: $cmb.children('option:selected').text(),
-                        licenseQuantity: parseInt($txt.val())
-                    };
-
-                    var $errAlert = $('.errAlert').first();
-                    $errAlert.addClass('hidden');
-
-                    $.LoadingOverlay('show');
-                    $.post('@Url.Action("AddLicense", "Subscriptions")', data)
-                    .done(function () {
-                        location.reload();
-                    })
-                    .fail(function () {
-                        $.LoadingOverlay('hide');
-                        $errAlert.removeClass('hidden');
-                    });
-                }
-            );
+            confirmDialog('¿Confirma agregar el plan seleccionado?', addLicensesConfirmed);
             event.preventDefault();
         }
-        function onCancelAddLicensesButtonClick() {
-            disableLicenseAddition();
+
+        function addLicensesConfirmed() {
+            formStatusLoading();
+
+            let $cmb = $('#cmb-price');
+            let parts = $cmb.val().split('|');
+            let $txt = $('#txt-license-quantity');
+
+            let data = {
+                customerId: '@ViewBag.CustomerId',
+                offerId: parts[0],
+                subscriptionId: parts[1],
+                offerFriendlyName: $cmb.children('option:selected').text(),
+                licenseQuantity: parseInt($txt.val())
+            };
+
+            $.post('@Url.Action("AddLicense", "Subscriptions")', data)
+                .done(formStatusReload)
+                .fail(formStatusShowError);
         }
 
-        function saveLicenseQuantity(subscriptionId, onSuccessCallback, onErrorCallback) {
-            var $textbox = selectBySubscriptionId('.txt-license-quantity', subscriptionId);
+        function onCancelAddLicensesButtonClick() {
+            formStatusDisplay();
+        }
+
+        // Licenses (subscriptions)
+
+        function onModifyLicensesButtonClick($button) {
+            let subscriptionId = $button.data('subscription-id');
+            formStatusLicensesEdition(subscriptionId, true);
+            event.preventDefault();
+        }
+
+        function onSaveLicensesButtonClick($button) {
+            let subscriptionId = $button.data('subscription-id');
+
+            hideErrors();
+
+            // Verificar no sea menor a 1
+            let $textbox = selectBySubscriptionId('.txt-licenses-quantity', subscriptionId);
+            if ($textbox.val() < 1) {
+                showMinError();
+                return;
+            }
+
+            confirmDialog('¿Está seguro que desea guardar los cambios?', function () { onSaveLicensesConfirm(subscriptionId); });
+        }
+
+        function onSaveLicensesConfirm(subscriptionId) {
+            formStatusSavingLicenses(subscriptionId);
+            saveLicensesQuantity(subscriptionId,
+                function() {
+                    saveLicensesQuantitySuccess(subscriptionId);
+                },
+                function(xhr, status, error) {
+                    saveLicensesQuantityError(subscriptionId, error);
+                });
+            event.preventDefault();
+        }
+
+        function saveLicensesQuantity(subscriptionId, onSuccessCallback, onErrorCallback) {
+            let $textbox = selectBySubscriptionId('.txt-licenses-quantity', subscriptionId);
             if ($textbox) {
-                var data = {
+                let data = {
                     customerId: '@ViewBag.CustomerId',
                     subscriptionId: subscriptionId,
                     licenseQuantity: parseInt($textbox.val())
                 };
                 $.post('@Url.Action("SaveLicenseQuantity", "Subscriptions")', data)
-                .done(onSuccessCallback)
-                .fail(onErrorCallback);
+                    .done(onSuccessCallback)
+                    .fail(onErrorCallback);
             }
+        }
+
+        function saveLicensesQuantitySuccess(subscriptionId) {
+            let $textbox = selectBySubscriptionId('.txt-licenses-quantity', subscriptionId);
+            let $licenseLabel = selectBySubscriptionId('.txt-licenses-label', subscriptionId);
+            $licenseLabel.text($textbox.val());
+            formStatusEndLicensesEdition(subscriptionId);
+        }
+
+        function saveLicensesQuantityError(subscriptionId, error) {
+            formStatusLicensesEdition(subscriptionId, false);
+
+            if (error.match('^MaximunQuantity:')) {
+                showMaxOfferError();
+                return;
+            }
+
+            if (error.match('^MinimumQuantity:')) {
+                showMinOfferError();
+                return;
+            }
+
+            showError();
+        }
+
+        function onSuspendLicensesButtonClick($button) {
+            hideErrors();
+            let subscriptionId = $button.data('subscription-id');
+            confirmDialog('¿Est&aacute;s seguro que quer&eacute;s eliminar el plan <span class="color-01">' + $button.data('subscription-name') + '</span>?',
+                function() { onSuspendLicensesButtonConfirm(subscriptionId); });
+        }
+
+        function onSuspendLicensesButtonConfirm(subscriptionId)
+        {
+            formStatusLicensesSuspending(subscriptionId);
+            suspendLicense(subscriptionId, formStatusReload, suspendLicensesError);
+            event.preventDefault();
         }
 
         function suspendLicense(subscriptionId, onSuccessCallback, onErrorCallback) {
 
-            var data = {
+            let data = {
                 customerId: '@ViewBag.CustomerId',
                 subscriptionId: subscriptionId,
             };
@@ -929,173 +979,590 @@
                 .fail(onErrorCallback);
         }
 
+        function suspendLicensesError() {
+            formStatusDisplay();
+            showError();
+        }
+
+        // Addon
+
+        function onAddAddonButtonClick($button) {
+            let parentSubscriptionId = $button.data('subscription-id');
+            let offerId = $button.data('offer-id');
+            let customerId = $button.data('customer-id');
+            getAddOns(parentSubscriptionId, offerId, customerId);
+            event.preventDefault();
+        }
+
+        function getAddOns(parentSubscriptionId, offerId, customerId) {
+            let data = {
+                parentSubscriptionId: parentSubscriptionId,
+                offerParentId: offerId,
+                customerId: customerId
+            };
+
+            formStatusLoading();
+
+            $.get('@Url.Action("GetAddOns", "Subscriptions")', data)
+                .done(function(res) {
+                    getAddonsSuccess(res, parentSubscriptionId);
+                })
+                .fail(formStatusShowError)
+                .always(function () {
+                    $.LoadingOverlay('hide');
+                });
+        }
+
+        function getAddonsSuccess(res, parentSubscriptionId) {
+            if (res.length == 0)
+                return;
+
+            let $cmb = selectBySubscriptionId('.cbo-addon', parentSubscriptionId);
+            $cmb.empty();
+
+            $.each(res, function (i, value) {
+                $cmb.append($('<option>').text(value.addOnDescription).attr('value', value.addOnId));
+            });
+            showAddonEdition(parentSubscriptionId);
+        }
+
+        function onCancelAddonButtonClick($button) {
+            let subscriptionId = $button.data('subscription-id');
+            hideAddonEdition(subscriptionId);
+            event.preventDefault();
+        }
+
+        function onSaveAddonButtonClick($button) {
+            confirmDialog('¿Confirma agregar el addon seleccionado?', function() { saveAddonConfirmed($button); });
+            event.preventDefault();
+        }
+
+        function saveAddonConfirmed($button) {
+            let subscriptionId = $button.data('subscription-id');
+            let $cmb = selectBySubscriptionId('.cbo-addon', subscriptionId);
+            let $txtQuantity = selectBySubscriptionId('.txt-quantity-addon', subscriptionId);
+            let addOnId = $cmb.val();
+            let friendlyName = $cmb.find('option:selected').text();
+
+            let data = {
+                customerId: '@ViewBag.CustomerId',
+                parentSubscriptionId: subscriptionId,
+                addOnId: addOnId,
+                friendlyName: friendlyName,
+                quantity: $txtQuantity.val()
+            };
+
+            formStatusLoading();
+
+            $.post('@Url.Action("AddAddOn", "Subscriptions")', data)
+                .done(formStatusReload)
+                .fail(formStatusShowError);
+        }
+
+        // Addons
+        function onSuspendAddOnButtonClick($button) {
+            hideErrors();
+            confirmDialog('¿Est&aacute;s seguro que quer&eacute;s eliminar el addon <span class="color-01">' + $button.data('addon-name') + '</span>?',
+                function() { suspendAddonConfirmed($button); });
+        }
+
+        function suspendAddonConfirmed($button)
+        {
+            let subscriptionId = $button.data('addon-id');
+
+            $.LoadingOverlay('show');
+            suspendLicense(subscriptionId, formStatusReload, formStatusShowError);
+            event.preventDefault();
+        }
+
+        function onModifyAddonsButtonClick($button) {
+            let subscriptionId = $button.data('addon-id');
+            formStatusAddonsEdition(subscriptionId);
+            event.preventDefault();
+        }
+
+        function onSaveAddonsButtonClick($button) {
+            let subscriptionId = $button.data('addon-id');
+
+            hideErrors();
+
+            // Verificar no sea menor a 1
+            let $textbox = selectByAddonId('.txt-addons-quantity', subscriptionId);
+            if ($textbox.val() < 1) {
+                showMinError();
+                return;
+            }
+
+            confirmDialog('¿Está seguro que desea guardar los cambios?', function () { onSaveAddonsConfirm(subscriptionId); });
+        }
+
+        function onSaveAddonsConfirm(subscriptionId) {
+            formStatusSavingAddons(subscriptionId);
+            saveAddonsQuantity(subscriptionId,
+                function() {
+                    saveAddonsQuantitySuccess(subscriptionId);
+                },
+                function(xhr, status, error) {
+                    saveAddonsQuantityError(subscriptionId, error);
+                });
+            event.preventDefault();
+        }
+
+        function saveAddonsQuantity(subscriptionId, onSuccessCallback, onErrorCallback) {
+            let $textbox = selectByAddonId('.txt-addons-quantity', subscriptionId);
+            if ($textbox) {
+                let data = {
+                    customerId: '@ViewBag.CustomerId',
+                    subscriptionId: subscriptionId,
+                    licenseQuantity: parseInt($textbox.val())
+                };
+                $.post('@Url.Action("SaveLicenseQuantity", "Subscriptions")', data)
+                    .done(onSuccessCallback)
+                    .fail(onErrorCallback);
+            }
+        }
+
+        function saveAddonsQuantitySuccess(subscriptionId) {
+            let $textbox = selectByAddonId('.txt-addons-quantity', subscriptionId);
+            let $licenseLabel = selectByAddonId('.txt-addons-label', subscriptionId);
+            $licenseLabel.text($textbox.val());
+            formStatusEndAddonsEdition(subscriptionId);
+        }
+
+        function saveAddonsQuantityError(subscriptionId, error) {
+            formStatusAddonsEdition(subscriptionId, false);
+
+            if (error.match('^MaximunQuantity:')) {
+                showMaxOfferError();
+                return;
+            }
+
+            if (error.match('^MinimumQuantity:')) {
+                showMinOfferError();
+                return;
+            }
+
+            showError();
+        }
+
+
+        // ---------------------------------------
+        // Form status
+        // ---------------------------------------
+
+        function formStatusDisplay(subscriptionId) {
+            $.LoadingOverlay('hide');
+            disableLicenseAddition();
+
+            if (subscriptionId != null)
+            {            
+                showLicensesLabel(subscriptionId);
+                showLicensesModifyButton(subscriptionId);
+                hideLicensesQuantity(subscriptionId);
+                disableLicensesQuantity(subscriptionId);
+                hideLicensesSaveButton(subscriptionId);
+                enableLicensesModifyButton(subscriptionId);
+                enableLicensesSuspendButton(subscriptionId);
+                enableLicensesSaveButton(subscriptionId);
+            }
+        }
+
+        function formStatusEndLicensesEdition(subscriptionId){
+            copyLicensesQuantityFromEdit(subscriptionId);
+            formStatusDisplay(subscriptionId);
+        }
+
+        function formStatusLicensesEdition(subscriptionId, init) {
+            $.LoadingOverlay('hide');
+            hideLicensesLabel(subscriptionId);
+            hideLicensesModifyButton(subscriptionId);
+            showLicensesSaveButton(subscriptionId);
+            showLicensesQuantity(subscriptionId, init);
+            enableLicensesSaveButton(subscriptionId);
+            enableLicensesQuantity(subscriptionId);
+        }
+
+        function formStatusSavingLicenses(subscriptionId) {
+            $.LoadingOverlay('show');
+            disableLicensesSaveButton(subscriptionId);
+            disableLicensesQuantity(subscriptionId);
+        }
+
+        function formStatusSavingAddons(subscriptionId) {
+            $.LoadingOverlay('show');
+            disableAddonsSaveButton(subscriptionId);
+            disableAddonsQuantity(subscriptionId);
+        }
+
+        function formStatusLicensesSuspending(subscriptionId){
+            $.LoadingOverlay('show');
+            disableLicensesModifyButton(subscriptionId);
+            disableLicensesSuspendButton(subscriptionId);
+            disableLicensesSaveButton(subscriptionId);
+        }
+        
+        function formStatusLicenseAddition() {
+            enableLicenseAddition();
+        }
+
+        function formStatusLoading() {
+            $.LoadingOverlay('show');
+            hideErrors();
+        }
+
+        function formStatusShowError() {
+            $.LoadingOverlay('hide');
+            showError();
+        }
+
+        function formStatusReload() {
+            location.reload();
+        }
+
+        function formStatusAddonsEdition(subscriptionId, init) {
+            $.LoadingOverlay('hide');
+            hideAddonsLabel(subscriptionId);
+            hideAddonsModifyButton(subscriptionId);
+            showAddonsSaveButton(subscriptionId);
+            showAddonsQuantity(subscriptionId, init);
+            enableAddonsSaveButton(subscriptionId);
+            enableAddonsQuantity(subscriptionId);            
+        }
+
+        function formStatusEndAddonsEdition(subscriptionId){
+            copyAddonsQuantityFromEdit(subscriptionId);
+            showAddonsLabel(subscriptionId);
+            showAddonsModifyButton(subscriptionId);
+            disableAddonsSaveButton(subscriptionId);
+            hideAddonsSaveButton(subscriptionId);
+            disableAddonsQuantity(subscriptionId);
+            $.LoadingOverlay('hide');
+        }
+
+        // ---------------------------------------
+        // Controls status
+        // ---------------------------------------
+
         function enableLicenseAddition() {
-            // show controls
-            var $controls = $('.add-license-controls');
+            let $controls = $('.add-license-controls');
             if ($controls) {
                 $controls.fadeIn();
             }
         }
 
         function disableLicenseAddition() {
-            // hide controls
-            var $controls = $('.add-license-controls');
+            let $controls = $('.add-license-controls');
             if ($controls) {
                 $controls.fadeOut();
             }
         }
 
-        function enableLicenseEdition(subscriptionId) {
-
-            // hide label
-            var $lbl = selectBySubscriptionId('.txt-license-label', subscriptionId);
+        function hideLicensesLabel(subscriptionId) {
+            let $lbl = selectBySubscriptionId('.txt-licenses-label', subscriptionId);
             if ($lbl) {
                 $lbl.hide();
             }
-
-            // hide modify button
-            var $button = selectBySubscriptionId('.btn-modify-licenses', subscriptionId);
-            if ($button) {
-                $button.hide();
-            }
-
-            // show save button
-            var $button = selectBySubscriptionId('.btn-save-licenses', subscriptionId);
-            if ($button) {
-                $button.show();
-            }
-
-            var onEnterKey = function () {
-                $button.click();
-            };
-
-            // show and enable input
-            var $textbox = selectBySubscriptionId('.txt-license-quantity', subscriptionId);
-            if ($textbox) {
-                $textbox.show();
-                var quantity = $textbox.data('subscription-quantity');
-                $textbox.prop('disabled', false);
-                $textbox.val(quantity);
-                $textbox.attr('placeholder', '');
-                $textbox.keyup(function (e) {
-                    if (e.keyCode === 13) {
-                        onEnterKey();
-                    }
-                });
-                $textbox.focus();
-            }
-
         }
 
-        function disableLicenseEdition(subscriptionId) {
-
-            // show label
-            var $lbl = selectBySubscriptionId('.txt-license-label', subscriptionId);
+        function showLicensesLabel(subscriptionId) {
+            let $lbl = selectBySubscriptionId('.txt-licenses-label', subscriptionId);
             if ($lbl) {
                 $lbl.show();
             }
+        }
 
-            // hide and disable input
-            var $textbox = selectBySubscriptionId('.txt-license-quantity', subscriptionId);
+        function hideLicensesModifyButton(subscriptionId) {
+            let $button = selectBySubscriptionId('.btn-modify-licenses', subscriptionId);
+            if ($button) {
+                $button.hide();
+            }
+        }
+
+        function showLicensesModifyButton(subscriptionId) {
+            let $button = selectBySubscriptionId('.btn-modify-licenses', subscriptionId);
+            if ($button) {
+                $button.show();
+            }
+        }
+
+        function hideLicensesSaveButton(subscriptionId) {
+            let $button = selectBySubscriptionId('.btn-save-licenses', subscriptionId);
+            if ($button) {
+                $button.hide();
+            }                    
+        }
+
+        function showLicensesSaveButton(subscriptionId) {
+            let $button = selectBySubscriptionId('.btn-save-licenses', subscriptionId);
+            if ($button) {
+                $button.show();
+            }                    
+        }
+
+        function showLicensesQuantity(subscriptionId, init) {
+            let $button = selectBySubscriptionId('.btn-save-licenses', subscriptionId);
+            let $textbox = selectBySubscriptionId('.txt-licenses-quantity', subscriptionId);
+            if ($textbox) {
+                $textbox.show();
+                $textbox.prop('disabled', false);
+
+                if (init)
+                {
+                    let onEnterKey = function () {
+                        $button.click();
+                    };
+
+                    let quantity = $textbox.data('subscription-quantity');
+                    $textbox.val(quantity);
+                    $textbox.attr('placeholder', '');
+                    $textbox.keyup(function (e) {
+                        if (e.keyCode === 13) {
+                            onEnterKey();
+                        }
+                    });
+                }
+                $textbox.focus();
+            }
+        }
+
+        function copyLicensesQuantityFromEdit(subscriptionId) {
+            let $textbox = selectBySubscriptionId('.txt-licenses-quantity', subscriptionId);
             if ($textbox) {
                 $textbox.hide();
-                var quantity = $textbox.val();
+                let quantity = $textbox.val();
+                $textbox.prop('disabled', true);
+                $textbox.attr('placeholder', quantity);
+                $textbox.data('subscription-quantity', quantity);
+            }
+        }
+        
+        function hideLicensesQuantity(subscriptionId) {
+            let $textbox = selectBySubscriptionId('.txt-licenses-quantity', subscriptionId);
+            if ($textbox) {
+                $textbox.hide();
+            }
+        }
+
+        function disableLicensesSaveButton(subscriptionId) {
+            let $button = selectBySubscriptionId('.btn-save-licenses', subscriptionId);
+            if ($button) {
+                $button.prop('disabled', true);
+            }
+        }
+
+        function enableLicensesSaveButton(subscriptionId) {
+            let $button = selectBySubscriptionId('.btn-save-licenses', subscriptionId);
+            if ($button) {
+                $button.prop('disabled', false);
+            }
+        }
+
+        function enableLicensesQuantity(subscriptionId) {
+            let $textbox = selectBySubscriptionId('.txt-licenses-quantity', subscriptionId);
+            if ($textbox) {
+                $textbox.prop('disabled', false);
+                $textbox.focus();
+            }
+        }
+
+        function disableLicensesQuantity(subscriptionId) {
+            let $textbox = selectBySubscriptionId('.txt-licenses-quantity', subscriptionId);
+            if ($textbox) {
+                $textbox.prop('disabled', true);
+            }
+        }
+
+        function enableLicensesSuspendButton(subscriptionId) {
+            let $button = selectBySubscriptionId('.btn-suspend-licenses', subscriptionId);
+            if ($button) {
+                $button.prop('disabled', false);
+            }
+        }
+
+        function disableLicensesSuspendButton(subscriptionId) {
+            let $button = selectBySubscriptionId('.btn-suspend-licenses', subscriptionId);
+            if ($button) {
+                $button.prop('disabled', true);
+            }
+        }
+
+        function enableLicensesModifyButton(subscriptionId) {
+            let $button = selectBySubscriptionId('.btn-modify-licenses', subscriptionId);
+            if ($button) {
+                $button.prop('disabled', false);
+            }
+        }
+
+        function disableLicensesModifyButton(subscriptionId) {
+            let $button = selectBySubscriptionId('.btn-modify-licenses', subscriptionId);
+            if ($button) {
+                $button.prop('disabled', true);
+            }
+        }
+
+        function showAddonEdition(subscriptionId) {
+            let $controls = selectBySubscriptionId('.add-addon-controls', subscriptionId);
+            if ($controls) {
+                $controls.fadeIn();
+            }
+        }
+
+        function hideAddonEdition(subscriptionId) {
+            let $controls = selectBySubscriptionId('.add-addon-controls', subscriptionId);
+            if ($controls) {
+                $controls.fadeOut();
+            }
+        }
+
+        function hideAddonsLabel(subscriptionId) {
+            var $lbl = selectByAddonId('.txt-addons-label', subscriptionId);
+            if ($lbl) {
+                $lbl.hide();
+            }
+        }
+
+        function showAddonsLabel(subscriptionId) {
+            var $lbl = selectByAddonId('.txt-addons-label', subscriptionId);
+            if ($lbl) {
+                $lbl.show();
+            }
+        }
+
+        function hideAddonsModifyButton(subscriptionId) {
+            var $button = selectByAddonId('.btn-modify-addons', subscriptionId);
+            if ($button) {
+                $button.hide();
+            }
+        }
+
+        function showAddonsModifyButton(subscriptionId) {
+            var $button = selectByAddonId('.btn-modify-addons', subscriptionId);
+            if ($button) {
+                $button.show();
+            }
+        }
+
+        function showAddonsSaveButton(subscriptionId) {
+            var $button = selectByAddonId('.btn-save-addons', subscriptionId);
+            if ($button) {
+                $button.show();
+            }
+        }
+
+        function hideAddonsSaveButton(subscriptionId) {
+            var $button = selectByAddonId('.btn-save-addons', subscriptionId);
+            if ($button) {
+                $button.hide();
+            }
+        }
+
+        function showAddonsQuantity(subscriptionId, init) {
+            let $button = selectByAddonId('.btn-save-addons', subscriptionId);
+            let $textbox = selectByAddonId('.txt-addons-quantity', subscriptionId);
+            if ($textbox) {
+                $textbox.show();
+                $textbox.prop('disabled', false);
+
+                if (init)
+                {
+                    let onEnterKey = function () {
+                        $button.click();
+                    };
+
+                    let quantity = $textbox.data('addon-quantity');
+                    $textbox.val(quantity);
+                    $textbox.attr('placeholder', '');
+                    $textbox.keyup(function (e) {
+                        if (e.keyCode === 13) {
+                            onEnterKey();
+                        }
+                    });
+                }
+                $textbox.focus();
+            }
+        }
+
+        function enableAddonsSaveButton(subscriptionId) {
+            var $button = selectByAddonId('.btn-save-addons', subscriptionId);
+            if ($button) {
+                $button.prop('disabled', false);
+            }
+        }
+
+        function disableAddonsSaveButton(subscriptionId) {
+            var $button = selectByAddonId('.btn-save-addons', subscriptionId);
+            if ($button) {
+                $button.prop('disabled', true);
+            }
+        }
+
+        function enableAddonsQuantity(subscriptionId) {
+            let $textbox = selectByAddonId('.txt-addons-quantity', subscriptionId);
+            if ($textbox) {
+                $textbox.prop('disabled', false);
+                $textbox.focus();
+            }
+        }
+
+        function disableAddonsQuantity(subscriptionId) {
+            let $textbox = selectByAddonId('.txt-addons-quantity', subscriptionId);
+            if ($textbox) {
+                $textbox.prop('disabled', true);
+            }
+        }
+
+        function copyAddonsQuantityFromEdit(subscriptionId) {
+            let $textbox = selectByAddonId('.txt-addons-quantity', subscriptionId);
+            if ($textbox) {
+                $textbox.hide();
+                let quantity = $textbox.val();
                 $textbox.prop('disabled', true);
                 $textbox.val();
                 $textbox.attr('placeholder', quantity);
                 $textbox.data('subscription-quantity', quantity);
             }
-
-            // hide modify button
-            var $button = selectBySubscriptionId('.btn-modify-licenses', subscriptionId);
-            if ($button) {
-                $button.show();
-            }
-
-            // show save button
-            var $button = selectBySubscriptionId('.btn-save-licenses', subscriptionId);
-            if ($button) {
-                $button.hide();
-            }
         }
 
-        function disableSaveButton(subscriptionId) {
-            var $button = selectBySubscriptionId('.btn-save-licenses', subscriptionId);
-            if ($button) {
-                $button.prop('disabled', true);
-            }
+        function hideErrors() {
+            let $minAlert = $('.minAlert').first();
+            let $minOfferAlert = $('.minOfferAlert').first();
+            let $maxOfferAlert = $('.maxOfferAlert').first();
+            let $errAlert = $('.errAlert').first();
+
+            $minAlert.addClass('hidden');
+            $minOfferAlert.addClass('hidden');
+            $maxOfferAlert.addClass('hidden');
+            $errAlert.addClass('hidden');
         }
 
-        function disableModifyButton(subscriptionId) {
-            var $button = selectBySubscriptionId('.btn-modify-licenses', subscriptionId);
-            if ($button) {
-                $button.prop('disabled', true);
-            }
+        function showMinError() {
+            let $minAlert = $('.minAlert').first();
+            $minAlert.removeClass('hidden');
         }
 
-        function disableModifyButtons() {
-            $('.btn-modify-licenses').prop('disabled', true);
+        function showMaxOfferError() {
+            let $maxOfferAlert = $('.maxOfferAlert').first();
+            $maxOfferAlert.removeClass('hidden');
         }
 
-        function enableModifyButton(subscriptionId) {
-            var $button = selectBySubscriptionId('.btn-modify-licenses', subscriptionId);
-            if ($button) {
-                $button.prop('disabled', false);
-            }
+        function showMinOfferError() {
+            let $minOfferAlert = $('.minOfferAlert').first();
+            $minOfferAlert.removeClass('hidden');
         }
 
-        function enableModifyButtons() {
-            $('.btn-modify-licenses').prop('disabled', false);
+        function showError() {
+            let $errAlert = $('.errAlert').first();
+            $errAlert.removeClass('hidden');
         }
 
-        function disableSuspendButton(subscriptionId) {
-            var $button = selectBySubscriptionId('.btn-suspend-licenses', subscriptionId);
-            if ($button) {
-                $button.prop('disabled', true);
-            }
-        }
-
-        function disableSuspendButtons() {
-            $('.btn-suspend-licenses').prop('disabled', true);
-        }
-
-        function enableSuspendButton(subscriptionId) {
-            var $button = selectBySubscriptionId('.btn-suspend-licenses', subscriptionId);
-            if ($button) {
-                $button.prop('disabled', false);
-            }
-        }
-
-        function enableSuspendButtons() {
-            $('.btn-suspend-licenses').prop('disabled', false);
-        }
-
-        function enableSaveButton(subscriptionId) {
-            var $button = selectBySubscriptionId('.btn-save-licenses', subscriptionId);
-            if ($button) {
-                $button.prop('disabled', false);
-            }
-        }
-
-        function disableLicenseQuantityTextBox(subscriptionId) {
-            var $textbox = selectBySubscriptionId('.txt-license-quantity', subscriptionId);
-            if ($textbox) {
-                $textbox.prop('disabled', true);
-            }
-        }
-
-        function enableLicenseQuantityTextBox(subscriptionId) {
-            var $textbox = selectBySubscriptionId('.txt-license-quantity', subscriptionId);
-            if ($textbox) {
-                $textbox.prop('disabled', false);
-                $textbox.focus();
-            }
-        }
+        // ---------------------------------------
+        // Helpers
+        // ---------------------------------------
 
         function selectBySubscriptionId(selector, subscriptionId) {
-            var $element = null;
+            let $element = null;
             $(selector).each(function () {
-                var $e = $(this);
+                let $e = $(this);
                 if ($e.data('subscription-id') == subscriptionId) {
                     $element = $e;
                 }
@@ -1103,173 +1570,77 @@
             return $element;
         }
 
-        // handle add-addon button clicks
-        $(function () { bindAddAddonButtons(); });
-        function bindAddAddonButtons() {
-            $('.btn-add-addon').each(function () {
-                $(this).off('click');
-                $(this).on('click', function () { onAddAddonButtonClick($(this)); });
+        function selectByAddonId(selector, subscriptionId) {
+            let $element = null;
+            $(selector).each(function () {
+                let $e = $(this);
+                if ($e.data('addon-id') == subscriptionId) {
+                    $element = $e;
+                }
             });
+            return $element;
         }
-        function onAddAddonButtonClick($button) {
-            var parentSubscriptionId = $button.data('subscription-id');
-            var offerId = $button.data('offer-id');
-            var customerId = $button.data('customer-id');
-            getAddOns(parentSubscriptionId, offerId, customerId);
-            event.preventDefault();
-        }
-        function getAddOns(parentSubscriptionId, offerId, customerId) {
-            var data = {
-                parentSubscriptionId: parentSubscriptionId,
-                offerParentId: offerId,
-                customerId: customerId
+
+        // Confirm Dialog
+        function confirmDialog(confirmText, onConfirm) {
+
+            let modal = $('#modalConfirm');
+
+            let fClose = function () {
+                modal.unbind();
+                modal.modal('hide');
             };
 
-            var $errAlert = $('.errAlert').first();
-            $errAlert.addClass('hidden');
+            let modalTextDiv = $('#modal-body-text');
+            modalTextDiv.html(confirmText);
 
-            $.LoadingOverlay('show');
+            modal.modal('show');
 
-            $.get('@Url.Action("GetAddOns", "Subscriptions")', data)
-                .done(function (res) {
-                    if (res.length == 0)
-                        return;
-
-                    var $cmb = selectBySubscriptionId('.cbo-addon', parentSubscriptionId);
-                    $cmb.empty();
-
-                    $.each(res, function (i, value) {
-                        $cmb.append($('<option>').text(value.addOnDescription).attr('value', value.addOnId));
-                    });
-                    enableAddonEdition(parentSubscriptionId);
-                })
-                .fail(function (xhr, status, error) {
-                    $errAlert.removeClass('hidden');
-                })
-                .always(function (data, textStatus, errorThrown) {
-                    $.LoadingOverlay('hide');
-                });
-        }
-        function enableAddonEdition(subscriptionId) {
-            var $controls = selectBySubscriptionId('.add-addon-controls', subscriptionId);
-            if ($controls) {
-                $controls.fadeIn();
-            }
+            $('#confirmOK').off('click').one('click', onConfirm);
+            $('#confirmOK').one('click', fClose);
+            $('#confirmCancel').off('click').one('click', fClose);
         }
 
-        // handle cancel-add-addon button clicks
-        $(function () { bindCancelAddonButtons(); });
-        function bindCancelAddonButtons() {
-            $('.btn-cancel-add-addon').each(function () {
-                $(this).off('click');
-                $(this).on('click', function () { onCancelAddonButtonClick($(this)); });
-            });
-        }
-        function onCancelAddonButtonClick($button) {
-            var subscriptionId = $button.data('subscription-id');
-            cancelAddonEdition(subscriptionId);
-            event.preventDefault();
-        }
-        function cancelAddonEdition(subscriptionId) {
-            var $controls = selectBySubscriptionId('.add-addon-controls', subscriptionId);
-            if ($controls) {
-                $controls.fadeOut();
-            }
-        }
+        
+        // ---------------------------------------
+        // Return object
+        // ---------------------------------------
+        return {
+            bindPage: vmSelf.bindPage
+        };
 
-        // handle save-addon button clicks
-        $(function () { bindSaveAddonButtons(); });
-        function bindSaveAddonButtons() {
-            $('.btn-save-addon').each(function () {
-                $(this).off('click');
-                $(this).on('click', function () { onSaveAddonButtonClick($(this)); });
-            });
-        }
+    }();
 
-        function onSaveAddonButtonClick($button) {
-            var subscriptionId = $button.data('subscription-id');
-            var $cmb = selectBySubscriptionId('.cbo-addon', subscriptionId);
-            var $txtQuantity = selectBySubscriptionId('.txt-quantity-addon', subscriptionId);
-            var addOnId = $cmb.val();
-            var friendlyName = $cmb.find('option:selected').text();
 
-            confirmDialog(
-                '¿Confirma agregar el addon seleccionado?',
-                function () {
 
-                    var data = {
-                        customerId: '@ViewBag.CustomerId',
-                        parentSubscriptionId: subscriptionId,
-                        addOnId: addOnId,
-                        friendlyName: friendlyName,
-                        quantity: $txtQuantity.val()
-                    };
+    // Init
+    $(function() {
+        // Inicializar los bindings
+        vm.bindPage();
 
-                    var $errAlert = $('.errAlert').first();
-                    $errAlert.addClass('hidden');
+    });
 
-                    $.LoadingOverlay('show');
-                    $.post('@Url.Action("AddAddOn", "Subscriptions")', data)
-                    .done(function () {
-                        location.reload();
-                    })
-                    .fail(function () {
-                        $.LoadingOverlay('hide');
-                        $errAlert.removeClass('hidden');
-                    });
-                }
-            );
-            event.preventDefault();
-        }
+}(window.jQuery, window));
+
+
+
+
+
+
+
+
 
         //Build addon trees
-        $(function () { buildAddOnTrees(); });
-        function buildAddOnTrees() {
-            $('.item-addon').jstree({
-                'core': {
-                    'themes': {
-                        'icons': false
-                    }
-                }
-            });
-        }
+        // $(function () { buildAddOnTrees(); });
+        // function buildAddOnTrees() {
+        //     $('.item-addon').jstree({
+        //         'core': {
+        //             'themes': {
+        //                 'icons': false
+        //             }
+        //         }
+        //     });
+        // }
 
-        //handle suspend addon
-        $(function () { bindSuspendAddOnButtons(); });
-        function bindSuspendAddOnButtons() {
-            $('.btn-suspend-addon').each(function () {
-                $(this).off('click');
-                $(this).on('click', function () { onSuspendAddOnButtonClick($(this)); });
-            });
-        }
-
-        function onSuspendAddOnButtonClick($button) {
-
-            var $errAlert = $('.errAlert').first();
-            $errAlert.addClass('hidden');
-
-            confirmDialog('¿Est&aacute;s seguro que quer&eacute;s eliminar el addon <span class="color-01">' + $button.data('subscription-name') + '</span>?'
-                , function () {
-                    var subscriptionId = $button.data('addon-id');
-                    //disableModifyButton(subscriptionId);
-                    //disableSuspendButton(subscriptionId);
-                    //disableSaveButton(subscriptionId);
-
-                    $.LoadingOverlay('show');
-                    suspendLicense(subscriptionId,
-                        function () {
-                            location.reload();
-                        },
-                        function (xhr, status, error) {
-                            $.LoadingOverlay('hide');
-                            //enableModifyButton(subscriptionId);
-                            //enableSuspendButton(subscriptionId);
-                            //enableSaveButton(subscriptionId);
-                            $errAlert.removeClass('hidden');
-                        }
-                    );
-                    event.preventDefault();
-                });
-        }
     </script>
 }
