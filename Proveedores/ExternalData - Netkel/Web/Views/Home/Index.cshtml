@@ -1,0 +1,135 @@
+﻿@using FiberCorp.ExternalData.Web.Models
+@using X.PagedList.Mvc;
+@using X.PagedList;
+
+<div class="row headerTable">
+    <div class="col-sm-7 col-xs-7 col-xs-offset-1 headerTableText table-text-space">Sector Operativo</div>
+    <div class="col-sm-3 col-xs-3 headerTableText headerTableText-line">Acciones</div>
+</div>
+
+<div class="row" style="margin-bottom:20px;">
+    <div class="col-sm-4 col-xs-offset-1">
+        @Html.ActionLink(" Nuevo ", "New", null, new { Class = "btn btn-select btn-select-customer" })
+        @Html.ActionLink(" Importar ", "Import", null, new { Class = "btn btn-select btn-select-customer" })
+    </div>
+</div>
+
+@foreach (var sector in ViewBag.List)
+{
+    <div class="row line">
+        <div class="row">
+
+            <div class="col-md-7 col-xs-7 col-xs-offset-1 tableSpace nopadding">
+                <input type="text" class="form-control" style="cursor:default;" placeholder="@sector.Codigo" disabled>
+            </div>
+
+            <div class="col-xs-3 tableSpace nopadding pad-botones">
+                <div class="btn-group">
+                    @*@Html.ActionLink(" Editar ", "Edit", new { id = sector.Codigo }, new { Class = "btn btn-select btn-select-customer" })*@
+                    @Html.ActionLink(" Borrar ", "Delete", new { id = sector.Codigo }, new { Class = "btn btn-select btn-select-customer" })
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="row">
+    <div class="col-sm-11 col-sm-offset-1">
+        @Html.PagedListPager((IPagedList)ViewBag.List, page => Url.Action("Index", new { page }))
+    </div>
+</div>
+<div class="clearfix"></div>
+
+@section scripts {
+    @*<script>
+
+            'use strict';
+
+            (function ($, window) {
+                let vm = function () {
+
+                    let vmSelf = {};
+
+                    // ---------------------------------------
+                    // Bindings
+                    // ---------------------------------------
+
+                    //function bindModifyLicensesButtons() {
+                    //    $('.btn-modify-licenses').each(function () {
+                    //        $(this).off('click');
+                    //        $(this).on('click', function () { onModifyLicensesButtonClick($(this)); });
+                    //    });
+                    //}
+
+
+                    // bindPage
+                    vmSelf.bindPage = function () {
+
+                    };
+
+                    // ---------------------------------------
+                    // Handlers
+                    // ---------------------------------------
+
+
+                    // ---------------------------------------
+                    // Form status
+                    // ---------------------------------------
+
+                    // ---------------------------------------
+                    // Controls status
+                    // ---------------------------------------
+
+
+                    function showError() {
+                        let $errAlert = $('.errAlert').first();
+                        $errAlert.removeClass('hidden');
+                    }
+
+                    // ---------------------------------------
+                    // Helpers
+                    // ---------------------------------------
+
+                    // Confirm Dialog
+                    //function confirmDialog(confirmText, onConfirm) {
+
+                    //    let modal = $('#modalConfirm');
+
+                    //    let fClose = function () {
+                    //        modal.unbind();
+                    //        modal.modal('hide');
+                    //    };
+
+                    //    let modalTextDiv = $('#modal-body-text');
+                    //    modalTextDiv.html(confirmText);
+
+                    //    modal.modal('show');
+
+                    //    $('#confirmOK').off('click').one('click', onConfirm);
+                    //    $('#confirmOK').one('click', fClose);
+                    //    $('#confirmCancel').off('click').one('click', fClose);
+                    //}
+
+
+                    // ---------------------------------------
+                    // Return object
+                    // ---------------------------------------
+                    return {
+                        bindPage: vmSelf.bindPage
+                    };
+
+                }();
+
+
+
+                // Init
+                $(function () {
+                    // Inicializar los bindings
+                    vm.bindPage();
+
+                });
+
+            }(window.jQuery, window));
+
+        </script>*@
+}

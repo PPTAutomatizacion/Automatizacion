@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html lang="en" style="height:100%;">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Sectores Operativos Migrados</title>
+
+    @Styles.Render("~/Content/css")
+
+    <!--[if gte IE 9]
+    <style type="text/css">
+        .gradient {
+            filter: none;
+        }
+    </style>
+    <![endif]-->
+</head>
+<body>
+
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+
+    <ul class="nav nav-tabs headerTabs" style="width:100%">
+        <li class="active"><a data-toggle="tab" href="#sectoresOperativos">Sectores Operativos Migrados</a></li>
+    </ul>
+
+    <div class="tab-content tabLine" style="height:100%;">
+
+        <div id="sectoresOperativos" class="tab-pane fade in active">
+
+            @RenderBody()
+
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/loadingoverlay")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

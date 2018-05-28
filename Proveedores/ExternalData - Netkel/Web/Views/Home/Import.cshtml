@@ -1,0 +1,44 @@
+﻿<div class="row">
+    <div class="col-sm-1 col-xs-2" style="margin-bottom:50px;">
+        <h2>Importar</h2>
+    </div>
+</div>
+@using (Html.BeginForm("Import", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-1">
+            <div class="form-horizontal">
+                @if (!string.IsNullOrWhiteSpace(ViewBag.Message))
+                {
+                <div class="row" style="padding:5px;">
+                    <div class="col-sm-5 col-offset-1">
+                        <div class="text-info text-center" style="font-size:large">@ViewBag.Message</div>
+                    </div>
+                </div>
+                }
+                else
+                {
+                <div class="row" style="padding:5px; margin-bottom:30px;">
+                    <div class="form-group">
+                        <label class="control-label col-md-2" for="file">Archivo Excel a subir: </label>
+                        <div class="col-md-5">
+                            @Html.TextBox("file", "", new { type = "file", Class="form-control" })
+                        </div>
+                    </div>
+                </div>
+                }
+                <div class="row" style="padding:5px;">
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            @if (string.IsNullOrWhiteSpace(ViewBag.Message))
+                            {
+                            <input type="submit" value="Subir" class="btn btn-select btn-select-customer" />
+                            }
+                            @Html.ActionLink("Volver", "Index", null, new { Class = "btn btn-select btn-select-customer" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
