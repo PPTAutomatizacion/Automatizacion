@@ -1,0 +1,613 @@
+{
+	"info": {
+		"_postman_id": "e2243733-a07b-4146-bf01-585965d11947",
+		"name": "Fibercorp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "O365",
+			"description": "",
+			"item": [
+				{
+					"name": "Fiber-Off365-CreateCustomer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t'domain':'netkelprueba.onmicrosoft.com',\r\n\t'companyName':'netkel',\r\n\t'firstName':'Federico',\r\n\t'lastName':'M',\r\n\t'email':'federicom1@netkel.com',\r\n\t'addressLine1':'Entre Rios 166',\r\n\t'city':'Buenos Aires',\r\n\t'postalCode':'1077',\r\n\t'phoneNumber':'+541143820000'\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:25149/api/v1/customer",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "25149",
+							"path": [
+								"api",
+								"v1",
+								"customer"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "a6158eab-4608-4291-baa9-6f3cb244c7a6",
+							"name": "newCustomer",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t'domain':'netkelprueba.onmicrosoft.com',\r\n\t'companyName':'netkel',\r\n\t'firstName':'Federico',\r\n\t'lastName':'M',\r\n\t'email':'federicom1@netkel.com',\r\n\t'addressLine1':'Entre Rios 166',\r\n\t'city':'Buenos Aires',\r\n\t'postalCode':'1077',\r\n\t'phoneNumber':'+541143820000'\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:25149/api/v1/customer",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "25149",
+									"path": [
+										"api",
+										"v1",
+										"customer"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"name": "Access-Control-Allow-Origin",
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"name": "Cache-Control",
+									"key": "Cache-Control",
+									"value": "no-cache",
+									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+								},
+								{
+									"name": "Content-Length",
+									"key": "Content-Length",
+									"value": "211",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"name": "Content-Type",
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "The mime type of this content"
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Fri, 24 Mar 2017 15:19:04 GMT",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"name": "Expires",
+									"key": "Expires",
+									"value": "-1",
+									"description": "Gives the date/time after which the response is considered stale"
+								},
+								{
+									"name": "Pragma",
+									"key": "Pragma",
+									"value": "no-cache",
+									"description": "Implementation-specific headers that may have various effects anywhere along the request-response chain."
+								},
+								{
+									"name": "Server",
+									"key": "Server",
+									"value": "Microsoft-IIS/10.0",
+									"description": "A name for the server"
+								},
+								{
+									"name": "X-AspNet-Version",
+									"key": "X-AspNet-Version",
+									"value": "4.0.30319",
+									"description": "Custom header"
+								},
+								{
+									"name": "X-Powered-By",
+									"key": "X-Powered-By",
+									"value": "ASP.NET",
+									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+								},
+								{
+									"name": "X-SourceFiles",
+									"key": "X-SourceFiles",
+									"value": "=?UTF-8?B?RTpcZGV2XGZjLW9mZjM2NVxzcmNcRmliZXJDb3JwLk9mZjM2NVxGaWJlckNvcnAuT2ZmMzY1LkFwaVxhcGlcdjFcY3VzdG9tZXI=?=",
+									"description": "Custom header"
+								}
+							],
+							"cookie": [],
+							"body": "{\"CommerceId\":\"e8cc1ba8-6ec7-4329-b0ff-4aef86089959\",\"Domain\":\"netkelprueba.onmicrosoft.com\",\"Error\":\"\",\"IsError\":false,\"Password\":\"16YPAu;6\",\"TenantId\":\"aaedfec3-01fb-40a5-bb45-374490512925\",\"UserName\":\"admin\"}"
+						}
+					]
+				},
+				{
+					"name": "Fiber-Off365-CreateOrder",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t'referenceCustomerId':'7fc0cf79-cd2c-4129-a6b6-51fe14f61586',\r\n\t'offerId':'bd938f12-058f-4927-bba3-ae36b1d2501c',\r\n\t'quantity':5\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:25149/api/v1/order",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "25149",
+							"path": [
+								"api",
+								"v1",
+								"order"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "71fe84f5-511a-45f8-97cd-a43ee699cfa0",
+							"name": "Off365CreateOrderResponse",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\t'referenceCustomerId':'7fc0cf79-cd2c-4129-a6b6-51fe14f61586',\r\n\t'offerId':'bd938f12-058f-4927-bba3-ae36b1d2501c',\r\n\t'quantity':5\r\n}"
+								},
+								"url": {
+									"raw": "http://localhost:25149/api/v1/order",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "25149",
+									"path": [
+										"api",
+										"v1",
+										"order"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"name": "Access-Control-Allow-Origin",
+									"key": "Access-Control-Allow-Origin",
+									"value": "*",
+									"description": "Specifies a URI that may access the resource. For requests without credentials, the server may specify '*' as a wildcard, thereby allowing any origin to access the resource."
+								},
+								{
+									"name": "Cache-Control",
+									"key": "Cache-Control",
+									"value": "no-cache",
+									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+								},
+								{
+									"name": "Content-Length",
+									"key": "Content-Length",
+									"value": "175",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"name": "Content-Type",
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "The mime type of this content"
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Fri, 24 Mar 2017 15:40:28 GMT",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"name": "Expires",
+									"key": "Expires",
+									"value": "-1",
+									"description": "Gives the date/time after which the response is considered stale"
+								},
+								{
+									"name": "Pragma",
+									"key": "Pragma",
+									"value": "no-cache",
+									"description": "Implementation-specific headers that may have various effects anywhere along the request-response chain."
+								},
+								{
+									"name": "Server",
+									"key": "Server",
+									"value": "Microsoft-IIS/10.0",
+									"description": "A name for the server"
+								},
+								{
+									"name": "X-AspNet-Version",
+									"key": "X-AspNet-Version",
+									"value": "4.0.30319",
+									"description": "Custom header"
+								},
+								{
+									"name": "X-Powered-By",
+									"key": "X-Powered-By",
+									"value": "ASP.NET",
+									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+								},
+								{
+									"name": "X-SourceFiles",
+									"key": "X-SourceFiles",
+									"value": "=?UTF-8?B?RTpcZGV2XGZjLW9mZjM2NVxzcmNcRmliZXJDb3JwLk9mZjM2NVxGaWJlckNvcnAuT2ZmMzY1LkFwaVxhcGlcdjFcb3JkZXI=?=",
+									"description": "Custom header"
+								}
+							],
+							"cookie": [],
+							"body": "{\"CreationDate\":\"2017-03-24T12:40:19.303-03:00\",\"Id\":\"eba9b344-bd2c-4e21-b58a-909b3e60d5ce\",\"SubscriptionId\":\"21D84E8C-445C-4B3C-A425-37D68FB22C49\",\"Error\":\"\",\"IsError\":false}"
+						}
+					]
+				},
+				{
+					"name": "Fiber-Off365-ReqResellerRelationship",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:25149/api/v1/resellerrelationship",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "25149",
+							"path": [
+								"api",
+								"v1",
+								"resellerrelationship"
+							]
+						}
+					},
+					"response": [
+						{
+							"id": "3d4a59a3-4a09-4b8d-9ca8-6e9a04a0646d",
+							"name": "ReqResellerRelationship",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {},
+								"url": {
+									"raw": "http://localhost:25149/api/v1/resellerrelationship",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "25149",
+									"path": [
+										"api",
+										"v1",
+										"resellerrelationship"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"name": "Cache-Control",
+									"key": "Cache-Control",
+									"value": "no-cache",
+									"description": "Tells all caching mechanisms from server to client whether they may cache this object. It is measured in seconds"
+								},
+								{
+									"name": "Content-Length",
+									"key": "Content-Length",
+									"value": "170",
+									"description": "The length of the response body in octets (8-bit bytes)"
+								},
+								{
+									"name": "Content-Type",
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "The mime type of this content"
+								},
+								{
+									"name": "Date",
+									"key": "Date",
+									"value": "Fri, 24 Mar 2017 15:51:52 GMT",
+									"description": "The date and time that the message was sent"
+								},
+								{
+									"name": "Expires",
+									"key": "Expires",
+									"value": "-1",
+									"description": "Gives the date/time after which the response is considered stale"
+								},
+								{
+									"name": "Pragma",
+									"key": "Pragma",
+									"value": "no-cache",
+									"description": "Implementation-specific headers that may have various effects anywhere along the request-response chain."
+								},
+								{
+									"name": "Server",
+									"key": "Server",
+									"value": "Microsoft-IIS/10.0",
+									"description": "A name for the server"
+								},
+								{
+									"name": "X-AspNet-Version",
+									"key": "X-AspNet-Version",
+									"value": "4.0.30319",
+									"description": "Custom header"
+								},
+								{
+									"name": "X-Powered-By",
+									"key": "X-Powered-By",
+									"value": "ASP.NET",
+									"description": "Specifies the technology (ASP.NET, PHP, JBoss, e.g.) supporting the web application (version details are often in X-Runtime, X-Version, or X-AspNet-Version)"
+								},
+								{
+									"name": "X-SourceFiles",
+									"key": "X-SourceFiles",
+									"value": "=?UTF-8?B?RTpcZGV2XGZjLW9mZjM2NVxzcmNcRmliZXJDb3JwLk9mZjM2NVxGaWJlckNvcnAuT2ZmMzY1LkFwaVxhcGlcdjFccmVzZWxsZXJyZWxhdGlvbnNoaXA=?=",
+									"description": "Custom header"
+								}
+							],
+							"cookie": [],
+							"body": "{\"Url\":\"https://portal.office.com/partner/partnersignup.aspx?type=ResellerRelationship&id=386dcfce-5120-4be8-95a1-79d9cf5a4df7&csp=1&msppid=0\",\"Error\":\"\",\"IsError\":false}"
+						}
+					]
+				},
+				{
+					"name": "Fiber-Off365-QueryCustomers",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t'domain':'fruta.onmicrosoft.com'\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:25149/api/v1/customers/query",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "25149",
+							"path": [
+								"api",
+								"v1",
+								"customers",
+								"query"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fiber-Off365-PurchaseAddon",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t'orderId':'122f2ee9-8c88-424a-9706-3981bda9aac4',\r\n\t'customerId':'e019f7d4-d60a-406f-a5b7-38625f9b8d21',\r\n\t'offerId':'68f6373c-31cb-43f0-bfaa-85f3688f8cfb',\r\n\t'parentSubscriptionId':'21D84E8C-445C-4B3C-A425-37D68FB22C49',\r\n\t'quantity':10\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:25149/api/v1/addons/purchase",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "25149",
+							"path": [
+								"api",
+								"v1",
+								"addons",
+								"purchase"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fiber-Off365-SuspendSubscription",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t'customerId':'7fc0cf79-cd2c-4129-a6b6-51fe14f61586',\r\n\t'id':'795E28E6-ED33-48F6-B4E1-E758BE787CAB'\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:25149/api/v1/subscriptions/suspend",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "25149",
+							"path": [
+								"api",
+								"v1",
+								"subscriptions",
+								"suspend"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fiber-Off365-VerifyDomain",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t'domain':'netkelprueba.onmicrosoft.com'\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:25149/api/v1/domains/verify",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "25149",
+							"path": [
+								"api",
+								"v1",
+								"domains",
+								"verify"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fiber-Off365-ReactivateSuspendedSubscription",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t'customerId':'7fc0cf79-cd2c-4129-a6b6-51fe14f61586',\r\n\t'id':'795E28E6-ED33-48F6-B4E1-E758BE787CAB'\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:25149/api/v1/subscriptions/reactivatesuspended",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "25149",
+							"path": [
+								"api",
+								"v1",
+								"subscriptions",
+								"reactivatesuspended"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fiber-Off365-GetSubscriptionById",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t'customerId':'aaedfec3-01fb-40a5-bb45-374490512925',\r\n\t'id':'21D84E8C-445C-4B3C-A425-37D68FB22C49'\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:25149/api/v1/subscriptions/getbyid",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "25149",
+							"path": [
+								"api",
+								"v1",
+								"subscriptions",
+								"getbyid"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fiber-Off365-SuspendSubscriptionDomain",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t'domain':'carranzateam.onmicrosoft.com'\r\n}"
+						},
+						"url": {
+							"raw": "http://localhost:25149/api/v1/subscriptions/suspend/domain",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "25149",
+							"path": [
+								"api",
+								"v1",
+								"subscriptions",
+								"suspend",
+								"domain"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fiber-Off365-GetRequestStatus",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:25149/api/v1/subscriptions/suspend/domain/c11fd080-ac21-4e4b-8e03-9520290c0132",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "25149",
+							"path": [
+								"api",
+								"v1",
+								"subscriptions",
+								"suspend",
+								"domain",
+								"c11fd080-ac21-4e4b-8e03-9520290c0132"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fiber-Off365-ReactivateDomain",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://localhost:25149/api/v1/subscriptions/reactive/domain/c11fd080-ac21-4e4b-8e03-9520290c0132",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "25149",
+							"path": [
+								"api",
+								"v1",
+								"subscriptions",
+								"reactive",
+								"domain",
+								"c11fd080-ac21-4e4b-8e03-9520290c0132"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
