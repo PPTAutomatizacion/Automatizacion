@@ -11,7 +11,7 @@
 <div class="row">
     <div class="col-sm-8 col-sm-offset-1">
         <div class="form-horizontal">
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
             <div class="row" style="padding:5px;">
                 <div class="form-group">
                     @Html.LabelFor(model => model.Codigo, htmlAttributes: new { @class = "control-label col-md-2" })
